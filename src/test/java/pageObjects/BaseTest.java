@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 public class BaseTest {
     public static WebDriver driver;
     public static LoginPage loginPage;
+    public static Permissions permissionForUserRole;
 
     @BeforeMethod
     public void openApplication() {
@@ -16,6 +17,7 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
+        permissionForUserRole = new Permissions(driver);
     }
 
     @AfterMethod
