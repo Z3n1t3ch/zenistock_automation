@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 public class DriverFactory {
 
-    public static WebDriver driver;
+    public WebDriver driver;
 
     public DriverFactory(WebDriver driver) {
 

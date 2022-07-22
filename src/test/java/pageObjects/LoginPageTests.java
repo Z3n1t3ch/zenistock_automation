@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class LoginPageTests extends BaseTest {
     @Test
-    public void successfulSignInAsSuperAdmin() throws InterruptedException {
+    public void successfulSignInAsSuperAdmin() {
         LoginPage.successfulSignInAsSuperAdmin();
         String URL = driver.getCurrentUrl();
         Assert.assertEquals(URL, "https://zenistock.zenitech.local/dashboard" );
