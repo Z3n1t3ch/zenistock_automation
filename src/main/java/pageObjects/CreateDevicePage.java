@@ -20,76 +20,66 @@ public class CreateDevicePage extends DriverFactory {
 
     }
 
-    @FindBy(id="username")
+    @FindBy(id = "username")
     private WebElement usernameField;
 
-    @FindBy(id="password")
+    @FindBy(id = "password")
     private WebElement passwordField;
 
-    @FindBy(id="log-in-button")
+    @FindBy(id = "log-in-button")
     private WebElement loginButton;
 
-    @FindBy(id="undefined-devices-mButton")
+    @FindBy(id = "undefined-devices-mButton")
     private WebElement devicesButton;
 
-    @FindBy(id="add_device_button")
+    @FindBy(id = "add_device_button")
     private WebElement addDeviceButton;
 
-    @FindBy(id="device-information-name")
+    @FindBy(id = "device-information-name")
     private WebElement nameField;
 
-    @FindBy(id="device-information-serialNo")
+    @FindBy(id = "device-information-serialNo")
     private WebElement serialNoField;
 
-    @FindBy(id="device-information-inventoryNo")
+    @FindBy(id = "device-information-inventoryNo")
     private WebElement inventoryNoField;
 
-    @FindBy(id="device-information-invoiceNo")
+    @FindBy(id = "device-information-invoiceNo")
     private WebElement invoiceNoField;
 
-    @FindBy(id="device-information-description")
+    @FindBy(id = "device-information-description")
     private WebElement descriptionField;
 
-    @FindBy(id="device-tags-subcategory-selectList")
+    @FindBy(id = "device-tags-subcategory-selectList")
     private WebElement subcategoryList;
 
-    @FindBy(id="tags")
+    @FindBy(id = "tags")
     private WebElement tagsList;
 
-    @FindBy(id="device-locations-selectList")
+    @FindBy(id = "device-locations-selectList")
     private WebElement locationsList;
 
-    @FindBy(id="device-saveBtn")
+    @FindBy(id = "device-saveBtn")
     private WebElement saveDeviceButton;
 
-    @FindBy(id="device-tags-subcategory-selectList-laptop")
+    @FindBy(id = "device-tags-subcategory-selectList-laptop")
     private WebElement subcategoryLaptopListElement;
 
-    @FindBy(id="item-device-tags-tags-0")
+    @FindBy(id = "tags-option-0")
     private WebElement tagsListElement;
 
-    @FindBy(id="device-locations-selectList-romania")
+    @FindBy(id = "device-locations-selectList-romania")
     private WebElement locationsRomaniaListElement;
 
-    @FindBy(id="success_toaster")
+    @FindBy(id = "success_toaster")
     private WebElement successToaster;
 
+    @FindBy(id = "error_toaster")
+    private WebElement errorToaster;
 
-    public String successfullyCreateDevice(){
-
-        driver.get(LOGIN_PAGE_URL);
-        usernameField.sendKeys(ADMIN_USERNAME);
-        passwordField.sendKeys(ADMIN_PASSWORD);
-        loginButton.click();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        //redirected to dashboard
-
+    public void successfullyCreateDevice() {
         devicesButton.click();
-        //redirected to device page
-
         addDeviceButton.click();
-        //redirected to add device page
-
         nameField.sendKeys(DEVICE_NAME);
         serialNoField.sendKeys(DEVICE_SERIAL_NO);
         inventoryNoField.sendKeys(DEVICE_INVENTORY_NO);
@@ -102,8 +92,132 @@ public class CreateDevicePage extends DriverFactory {
         locationsList.click();
         locationsRomaniaListElement.click();
         saveDeviceButton.click();
-        return successToaster.getText();
-
     }
 
+    public void createDeviceWithoutName() {
+        devicesButton.click();
+        addDeviceButton.click();
+        serialNoField.sendKeys(DEVICE_SERIAL_NO);
+        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO);
+        invoiceNoField.sendKeys(DEVICE_INVOICE_NO);
+        saveDeviceButton.click();
+    }
+
+    public void createDeviceWithoutSerialNo() {
+        devicesButton.click();
+        addDeviceButton.click();
+        nameField.sendKeys(DEVICE_NAME);
+        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO);
+        invoiceNoField.sendKeys(DEVICE_INVOICE_NO);
+        saveDeviceButton.click();
+    }
+
+    public void createDeviceWithoutInventoryNo() {
+        devicesButton.click();
+        addDeviceButton.click();
+        nameField.sendKeys(DEVICE_NAME);
+        serialNoField.sendKeys(DEVICE_SERIAL_NO);
+        invoiceNoField.sendKeys(DEVICE_INVOICE_NO);
+        saveDeviceButton.click();
+    }
+
+    public void createDeviceWithoutInvoiceNo() {
+        devicesButton.click();
+        addDeviceButton.click();
+        nameField.sendKeys(DEVICE_NAME);
+        serialNoField.sendKeys(DEVICE_SERIAL_NO);
+        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO);
+        saveDeviceButton.click();
+    }
+
+    public void createDeviceWithWhiteSpacesNameField() {
+        devicesButton.click();
+        addDeviceButton.click();
+        nameField.sendKeys(DEVICE_NAME_WS);
+        serialNoField.sendKeys(DEVICE_SERIAL_NO);
+        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO);
+        invoiceNoField.sendKeys(DEVICE_INVOICE_NO);
+        saveDeviceButton.click();
+    }
+
+    public void createDeviceWithWhiteSpaceSerialNoField() {
+        devicesButton.click();
+        addDeviceButton.click();
+        nameField.sendKeys(DEVICE_NAME);
+        serialNoField.sendKeys(DEVICE_SERIAL_NO_WS);
+        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO);
+        invoiceNoField.sendKeys(DEVICE_INVOICE_NO);
+        saveDeviceButton.click();
+    }
+
+    public void createDeviceWithWhiteSpaceInventoryNoField() {
+        devicesButton.click();
+        addDeviceButton.click();
+        nameField.sendKeys(DEVICE_NAME);
+        serialNoField.sendKeys(DEVICE_SERIAL_NO);
+        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO_WS);
+        invoiceNoField.sendKeys(DEVICE_INVOICE_NO);
+        saveDeviceButton.click();
+    }
+
+    public void createDeviceWithWhiteSpaceInvoiceNoField() {
+        devicesButton.click();
+        addDeviceButton.click();
+        nameField.sendKeys(DEVICE_NAME);
+        serialNoField.sendKeys(DEVICE_SERIAL_NO);
+        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO);
+        invoiceNoField.sendKeys(DEVICE_INVOICE_NO_WS);
+        saveDeviceButton.click();
+    }
+
+    public void createDeviceWithThiteSpaceDescriptionField() {
+        devicesButton.click();
+        addDeviceButton.click();
+        nameField.sendKeys(DEVICE_NAME);
+        serialNoField.sendKeys(DEVICE_SERIAL_NO);
+        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO);
+        invoiceNoField.sendKeys(DEVICE_INVOICE_NO);
+        descriptionField.sendKeys(DEVICE_DESCRIPTION_WS);
+        saveDeviceButton.click();
+    }
+
+    public void createDeviceTooLongName() {
+        devicesButton.click();
+        addDeviceButton.click();
+        nameField.sendKeys(DEVICE_NAME_TOO_LONG);
+        serialNoField.sendKeys(DEVICE_SERIAL_NO);
+        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO);
+        invoiceNoField.sendKeys(DEVICE_INVOICE_NO);
+        saveDeviceButton.click();
+    }
+
+    public void createDeviceTooLongSerialNo(){
+        devicesButton.click();
+        addDeviceButton.click();
+        nameField.sendKeys(DEVICE_NAME);
+        serialNoField.sendKeys(DEVICE_NUMBER_OVER_30_CHAR);
+        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO);
+        invoiceNoField.sendKeys(DEVICE_INVOICE_NO);
+        saveDeviceButton.click();
+    }
+
+    public void createDeviceToLongInventoryNo(){
+        devicesButton.click();
+        addDeviceButton.click();
+        nameField.sendKeys(DEVICE_NAME);
+        serialNoField.sendKeys(DEVICE_SERIAL_NO);
+        inventoryNoField.sendKeys(DEVICE_NUMBER_OVER_30_CHAR);
+        invoiceNoField.sendKeys(DEVICE_INVOICE_NO);
+        saveDeviceButton.click();
+    }
+
+    public void createDeviceToLongInvoiceNo(){
+        devicesButton.click();
+        addDeviceButton.click();
+        nameField.sendKeys(DEVICE_NAME);
+        serialNoField.sendKeys(DEVICE_SERIAL_NO);
+        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO);
+        invoiceNoField.sendKeys(DEVICE_NUMBER_OVER_30_CHAR);
+        saveDeviceButton.click();
+    }
 }
