@@ -26,12 +26,12 @@ public class Permissions extends DriverFactory{
     @FindBy(id ="undefined-devices-mButton")
     private static WebElement devicesButtonSidebarMenu;
 
-    public static void checkIfUserCanPerformActionOnDevicePage() throws InterruptedException {
+    public static void checkIfUserCanPerformActionOnDevicePage()  {
         driver.get("https://zenistock.zenitech.local/login");
         usernameField.sendKeys("user");
         passwordField.sendKeys("oiuhbvc5%r");
         signInButton.click();
-        Thread.sleep(2000);
+       // Thread.sleep(2000);
         devicesButtonSidebarMenu.click();
     }
 

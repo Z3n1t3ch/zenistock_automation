@@ -1,12 +1,12 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import javax.xml.xpath.XPath;
 
 public class PermissionTests extends BaseTest {
 
@@ -14,26 +14,31 @@ public class PermissionTests extends BaseTest {
     public void PermissionUser() throws InterruptedException {
         //User
         Permissions.checkIfUserCanPerformActionOnDevicePage();
-        String URL = driver.getCurrentUrl();
-//        boolean AddDeviceButton = driver.getPageSource().contains("Add device");
-//        Assert.assertFalse(AddDeviceButton);
-//
-//        boolean ExportButton = driver.getPageSource().contains("Export");
-//        Assert.assertFalse(ExportButton);
-//
-//        boolean ImportButton = driver.getPageSource().contains("Import");
-//        Assert.assertFalse(ImportButton);
-
-
-
-
-
+        boolean AddDeviceButton = driver.getPageSource().contains("Add device");
+        Assert.assertFalse(AddDeviceButton);
+        boolean ExportButton = driver.getPageSource().contains("Export");
+        Assert.assertFalse(ExportButton);
+        boolean ImportButton = driver.getPageSource().contains("Import");
+        Assert.assertFalse(ImportButton);
     }
+    @Test
+    public void Check()
+    {
+        Permissions.checkIfUserCanPerformActionOnDevicePage();
+        if (driver.findElement(By.xpath("//button[starts-with(@id,'device_dropdown_')]")).getSize() !=0)
+        {
+            Assert.fail();
+        }
+        else {
+            Assert.assertTrue(true);
+        }
+    }
+
+
     @Test
     //Admin
         public void PermissionAdmin() throws InterruptedException {
         Permissions.checkIfAdminCanPerformActionOnDevicePage();
-        String URL = driver.getCurrentUrl();
         boolean AddDeviceButton = driver.getPageSource().contains("Add device");
         Assert.assertTrue(AddDeviceButton);
 
@@ -43,14 +48,22 @@ public class PermissionTests extends BaseTest {
         boolean ImportButton = driver.getPageSource().contains("Import");
         Assert.assertTrue(ImportButton);
 
-        WebElement Actions = driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[3]/table/tbody/tr[1]/td[9]/div/div/button/svg"));
 
-        }
+      //  boolean ThreeDotsButton = driver.findElement(By.id("device_dropdown_123weq")).isDisplayed();
+       // Assert.assertTrue(ThreeDotsButton);
+
+       WebElement threeDotsButton = driver.findElement(By.xpath("//button[@id='device_dropdown_123weq']"));
+       Assert.assertTrue(threeDotsButton.isDisplayed());
+
+
+      //  driver.findElements(By.xpath("//button[@id='device_dropdown_123weq')]"));
+
+        //Assert.assertTrue(driver);
+    }
 
     @Test
     public void PermissionSuperAdmin() throws InterruptedException {
         Permissions.checkIfSuperAdminCanPerformActionOnDevicePage();
-        String URL = driver.getCurrentUrl();
         boolean AddDeviceButton = driver.getPageSource().contains("Add device");
         Assert.assertTrue(AddDeviceButton);
 
@@ -60,10 +73,11 @@ public class PermissionTests extends BaseTest {
         boolean ImportButton = driver.getPageSource().contains("Import");
         Assert.assertTrue(ImportButton);
 
-        boolean Actions = driver.getPageSource().contains("/html/body/div[1]/div/div[2]/div/div[3]/table/tbody/tr[1]/td[9]/div/div/button/svg");
-        Assert.assertTrue(Actions);
+      //  boolean ThreeDotsButton = driver.findElement(By.id("device_dropdown_123weq")).isDisplayed();
+     //   Assert.assertTrue(ThreeDotsButton);
 
-
+        WebElement threeDotsButton = driver.findElement(By.xpath("//button[@id='device_dropdown_123weq']"));
+        Assert.assertTrue(threeDotsButton.isDisplayed());
     }
 
 }
