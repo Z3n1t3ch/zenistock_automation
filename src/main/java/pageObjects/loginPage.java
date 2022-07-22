@@ -7,9 +7,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
-public class LoginPage extends DriverFactory {
+public class loginPage extends DriverFactory {
 
-    public LoginPage(WebDriver driver) {
+    public loginPage(WebDriver driver) {
         super(driver);
 
         PageFactory.initElements(driver, this);
@@ -25,29 +25,14 @@ public class LoginPage extends DriverFactory {
 
     @FindBy(id="log-out")
     private  WebElement logOut;
-
-
-
-
-    public void successfulSignInAsSuperAdmin() {
-        driver.get("https://zenistock.zenitech.local/login");
-        usernameField. sendKeys("super_admin");
-        passwordField.sendKeys("qwer3#qazxsw09*");
-        signInButton.click();
+    public void successfulSignInAsSuperAdmin() throws InterruptedException {
+        signInAsSuperAdmin();
     }
     public void successfulSignInAsAdmin() throws InterruptedException {
-        driver.get("https://zenistock.zenitech.local/login");
-        usernameField. sendKeys("admin");
-        passwordField.sendKeys("qazqwer1@d.");
-        signInButton.click();
-        Thread.sleep(3000);
+        signInAsAdmin();
     }
     public void successfulSignInAsUser() throws InterruptedException {
-        driver.get("https://zenistock.zenitech.local/login");
-        usernameField. sendKeys("user");
-        passwordField.sendKeys("oiuhbvc5%r");
-        signInButton.click();
-        Thread.sleep(3000);
+        signInAsUser();
     }
     public void logInNoUsername(){
         driver.get("https://zenistock.zenitech.local/login");
