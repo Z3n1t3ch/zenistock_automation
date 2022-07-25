@@ -24,7 +24,10 @@ public class TagPage extends DriverFactory {
         tagNameField.sendKeys(tagName);
         addTagButton.click();
     }
-
+    public void deleteTag(String tagName){
+        WebElement button = driver.findElement(new By.ById("tags-list-tag-" + tagName + "-item-delete"));
+        button.click();
+    }
     public WebElement getTag(String tagName) {
         return driver.findElement(new By.ById("tags-list-tag-" + tagName + "-item"));
     }

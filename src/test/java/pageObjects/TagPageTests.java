@@ -46,5 +46,16 @@ public class TagPageTests extends BaseTest {
         WebElement errorToaster = toaster.getErrorToaster();
         Assert.assertEquals(errorToaster.getText(), "The field \"name\" already exist.");
     }
+    @Test
+    public void successfullyDeleteTag() {
+        loginPage.signIn();
+        dashboardPage.goToTags();
 
+        String newTagName = this.addNewTag("");
+        toaster.getSuccessToaster(); // this waits for the success toaster to show
+
+        tagPage.deleteTag(newTagName);
+        WebElement successToaster = toaster.getSuccessToaster();
+        Assert.assertEquals(successToaster.getText(), "Tag deleted successfully!");
+    }
 }
