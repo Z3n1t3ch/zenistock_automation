@@ -11,6 +11,7 @@ public class BaseTest {
     public static LoginPage loginPage;
     public static TagPage tagPage;
     public static DashboardPage dashboardPage;
+    public static Toaster toaster;
     @BeforeMethod
     public void openApplication() {
         WebDriverManager.chromedriver().setup();
@@ -18,6 +19,7 @@ public class BaseTest {
         loginPage = new LoginPage(driver);
         tagPage = new TagPage(driver);
         dashboardPage = new DashboardPage(driver);
+        toaster = new Toaster(driver);
     }
 
 

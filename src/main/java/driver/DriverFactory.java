@@ -11,33 +11,30 @@ import java.time.Duration;
 public class DriverFactory {
 
     public WebDriver driver;
+    private WebDriverWait waiter;
 
     public DriverFactory(WebDriver driver) {
         this.driver = driver;
+        this.waiter = new WebDriverWait(driver, Duration.ofSeconds(3));
     }
 
     public void waitForURL(String url) {
-        WebDriverWait waiter = new WebDriverWait(driver, Duration.ofSeconds(3));
-        waiter.until(ExpectedConditions.urlToBe(url));
+        this.waiter.until(ExpectedConditions.urlToBe(url));
     }
 
     public void waitForURLNotToBe(String url) {
-        WebDriverWait waiter = new WebDriverWait(driver, Duration.ofSeconds(3));
-        waiter.until(ExpectedConditions.not(ExpectedConditions.urlToBe(url)));
+        this.waiter.until(ExpectedConditions.not(ExpectedConditions.urlToBe(url)));
     }
 
     public void waitForElementToBeClickable(WebElement elem) {
-        WebDriverWait waiter = new WebDriverWait(driver, Duration.ofSeconds(3));
-        waiter.until(ExpectedConditions.elementToBeClickable(elem));
+       this.waiter.until(ExpectedConditions.elementToBeClickable(elem));
     }
 
     public void waitForElementToBeDisplayed(WebElement elem) {
-        WebDriverWait waiter = new WebDriverWait(driver, Duration.ofSeconds(3));
-        waiter.until(ExpectedConditions.visibilityOf(elem));
+        this.waiter.until(ExpectedConditions.visibilityOf(elem));
     }
 
     public void waitForElementToBeDisplayed(String cssSelector) {
-        WebDriverWait w = new WebDriverWait(driver,Duration.ofSeconds(3));
-        w.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector)));
+        this.waiter.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector)));
     }
 }

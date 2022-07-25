@@ -26,7 +26,7 @@ public class TagPageTests extends BaseTest {
 
         String newTagName = this.addNewTag("");
 
-        WebElement successToaster = tagPage.getSuccessToaster();
+        WebElement successToaster = toaster.getSuccessToaster();
         Assert.assertEquals(successToaster.getText(), "Tag created successfully!");
 
         Assert.assertNotNull(tagPage.getTag(newTagName));
@@ -39,11 +39,11 @@ public class TagPageTests extends BaseTest {
         dashboardPage.goToTags();
 
         String previousTagName = this.addNewTag("");
-        tagPage.getSuccessToaster(); // this waits for the success toaster to show
+        toaster.getSuccessToaster(); // this waits for the success toaster to show
 
         this.addNewTag(previousTagName);
 
-        WebElement errorToaster = tagPage.getErrorToaster();
+        WebElement errorToaster = toaster.getErrorToaster();
         Assert.assertEquals(errorToaster.getText(), "The field \"name\" already exist.");
     }
 

@@ -4,14 +4,13 @@ import driver.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class TagPage extends DriverFactory {
 
     @FindBy(id = "tags-addTag-field")
-    private WebElement newTagNameField;
+    private WebElement tagNameField;
     @FindBy(id = "tags-addTag-add")
     private WebElement addTagButton;
 
@@ -20,19 +19,9 @@ public class TagPage extends DriverFactory {
         PageFactory.initElements(driver, this);
     }
 
-    public WebElement getErrorToaster() {
-        waitForElementToBeDisplayed("#error_toaster");
-        return driver.findElement(new By.ById("error_toaster"));
-    }
-
-    public WebElement getSuccessToaster() {
-        waitForElementToBeDisplayed("#success_toaster");
-        return driver.findElement(new By.ById("success_toaster"));
-    }
-
     public void AddTag(String tagName) {
-        waitForElementToBeDisplayed(newTagNameField);
-        newTagNameField.sendKeys(tagName);
+        waitForElementToBeDisplayed(tagNameField);
+        tagNameField.sendKeys(tagName);
         addTagButton.click();
     }
 
