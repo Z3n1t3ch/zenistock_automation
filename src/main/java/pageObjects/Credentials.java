@@ -10,6 +10,4 @@ public final class Credentials {
     public static final String login = "https://zenistock.zenitech.local/login";
     public static final String dashboard = "https://zenistock.zenitech.local/dashboard";
 
-    private Credentials() {
-    }
 }

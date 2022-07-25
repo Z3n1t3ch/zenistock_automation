@@ -40,11 +40,10 @@ public class LoginPage extends DriverFactory {
         signInAsUser();
     }
 
-    public String logInWithEmptyUsername() {
+    public void logInWithEmptyUsername() {
         driver.get(Credentials.login);
         passwordField.sendKeys(Credentials.passwordSuperAdminRole);
         signInButton.click();
-        return usernameField.getAttribute("required");
     }
 
     public void logInWithEmptyPassword() {
@@ -98,5 +97,4 @@ public class LoginPage extends DriverFactory {
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
         logOutButton.click();
     }
-
 }

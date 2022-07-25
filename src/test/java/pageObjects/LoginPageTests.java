@@ -30,17 +30,19 @@ public class LoginPageTests extends BaseTest {
 
     @Test
     public void logInWithEmptyUsername() {
-        String hasRequired = loginPage.logInWithEmptyUsername();
+        loginPage.logInWithEmptyUsername();
         String URL = driver.getCurrentUrl();
+        String hasRequired = driver.findElement(By.id("username")).getAttribute("required");
+        boolean errorMessage = driver.getPageSource().contains(hasRequired);
         Assert.assertEquals(URL, Credentials.login);
-        Assert.assertEquals(hasRequired, "true");
+        Assert.assertTrue(errorMessage);
     }
 
     @Test
     public void logInWithEmptyPassword() {
         loginPage.logInWithEmptyPassword();
         String URL = driver.getCurrentUrl();
-        String invalidCredentials = Errors.invalidCredentials;
+        String invalidCredentials = driver.findElement(By.id("password-helper-text")).getText();
         Assert.assertEquals(URL, Credentials.login);
         Assert.assertEquals(invalidCredentials, Errors.invalidCredentials);
     }
@@ -56,7 +58,7 @@ public class LoginPageTests extends BaseTest {
     public void logInWithInvalidUsername() {
         loginPage.logInWithInvalidUsername();
         String URL = driver.getCurrentUrl();
-        String invalidCredentials = Errors.invalidCredentials;
+        String invalidCredentials = driver.findElement(By.id("password-helper-text")).getText();
         Assert.assertEquals(URL, Credentials.login);
         Assert.assertEquals(invalidCredentials, Errors.invalidCredentials);
     }
@@ -65,7 +67,7 @@ public class LoginPageTests extends BaseTest {
     public void logInWithInvalidPassword() {
         loginPage.logInWithInvalidPassword();
         String URL = driver.getCurrentUrl();
-        String invalidCredentials = Errors.invalidCredentials;
+        String invalidCredentials = driver.findElement(By.id("password-helper-text")).getText();
         Assert.assertEquals(URL, Credentials.login);
         Assert.assertEquals(invalidCredentials, Errors.invalidCredentials);
     }
