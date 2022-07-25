@@ -8,14 +8,14 @@ import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
     public static WebDriver driver;
-    public static pageObjects.loginPage loginPage;
+    public static LoginPage loginPage;
 
     @BeforeMethod
     public void openApplication() {
 
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        loginPage = new loginPage(driver);
+        loginPage = new LoginPage(driver);
     }
 
     @AfterMethod

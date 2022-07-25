@@ -1,73 +1,93 @@
 package pageObjects;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginPageTests extends BaseTest {
     @Test
-    public void successfulSignInAsSuperAdmin() throws InterruptedException {
+    public void successfulSignInAsSuperAdmin() {
         loginPage.successfulSignInAsSuperAdmin();
         String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, "https://zenistock.zenitech.local/dashboard" );
+        Assert.assertEquals(URL, Credentials.dashboard);
     }
+
     @Test
-    public void successfulSignInAsAdmin() throws InterruptedException {
+    public void successfulSignInAsAdmin() {
         loginPage.successfulSignInAsAdmin();
         String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, "https://zenistock.zenitech.local/dashboard" );
+        Assert.assertEquals(URL, Credentials.dashboard);
     }
+
     @Test
-    public void successfulSignInAsUser() throws InterruptedException {
+    public void successfulSignInAsUser() {
         loginPage.successfulSignInAsUser();
         String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, "https://zenistock.zenitech.local/dashboard" );
+        Assert.assertEquals(URL, Credentials.dashboard);
     }
+
     @Test
-    public void logInNoUsername(){
-        loginPage.logInNoUsername();
+    public void logInWithEmptyUsername() {
+        String hasRequired = loginPage.logInWithEmptyUsername();
         String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL,"https://zenistock.zenitech.local/login");
+        Assert.assertEquals(URL, Credentials.login);
+        Assert.assertEquals(hasRequired, "true");
     }
+
     @Test
-    public void logInNoPassword(){
-        loginPage.logInNoPassword();
+    public void logInWithEmptyPassword() {
+        loginPage.logInWithEmptyPassword();
         String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, "https://zenistock.zenitech.local/login");
+        String invalidCredentials = Errors.invalidCredentials;
+        Assert.assertEquals(URL, Credentials.login);
+        Assert.assertEquals(invalidCredentials, Errors.invalidCredentials);
     }
+
     @Test
-    public void logInNoPasswordNoUsername(){
-        loginPage.logInNoPasswordNoUsername();
+    public void logInWithEmptyCredentials() {
+        loginPage.logInWithEmptyCredentials();
         String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL,"https://zenistock.zenitech.local/login");
+        Assert.assertEquals(URL, Credentials.login);
     }
+
     @Test
-    public void logInWithInvalidUsername(){
+    public void logInWithInvalidUsername() {
         loginPage.logInWithInvalidUsername();
         String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, "https://zenistock.zenitech.local/login");
+        String invalidCredentials = Errors.invalidCredentials;
+        Assert.assertEquals(URL, Credentials.login);
+        Assert.assertEquals(invalidCredentials, Errors.invalidCredentials);
     }
+
     @Test
-    public void logInWithInvalidPassword(){
+    public void logInWithInvalidPassword() {
         loginPage.logInWithInvalidPassword();
         String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, "https://zenistock.zenitech.local/login");
+        String invalidCredentials = Errors.invalidCredentials;
+        Assert.assertEquals(URL, Credentials.login);
+        Assert.assertEquals(invalidCredentials, Errors.invalidCredentials);
     }
+
     @Test
-    public void successfulLogOutAsSuperAdmin() throws InterruptedException {
+    public void successfulLogOutAsSuperAdmin() {
         loginPage.successfulLogOutAsSuperAdmin();
         String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, "https://zenistock.zenitech.local/login");
+        Assert.assertEquals(URL, Credentials.login);
     }
+
     @Test
-    public void successfulLogOutAsAdmin() throws InterruptedException {
+    public void successfulLogOutAsAdmin() {
         loginPage.successfulLogOutAsAdmin();
         String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, "https://zenistock.zenitech.local/login");
+        Assert.assertEquals(URL, Credentials.login);
     }
+
     @Test
-    public void successfulLogOutAsUser() throws InterruptedException {
+    public void successfulLogOutAsUser() {
         loginPage.successfulLogOutAsUser();
         String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, "https://zenistock.zenitech.local/login");
+        Assert.assertEquals(URL, Credentials.login);
     }
 }
