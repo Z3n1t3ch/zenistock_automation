@@ -1,22 +1,29 @@
 package pageObjects;
 
-import com.sun.source.tree.AssertTree;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
-public class CreateDevicePageTests extends BaseTest {
+import static utils.Constants.DEVICE_NAME;
+import static utils.Constants.DEVICE_SERIAL_NO;
 
+public class CreateDevicePageTests extends BaseTest {
 
     @Test
     public void successfulCreateDevice() {
         createDevicePage.successfullyCreateDevice();
         WebElement successToaster = driver.findElement(By.id("success_toaster"));
         Assert.assertEquals(successToaster.getText(), "Item created successfully!");
+        filterDevice.filterBySerialNo(DEVICE_SERIAL_NO);
+        Assert.assertTrue(driver.findElement(By.id("device-table")).getText().contains(DEVICE_NAME));
+
     }
 
     @Test

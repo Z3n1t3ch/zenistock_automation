@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import utils.FilterDevice;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,8 +17,10 @@ import static utils.Constants.*;
 public class BaseTest {
     public static WebDriver driver;
     public static LoginPage loginPage;
+    public static FilterDevice filterDevice;
     public static CreateDevicePage createDevicePage;
     @FindBy(id="username")
+
     private WebElement usernameField;
 
     @FindBy(id="password")
@@ -26,7 +29,6 @@ public class BaseTest {
     @FindBy(id="log-in-button")
     private WebElement loginButton;
 
-
     @BeforeMethod
     public void openApplication() {
 
@@ -34,6 +36,7 @@ public class BaseTest {
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
         createDevicePage = new CreateDevicePage(driver);
+        filterDevice = new FilterDevice(driver);
         driver.get(LOGIN_PAGE_URL);
         driver.findElement(By.id("username")).sendKeys(ADMIN_USERNAME);
         driver.findElement(By.id("password")).sendKeys(ADMIN_PASSWORD);

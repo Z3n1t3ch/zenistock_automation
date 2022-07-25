@@ -1,15 +1,17 @@
 package pageObjects;
 
+
 import driver.DriverFactory;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.concurrent.TimeUnit;
 
 import static utils.Constants.*;
-
 
 public class CreateDevicePage extends DriverFactory {
     public CreateDevicePage(WebDriver driver) {
@@ -77,6 +79,15 @@ public class CreateDevicePage extends DriverFactory {
     @FindBy(id = "error_toaster")
     private WebElement errorToaster;
 
+    @FindBy(id = "filter_device_button")
+    private WebElement filterButton;
+
+    @FindBy(id = "device-filter-serialNo")
+    private WebElement filterSerialNoField;
+
+    @FindBy(id = "device-filter-apply-button")
+    private WebElement applyButton;
+
     public void successfullyCreateDevice() {
         devicesButton.click();
         addDeviceButton.click();
@@ -92,6 +103,9 @@ public class CreateDevicePage extends DriverFactory {
         locationsList.click();
         locationsRomaniaListElement.click();
         saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+
+
     }
 
     public void createDeviceWithoutName() {
@@ -191,7 +205,7 @@ public class CreateDevicePage extends DriverFactory {
         saveDeviceButton.click();
     }
 
-    public void createDeviceTooLongSerialNo(){
+    public void createDeviceTooLongSerialNo() {
         devicesButton.click();
         addDeviceButton.click();
         nameField.sendKeys(DEVICE_NAME);
@@ -201,7 +215,7 @@ public class CreateDevicePage extends DriverFactory {
         saveDeviceButton.click();
     }
 
-    public void createDeviceToLongInventoryNo(){
+    public void createDeviceToLongInventoryNo() {
         devicesButton.click();
         addDeviceButton.click();
         nameField.sendKeys(DEVICE_NAME);
@@ -211,7 +225,7 @@ public class CreateDevicePage extends DriverFactory {
         saveDeviceButton.click();
     }
 
-    public void createDeviceToLongInvoiceNo(){
+    public void createDeviceToLongInvoiceNo() {
         devicesButton.click();
         addDeviceButton.click();
         nameField.sendKeys(DEVICE_NAME);
