@@ -43,43 +43,52 @@ public class Permissions extends DriverFactory {
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
 
-    public  void checkIfSuperAdminCanPerformActionOnDevicePage()  {
+    public void checkIfSuperAdminCanPerformActionOnDevicePage() {
         devicesButtonSidebarMenu.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
-    public  void checkIfUserCanPerformActionOnAssetsPage()  {
+
+    public void checkIfUserCanPerformActionOnAssetsPage() {
         assetsButtonSidebarMenu.click();
         wait.until(ExpectedConditions.urlToBe(Constants.ASSETS_URL));
     }
-    public  void checkIfAdminCanPerformActionOnAssetsPage()  {
+
+    public void checkIfAdminCanPerformActionOnAssetsPage() {
         assetsButtonSidebarMenu.click();
         wait.until(ExpectedConditions.urlToBe(Constants.ASSETS_URL));
     }
-    public  void checkIfSuperAdminCanPerformActionOnAssetsPage()  {
+
+    public void checkIfSuperAdminCanPerformActionOnAssetsPage() {
         assetsButtonSidebarMenu.click();
         wait.until(ExpectedConditions.urlToBe(Constants.ASSETS_URL));
     }
-    public  void checkIfUserCanPerformActionOnEmployeesPage()  {
+
+    public void checkIfUserCanPerformActionOnEmployeesPage() {
         employeesButtonSidebarMenu.click();
         wait.until(ExpectedConditions.urlToBe(Constants.EMPLOYEES_URL));
     }
-    public  void checkIfAdminCanPerformActionOnEmployeesPage()  {
+
+    public void checkIfAdminCanPerformActionOnEmployeesPage() {
         employeesButtonSidebarMenu.click();
         wait.until(ExpectedConditions.urlToBe(Constants.EMPLOYEES_URL));
     }
-    public  void checkIfSuperAdminCanPerformActionOnEmployeesPage()  {
+
+    public void checkIfSuperAdminCanPerformActionOnEmployeesPage() {
         employeesButtonSidebarMenu.click();
         wait.until(ExpectedConditions.urlToBe(Constants.EMPLOYEES_URL));
     }
-    public  void checkIfUserCanPerformActionOnLicensesPage()  {
+
+    public void checkIfUserCanPerformActionOnLicensesPage() {
         licensesButtonSidebarMenu.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
     }
-    public  void checkIfAdminCanPerformActionOnLicensesPage()  {
+
+    public void checkIfAdminCanPerformActionOnLicensesPage() {
         licensesButtonSidebarMenu.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
     }
-    public  void checkIfSuperAdminCanPerformActionOnLicensesPage()  {
+
+    public void checkIfSuperAdminCanPerformActionOnLicensesPage() {
         licensesButtonSidebarMenu.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
     }
