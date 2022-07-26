@@ -32,7 +32,8 @@ public class Permissions extends DriverFactory {
     private WebElement employeesButtonSidebarMenu;
     @FindBy(id = "undefined-licenses-mButton")
     private WebElement licensesButtonSidebarMenu;
-
+    @FindBy(id = "undefined-tags-mButton")
+    private WebElement tagsButtonSidebarMenu;
     public void checkIfUserCanPerformActionOnDevicePage() {
         devicesButtonSidebarMenu.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
@@ -91,5 +92,19 @@ public class Permissions extends DriverFactory {
     public void checkIfSuperAdminCanPerformActionOnLicensesPage() {
         licensesButtonSidebarMenu.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
+    }
+    public void checkIfUserCanPerformActionOnTagsPage() {
+        tagsButtonSidebarMenu.click();
+        wait.until(ExpectedConditions.urlToBe(Constants.TAGS_URL));
+    }
+
+    public void checkIfAdminCanPerformActionOnTagsPage() {
+        tagsButtonSidebarMenu.click();
+        wait.until(ExpectedConditions.urlToBe(Constants.TAGS_URL));
+    }
+
+    public void checkIfSuperAdminCanPerformActionOnTagsPage() {
+        tagsButtonSidebarMenu.click();
+        wait.until(ExpectedConditions.urlToBe(Constants.TAGS_URL));
     }
 }

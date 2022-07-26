@@ -339,4 +339,34 @@ public class PermissionsTest extends BaseTest {
             Assert.fail();
         }
     }
+    @Test
+    public void checkIfUserCanDoActionsOnTagsPage() {
+        loginPage.successfulSignInAsUser();
+        permissionForAllRoles.checkIfUserCanPerformActionOnTagsPage();
+        if (driver.findElements(By.id("tags_edit_laptop")).size() != 0 || driver.findElements(By.id("tags_delete_laptop")).size() != 0) {
+            Assert.fail();
+        } else {
+            Assert.assertTrue(true);
+        }
+    }
+    @Test
+    public void checkIfAdminCanDoActionsOnTagsPage() {
+        loginPage.successfulSignInAsAdmin();
+        permissionForAllRoles.checkIfAdminCanPerformActionOnTagsPage();
+        if (driver.findElements(By.xpath("//*[contains(@id,'item-edit')]")).size() != 0 || driver.findElements(By.xpath("//*[contains(@id,'item-delete')]")).size() != 0) {
+            Assert.assertTrue(true);
+        } else {
+            Assert.fail();
+        }
+    }
+    @Test
+    public void checkIfSuperAdminCanDoActionsOnTagsPage() {
+        loginPage.successfulSignInAsSuperAdmin();
+        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnTagsPage();
+        if (driver.findElements(By.xpath("//*[contains(@id,'item-edit')]")).size() != 0 || driver.findElements(By.xpath("//*[contains(@id,'item-delete')]")).size() != 0) {
+            Assert.assertTrue(true);
+        } else {
+            Assert.fail();
+        }
+    }
 }
