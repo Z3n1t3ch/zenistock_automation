@@ -3,21 +3,15 @@ package pageObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.time.Instant;
-import java.util.concurrent.TimeUnit;
-
 import static utils.Constants.DEVICE_NAME;
 import static utils.Constants.DEVICE_SERIAL_NO;
 
 public class CreateDevicePageTests extends BaseTest {
 
     @Test
-    public void successfulCreateDevice() {
+    public void successfullyCreateDevice() {
         createDevicePage.successfullyCreateDevice();
         WebElement successToaster = driver.findElement(By.id("success_toaster"));
         Assert.assertEquals(successToaster.getText(), "Item created successfully!");
@@ -84,8 +78,8 @@ public class CreateDevicePageTests extends BaseTest {
     }
 
     @Test
-    public void createDeviceWhitSpaceDescriptionField() {
-        createDevicePage.createDeviceWithThiteSpaceDescriptionField();
+    public void createDeviceWhiteSpaceDescriptionField() {
+        createDevicePage.createDeviceWithWhiteSpaceDescriptionField();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"description\" contains only whitespaces.");
     }
@@ -107,14 +101,14 @@ public class CreateDevicePageTests extends BaseTest {
 
     @Test
     public void createDeviceWithTooLongInventoryNo() {
-        createDevicePage.createDeviceToLongInventoryNo();
+        createDevicePage.createDeviceTooLongInventoryNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"inventoryNumber\" is too long.");
     }
 
     @Test
     public void createDeviceWithTooLongInvoiceNo() {
-        createDevicePage.createDeviceToLongInvoiceNo();
+        createDevicePage.createDeviceTooLongInvoiceNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"invoiceNumber\" is too long.");
     }

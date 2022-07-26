@@ -5,7 +5,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.Credentials;
 
 public class DriverFactory {
@@ -25,6 +24,7 @@ public class DriverFactory {
 
     @FindBy (id = "log-in-button")
     private  WebElement signInButton;
+
     public void signInAsSuperAdmin() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameSuperAdminRole);
