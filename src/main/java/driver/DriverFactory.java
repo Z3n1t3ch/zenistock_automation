@@ -15,15 +15,17 @@ public class DriverFactory {
     public DriverFactory(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, 20);
+        driver.manage().window().maximize();
     }
+
     @FindBy(id = "username")
     private WebElement usernameField;
 
     @FindBy(id = "password")
-    private  WebElement passwordField;
+    private WebElement passwordField;
 
-    @FindBy (id = "log-in-button")
-    private  WebElement signInButton;
+    @FindBy(id = "log-in-button")
+    private WebElement signInButton;
 
     public void signInAsSuperAdmin() {
         driver.get(Credentials.login);
@@ -32,16 +34,18 @@ public class DriverFactory {
         signInButton.click();
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
     }
+
     public void signInAsAdmin() {
         driver.get(Credentials.login);
-        usernameField. sendKeys(Credentials.usernameAdminRole);
+        usernameField.sendKeys(Credentials.usernameAdminRole);
         passwordField.sendKeys(Credentials.passwordAdminRole);
         signInButton.click();
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
     }
+
     public void signInAsUser() {
         driver.get(Credentials.login);
-        usernameField. sendKeys(Credentials.usernameUserRole);
+        usernameField.sendKeys(Credentials.usernameUserRole);
         passwordField.sendKeys(Credentials.passwordUserRole);
         signInButton.click();
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));

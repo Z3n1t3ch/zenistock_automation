@@ -11,7 +11,7 @@ public class BaseTest {
     public static WebDriver driver;
     public static LoginPage loginPage;
     public static FilterDevice filterDevice;
-    public static CreateDevicePage createDevicePage;
+    public static DevicePage devicePage;
 
     @BeforeMethod
     public void openApplication() {
@@ -19,7 +19,7 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
-        createDevicePage = new CreateDevicePage(driver);
+        devicePage = new DevicePage(driver);
         filterDevice = new FilterDevice(driver);
     }
 
