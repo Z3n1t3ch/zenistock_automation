@@ -1,13 +1,7 @@
 package utils;
 
-import java.util.Random;
-
 public class Constants {
-    private static Random random = new Random();
-    public static final String DEVICE_NAME = "1Laptop DELL";
-    public static final String DEVICE_SERIAL_NO = random.nextInt(100000) + "";
-    public static final String DEVICE_INVENTORY_NO = random.nextInt(100000) + "";
-    public static final String DEVICE_INVOICE_NO = random.nextInt(1000000) + "";
+
     public static final String DEVICE_DESCRIPTION = "Touchpad defect";
     public static final String DEVICE_NAME_WS = "Laptop Lenovo ";
     public static final String DEVICE_SERIAL_NO_WS = "A23456 ";
