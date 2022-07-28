@@ -16,7 +16,6 @@ public class DriverFactory {
         this.driver = driver;
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 20);
-        driver.manage().window().maximize();
     }
 
     @FindBy(id = "username")
