@@ -239,6 +239,7 @@ public class PermissionsTest extends BaseTest {
         permissionForAllRoles.checkIfUserCanPerformActionOnEmployeesPage();
         driver.findElement(By.id("filter-button"));
     }
+
     @Test
     public void checkIfUserCanPerformActionsOnEmployeesPage() {
         loginPage.successfulSignInAsUser();
