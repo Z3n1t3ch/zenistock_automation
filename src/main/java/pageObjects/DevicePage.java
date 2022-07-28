@@ -76,19 +76,15 @@ public class DevicePage extends DriverFactory {
 
     @FindBy(id = "device-locations-selectList-romania")
     private WebElement locationsRomaniaListElement;
-    @FindBy(id = "device_dropdown_000")
-    private WebElement devicesDropdownButtonInactive;
-    @FindBy(id = "device_assign_000")
-    private WebElement devicesAssignButtonInactive;
+
     @FindBy(id = "assign_user")
     private WebElement assignUserButton;
+
     @FindBy(id = "assign_user-option-0")
     private WebElement firstUserInList;
+
     @FindBy(id = "assign_update")
     private WebElement assignUpdateButton;
-    @FindBy(id = "device_delete_000")
-    private WebElement deleteButton;
-
 
     public void successfullyCreateDevice() {
         signInAsAdmin();
@@ -325,10 +321,11 @@ public class DevicePage extends DriverFactory {
         devicesButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
         filterByStatusInactive();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_000")));
-        devicesDropdownButtonInactive.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_000")));
-        devicesAssignButtonInactive.click();
+        String inactiveDeviceName = getDeviceName();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + inactiveDeviceName)));
+        driver.findElement(By.id("device_dropdown_" + inactiveDeviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_" + inactiveDeviceName)));
+        driver.findElement(By.id("device_assign_" + inactiveDeviceName)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_user")));
         assignUserButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_user-option-0")));
@@ -361,10 +358,11 @@ public class DevicePage extends DriverFactory {
         devicesButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
         filterByStatusInactive();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_000")));
-        devicesDropdownButtonInactive.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_000")));
-        deleteButton.click();
+        String inactiveDeviceName = getDeviceName();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + inactiveDeviceName)));
+        driver.findElement(By.id("device_dropdown_" + inactiveDeviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + inactiveDeviceName)));
+        driver.findElement(By.id("device_delete_" + inactiveDeviceName)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
     }
 
@@ -382,5 +380,11 @@ public class DevicePage extends DriverFactory {
         driver.findElement(By.id("device-filter-status-autocomplete-option-2")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-apply-button")));
         driver.findElement(By.id("device-filter-apply-button")).click();
+    }
+
+    private String getDeviceName() {
+        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
+        String[] attributes = firstRowText.split("\n");
+        return attributes[0];
     }
 }
