@@ -152,8 +152,8 @@ public class DevicePageTests extends BaseTest {
     }
 
     @Test
-    public void successDeleteAssignDevice() {
-        devicePage.successfullyDeleteAssigneDevice();
+    public void successfullyDeleteAssignedDevice() {
+        devicePage.successfullyDeleteAssignedDevice();
         String text = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(text, "Item deleted successfully!");
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
@@ -162,7 +162,7 @@ public class DevicePageTests extends BaseTest {
 
     @Test
     public void deleteInactiveDevice(){
-        devicePage.deleteInactivDevice();
+        devicePage.deleteInactiveDevice();
         String text = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(text, "Item deleted successfully!");
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();

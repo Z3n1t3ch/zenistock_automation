@@ -343,7 +343,7 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
     }
 
-    public void successfullyDeleteAssigneDevice() {
+    public void successfullyDeleteAssignedDevice() {
         successfullyAssignDevice();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
         driver.findElement(By.id("device_dropdown_" + deviceName)).click();
@@ -352,7 +352,7 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
     }
 
-    public void deleteInactivDevice() {
+    public void deleteInactiveDevice() {
         signInAsAdmin();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-devices-mButton")));
         devicesButton.click();
@@ -364,27 +364,5 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + inactiveDeviceName)));
         driver.findElement(By.id("device_delete_" + inactiveDeviceName)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
-    }
-
-    private void filterBySerialNo(String serialNo) {
-        driver.findElement(By.id("filter_device_button")).click();
-        driver.findElement(By.id("device-filter-serialNo")).sendKeys(serialNo);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-apply-button")));
-        driver.findElement(By.id("device-filter-apply-button")).click();
-    }
-
-    private void filterByStatusInactive() {
-        driver.findElement(By.id("filter_device_button")).click();
-        driver.findElement(By.id("device-filter-status-autocomplete")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-status-autocomplete-option-2")));
-        driver.findElement(By.id("device-filter-status-autocomplete-option-2")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-apply-button")));
-        driver.findElement(By.id("device-filter-apply-button")).click();
-    }
-
-    private String getDeviceName() {
-        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
-        String[] attributes = firstRowText.split("\n");
-        return attributes[0];
     }
 }
