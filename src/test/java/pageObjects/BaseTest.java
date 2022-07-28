@@ -10,6 +10,7 @@ public class BaseTest {
     public static WebDriver driver;
     public static LoginPage loginPage;
     public static DevicePage devicePage;
+    public static Permissions permissionForAllRoles;
 
     @BeforeMethod
     public void openApplication() {
@@ -17,6 +18,7 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
+        permissionForAllRoles = new Permissions(driver);
         devicePage = new DevicePage(driver);
     }
 
