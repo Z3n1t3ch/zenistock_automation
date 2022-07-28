@@ -7,8 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.FilterDevice;
+
 import java.util.concurrent.TimeUnit;
+
 import static utils.Constants.DEVICE_DESCRIPTION;
 import static utils.Constants.DEVICE_DESCRIPTION_WS;
 import static utils.Constants.DEVICE_INVENTORY_NO_WS;
@@ -23,8 +24,6 @@ import static utils.RandomGenerator.randomNumber;
 
 public class DevicePage extends DriverFactory {
 
-    private FilterDevice filterDevice;
-
     private String deviceName;
     private int serialNo;
     private int inventoryNo;
@@ -34,7 +33,6 @@ public class DevicePage extends DriverFactory {
 
         super(driver);
         PageFactory.initElements(driver, this);
-        filterDevice = new FilterDevice(driver);
     }
 
     @FindBy(id = "undefined-devices-mButton")
@@ -78,9 +76,9 @@ public class DevicePage extends DriverFactory {
 
     @FindBy(id = "device-locations-selectList-romania")
     private WebElement locationsRomaniaListElement;
-    @FindBy(id = "device_dropdown_11")
+    @FindBy(id = "device_dropdown_000")
     private WebElement devicesDropdownButtonInactive;
-    @FindBy(id = "device_assign_11")
+    @FindBy(id = "device_assign_000")
     private WebElement devicesAssignButtonInactive;
     @FindBy(id = "assign_user")
     private WebElement assignUserButton;
@@ -88,6 +86,8 @@ public class DevicePage extends DriverFactory {
     private WebElement firstUserInList;
     @FindBy(id = "assign_update")
     private WebElement assignUpdateButton;
+    @FindBy(id = "device_delete_000")
+    private WebElement deleteButton;
 
 
     public void successfullyCreateDevice() {
@@ -112,13 +112,16 @@ public class DevicePage extends DriverFactory {
         locationsRomaniaListElement.click();
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
-        filterDevice.filterBySerialNo(serialNo + "");
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+        filterBySerialNo(serialNo + "");
 
     }
 
     public void createDeviceWithoutName() {
         signInAsAdmin();
         devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
         addDeviceButton.click();
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
@@ -130,6 +133,7 @@ public class DevicePage extends DriverFactory {
         signInAsAdmin();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-devices-mButton")));
         devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         inventoryNoField.sendKeys(inventoryNo + "");
@@ -141,6 +145,7 @@ public class DevicePage extends DriverFactory {
         signInAsAdmin();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-devices-mButton")));
         devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
@@ -151,6 +156,7 @@ public class DevicePage extends DriverFactory {
     public void createDeviceWithoutInvoiceNo() {
         signInAsAdmin();
         devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
@@ -161,6 +167,7 @@ public class DevicePage extends DriverFactory {
     public void createDeviceWithWhiteSpacesNameField() {
         signInAsAdmin();
         devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
         addDeviceButton.click();
         nameField.sendKeys(DEVICE_NAME_WS);
         serialNoField.sendKeys(deviceName + "");
@@ -173,6 +180,7 @@ public class DevicePage extends DriverFactory {
     public void createDeviceWithWhiteSpaceSerialNoField() {
         signInAsAdmin();
         devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(DEVICE_SERIAL_NO_WS);
@@ -211,6 +219,7 @@ public class DevicePage extends DriverFactory {
     public void createDeviceWithWhiteSpaceDescriptionField() {
         signInAsAdmin();
         devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
@@ -224,6 +233,7 @@ public class DevicePage extends DriverFactory {
     public void createDeviceTooLongName() {
         signInAsAdmin();
         devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
         addDeviceButton.click();
         nameField.sendKeys(DEVICE_NAME_TOO_LONG);
         serialNoField.sendKeys(serialNo + "");
@@ -236,6 +246,7 @@ public class DevicePage extends DriverFactory {
     public void createDeviceTooLongSerialNo() {
         signInAsAdmin();
         devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(DEVICE_NUMBER_OVER_30_CHAR);
@@ -248,6 +259,7 @@ public class DevicePage extends DriverFactory {
     public void createDeviceTooLongInventoryNo() {
         signInAsAdmin();
         devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
@@ -312,10 +324,10 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-devices-mButton")));
         devicesButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
-        filterDevice.filterByStatus();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_11")));
+        filterByStatusInactive();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_000")));
         devicesDropdownButtonInactive.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_11")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_000")));
         devicesAssignButtonInactive.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_user")));
         assignUserButton.click();
@@ -325,4 +337,50 @@ public class DevicePage extends DriverFactory {
         assignUpdateButton.click();
     }
 
+    public void deleteDevice() {
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + deviceName)));
+        driver.findElement(By.id("device_delete_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+    }
+
+    public void successfullyDeleteAssigneDevice() {
+        successfullyAssignDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + deviceName)));
+        driver.findElement(By.id("device_delete_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+    }
+
+    public void deleteInactivDevice() {
+        signInAsAdmin();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-devices-mButton")));
+        devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+        filterByStatusInactive();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_000")));
+        devicesDropdownButtonInactive.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_000")));
+        deleteButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+    }
+
+    private void filterBySerialNo(String serialNo) {
+        driver.findElement(By.id("filter_device_button")).click();
+        driver.findElement(By.id("device-filter-serialNo")).sendKeys(serialNo);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-apply-button")));
+        driver.findElement(By.id("device-filter-apply-button")).click();
+    }
+
+    private void filterByStatusInactive() {
+        driver.findElement(By.id("filter_device_button")).click();
+        driver.findElement(By.id("device-filter-status-autocomplete")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-status-autocomplete-option-2")));
+        driver.findElement(By.id("device-filter-status-autocomplete-option-2")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-apply-button")));
+        driver.findElement(By.id("device-filter-apply-button")).click();
+    }
 }
