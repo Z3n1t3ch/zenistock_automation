@@ -1,5 +1,6 @@
 package driver;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
@@ -49,6 +50,28 @@ public class DriverFactory {
         passwordField.sendKeys(Credentials.passwordUserRole);
         signInButton.click();
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
+    }
+
+    public void filterBySerialNo(String serialNo) {
+        driver.findElement(By.id("filter_device_button")).click();
+        driver.findElement(By.id("device-filter-serialNo")).sendKeys(serialNo);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-apply-button")));
+        driver.findElement(By.id("device-filter-apply-button")).click();
+    }
+
+    public void filterByStatusInactive() {
+        driver.findElement(By.id("filter_device_button")).click();
+        driver.findElement(By.id("device-filter-status-autocomplete")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-status-autocomplete-option-2")));
+        driver.findElement(By.id("device-filter-status-autocomplete-option-2")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-apply-button")));
+        driver.findElement(By.id("device-filter-apply-button")).click();
+    }
+
+    public String getDeviceName() {
+        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
+        String[] attributes = firstRowText.split("\n");
+        return attributes[0];
     }
 
 }
