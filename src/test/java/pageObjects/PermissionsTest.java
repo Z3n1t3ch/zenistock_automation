@@ -219,8 +219,8 @@ public class PermissionsTest extends BaseTest {
     @Test
     public void checkIfSuperAdminCanPerformActionsOnAssets() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnDevicePage();
-        if (driver.findElements(By.xpath("//button[starts-with(@id,'assert_dropdown_')]")).size() != 0) {
+        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnAssetsPage();
+        if (driver.findElements(By.xpath("//button[starts-with(@id,'asset_dropdown_')]")).size() != 0) {
             Assert.assertTrue(true);
         } else {
             Assert.fail();
@@ -289,7 +289,8 @@ public class PermissionsTest extends BaseTest {
     public void checkIfUserCanFilterOnLicensesPage() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUserCanPerformActionOnLicensesPage();
-        driver.findElement(By.id("filter-button"));
+        boolean filterButton = driver.getPageSource().contains("Filter");
+        Assert.assertTrue(filterButton);
     }
     @Test
     public void checkIfUserCanPerformActionsOnLicensesPage() {
@@ -330,7 +331,7 @@ public class PermissionsTest extends BaseTest {
     @Test
     public void checkIfSuperAdminCanPerformActionsOnLicensesPage() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnEmployeesPage();
+        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnLicensesPage();
         boolean addLicenseButton = driver.getPageSource().contains("Add license");
         Assert.assertTrue(addLicenseButton);
         if (driver.findElements(By.xpath("//button[starts-with(@id,'license_dropdown_')]")).size() != 0) {

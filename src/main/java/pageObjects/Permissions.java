@@ -8,8 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
 
-import java.util.concurrent.TimeUnit;
-
 public class Permissions extends DriverFactory {
 
     public Permissions(WebDriver driver) {
@@ -18,12 +16,6 @@ public class Permissions extends DriverFactory {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(id = "username")
-    private WebElement usernameField;
-    @FindBy(id = "password")
-    private WebElement passwordField;
-    @FindBy(id = "log-in-button")
-    private WebElement signInButton;
     @FindBy(id = "undefined-devices-mButton")
     private WebElement devicesButtonSidebarMenu;
     @FindBy(id = "undefined-assets-mButton")
