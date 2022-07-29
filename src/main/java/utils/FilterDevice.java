@@ -12,7 +12,7 @@ public class FilterDevice extends DriverFactory {
         PageFactory.initElements(driver, this);
     }
 
-    public void filterBySerialNo(String serialNo) {
+    public void filterBySerialNo(String serialNo)  {
         driver.findElement(By.id("filter_device_button")).click();
         driver.findElement(By.id("device-filter-serialNo")).sendKeys(serialNo);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-apply-button")));

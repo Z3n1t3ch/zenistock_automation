@@ -36,46 +36,32 @@ public class DevicePage extends DriverFactory {
         PageFactory.initElements(driver, this);
         filterDevice = new FilterDevice(driver);
     }
-
     @FindBy(id = "undefined-devices-mButton")
     private WebElement devicesButton;
-
     @FindBy(id = "add_device_button")
     private WebElement addDeviceButton;
-
     @FindBy(id = "device-information-name")
     private WebElement nameField;
-
     @FindBy(id = "device-information-serialNo")
     private WebElement serialNoField;
-
     @FindBy(id = "device-information-inventoryNo")
     private WebElement inventoryNoField;
-
     @FindBy(id = "device-information-invoiceNo")
     private WebElement invoiceNoField;
-
     @FindBy(id = "device-information-description")
     private WebElement descriptionField;
-
     @FindBy(id = "device-tags-subcategory-selectList")
     private WebElement subcategoryList;
-
     @FindBy(id = "tags")
     private WebElement tagsList;
-
     @FindBy(id = "device-locations-selectList")
     private WebElement locationsList;
-
     @FindBy(id = "device-saveBtn")
     private WebElement saveDeviceButton;
-
     @FindBy(id = "device-tags-subcategory-selectList-laptop")
     private WebElement subcategoryLaptopListElement;
-
     @FindBy(id = "tags-option-0")
     private WebElement tagsListElement;
-
     @FindBy(id = "device-locations-selectList-romania")
     private WebElement locationsRomaniaListElement;
     @FindBy(id = "device_dropdown_11")
@@ -88,6 +74,7 @@ public class DevicePage extends DriverFactory {
     private WebElement firstUserInList;
     @FindBy(id = "assign_update")
     private WebElement assignUpdateButton;
+
 
 
     public void successfullyCreateDevice() {
@@ -112,9 +99,80 @@ public class DevicePage extends DriverFactory {
         locationsRomaniaListElement.click();
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
         filterDevice.filterBySerialNo(serialNo + "");
-
     }
+
+    public void successfullyEditADeviceName(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        nameField.click();
+        nameField.clear();
+        nameField.sendKeys(randomNumber()+ "");
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+    }
+
+    public void successfullyEditADeviceSerialNo(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        serialNoField.click();
+        serialNoField.clear();
+        serialNoField.sendKeys(randomNumber()+ "");
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+    }
+
+    public void successfullyEditADeviceInventoryNo(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        inventoryNoField.click();
+        inventoryNoField.clear();
+        inventoryNoField.sendKeys(randomNumber()+ "");
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+    }
+
+    public void successfullyEditADeviceInvoiceNo(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        invoiceNoField.click();
+        invoiceNoField.clear();
+        invoiceNoField.sendKeys(randomNumber()+ "");
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+    }
+    public void successfullyEditDescription(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        descriptionField.click();
+        descriptionField.clear();
+        descriptionField.sendKeys(randomName());
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+    }
+
 
     public void createDeviceWithoutName() {
         signInAsAdmin();
@@ -123,6 +181,17 @@ public class DevicePage extends DriverFactory {
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
+        saveDeviceButton.click();
+    }
+    public void editDeviceWithoutName(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        nameField.click();
+        nameField.clear();
         saveDeviceButton.click();
     }
 
@@ -137,6 +206,18 @@ public class DevicePage extends DriverFactory {
         saveDeviceButton.click();
     }
 
+    public void editDeviceWithoutSerialNo(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        serialNoField.click();
+        serialNoField.clear();
+        saveDeviceButton.click();
+    }
+
     public void createDeviceWithoutInventoryNo() {
         signInAsAdmin();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-devices-mButton")));
@@ -148,6 +229,18 @@ public class DevicePage extends DriverFactory {
         saveDeviceButton.click();
     }
 
+    public void editDeviceWithoutInventoryNo(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        inventoryNoField.click();
+        inventoryNoField.clear();
+        saveDeviceButton.click();
+    }
+
     public void createDeviceWithoutInvoiceNo() {
         signInAsAdmin();
         devicesButton.click();
@@ -155,6 +248,18 @@ public class DevicePage extends DriverFactory {
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
+        saveDeviceButton.click();
+    }
+
+    public void editDeviceWithoutInvoiceNo(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        invoiceNoField.click();
+        invoiceNoField.clear();
         saveDeviceButton.click();
     }
 
@@ -170,6 +275,20 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
 
+    public void editDeviceWithWhiteSpacesNameField(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        nameField.click();
+        nameField.clear();
+        nameField.sendKeys(DEVICE_NAME_WS);
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+    }
+
     public void createDeviceWithWhiteSpaceSerialNoField() {
         signInAsAdmin();
         devicesButton.click();
@@ -178,6 +297,20 @@ public class DevicePage extends DriverFactory {
         serialNoField.sendKeys(DEVICE_SERIAL_NO_WS);
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+    }
+
+    public void editDeviceWithWhiteSpaceSerialNoField(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        serialNoField.click();
+        serialNoField.clear();
+        serialNoField.sendKeys(DEVICE_SERIAL_NO_WS);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -195,6 +328,20 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
 
+    public void editDeviceWithWhiteSpaceInventoryNo() {
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        inventoryNoField.click();
+        inventoryNoField.clear();
+        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO_WS);
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+    }
+
     public void createDeviceWithWhiteSpaceInvoiceNoField() {
         signInAsAdmin();
         devicesButton.click();
@@ -203,6 +350,20 @@ public class DevicePage extends DriverFactory {
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
+        invoiceNoField.sendKeys(DEVICE_INVOICE_NO_WS);
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+    }
+
+    public void editDeviceWithWhiteSpaceInvoiceNo(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        invoiceNoField.click();
+        invoiceNoField.clear();
         invoiceNoField.sendKeys(DEVICE_INVOICE_NO_WS);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
@@ -221,6 +382,20 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
 
+    public void editDeviceWithWhiteSpaceDescriptionField(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        descriptionField.click();
+        descriptionField.clear();
+        descriptionField.sendKeys(DEVICE_DESCRIPTION_WS);
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+    }
+
     public void createDeviceTooLongName() {
         signInAsAdmin();
         devicesButton.click();
@@ -233,14 +408,43 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
 
+    public void editDeviceTooLongName(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        nameField.click();
+        nameField.clear();
+        nameField.sendKeys(DEVICE_NAME_TOO_LONG);
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+    }
+
     public void createDeviceTooLongSerialNo() {
         signInAsAdmin();
         devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(DEVICE_NUMBER_OVER_30_CHAR);
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+    }
+
+    public void editDeviceTooLongSerialNo(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        serialNoField.click();
+        serialNoField.clear();
+        serialNoField.sendKeys((DEVICE_NUMBER_OVER_30_CHAR));
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -257,6 +461,20 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
 
+    public void editDeviceTooLongInventoryNo(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        inventoryNoField.click();
+        inventoryNoField.clear();
+        inventoryNoField.sendKeys((DEVICE_NUMBER_OVER_30_CHAR));
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+    }
+
     public void createDeviceTooLongInvoiceNo() {
         signInAsAdmin();
         devicesButton.click();
@@ -266,6 +484,20 @@ public class DevicePage extends DriverFactory {
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(DEVICE_NUMBER_OVER_30_CHAR);
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+    }
+
+    public void editDeviceTooLongInvoiceNo(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+        invoiceNoField.click();
+        invoiceNoField.clear();
+        invoiceNoField.sendKeys((DEVICE_NUMBER_OVER_30_CHAR));
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
