@@ -73,5 +73,41 @@ public class DriverFactory {
         String[] attributes = firstRowText.split("\n");
         return attributes[0];
     }
+    public String getEmployeeName() {
+        String firstRowText = driver.findElement(By.id("undefined-table-row-0")).getText();
+        String[] attributes = firstRowText.split("\n");
+        return attributes[1];
+    }
+    public String getEmail() {
+        String firstRowText = driver.findElement(By.id("undefined-table-row-0")).getText();
+        String[] attributes = firstRowText.split("\n");
+        return attributes[0];
+    }
 
+    public void filterByRole(String role) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter-button")));
+        driver.findElement(By.id("filter-button")).click();
+        driver.findElement(By.id("user-filter-filter-role-selectList")).click();
+        if (role.equals("user")) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-filter-filter-role-selectList-user")));
+            driver.findElement(By.id("user-filter-filter-role-selectList-user")).click();
+        } else if (role.equals("admin")) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-filter-filter-role-selectList-admin")));
+            driver.findElement(By.id("user-filter-filter-role-selectList-admin")).click();
+        } else if (role.equals("super_admin")) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-filter-filter-role-selectList-super_admin")));
+            driver.findElement(By.id("user-filter-filter-role-selectList-super_admin")).click();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-filter-filter-apply-button")));
+        driver.findElement(By.id("user-filter-filter-apply-button")).click();
+    }
+    public void filterByEmail(String email){
+        driver.findElement(By.id("filter-button")).click();
+        driver.findElement(By.id("user-filter-filter-clearButton")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter-button")));
+        driver.findElement(By.id("filter-button")).click();
+        driver.findElement(By.id("user-filter-filter-email")).sendKeys(email);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-filter-filter-apply-button")));
+        driver.findElement(By.id("user-filter-filter-apply-button")).click();
+    }
 }
