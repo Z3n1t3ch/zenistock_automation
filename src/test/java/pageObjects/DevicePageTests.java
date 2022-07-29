@@ -107,7 +107,7 @@ public class DevicePageTests extends BaseTest {
     }
 
     @Test
-    public void succesfulAssignDevice() {
+    public void succesfulAssignDevice() throws InterruptedException {
         devicePage.successfullyAssignDevice();
         WebElement succesToaster = driver.findElement(By.id("success_toaster"));
         Assert.assertEquals(succesToaster.getText(), "Item updated successfully!");
@@ -118,7 +118,7 @@ public class DevicePageTests extends BaseTest {
     }
 
     @Test
-    public void succesfulUnAssignDevice() {
+    public void succesfulUnAssignDevice() throws InterruptedException {
         devicePage.succesfullyUnAssignDevice();
         WebElement succesToaster = driver.findElement(By.id("success_toaster"));
         Assert.assertEquals(succesToaster.getText(), "Item updated successfully!");
@@ -129,7 +129,7 @@ public class DevicePageTests extends BaseTest {
     }
 
     @Test
-    public void assignDeviceEmptyUserField(){
+    public void assignDeviceEmptyUserField() throws InterruptedException {
         devicePage.assignDeviceWithoutUser();
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(deviceRowText.contains("available"));
