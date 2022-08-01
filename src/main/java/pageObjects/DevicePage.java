@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.FilterDevice;
+
 import java.util.concurrent.TimeUnit;
 import static utils.Constants.DEVICE_DESCRIPTION;
 import static utils.Constants.DEVICE_DESCRIPTION_WS;
@@ -22,9 +22,6 @@ import static utils.RandomGenerator.randomNumber;
 
 
 public class DevicePage extends DriverFactory {
-
-    private FilterDevice filterDevice;
-
     private String deviceName;
     private int serialNo;
     private int inventoryNo;
@@ -34,7 +31,6 @@ public class DevicePage extends DriverFactory {
 
         super(driver);
         PageFactory.initElements(driver, this);
-        filterDevice = new FilterDevice(driver);
     }
     @FindBy(id = "undefined-devices-mButton")
     private WebElement devicesButton;
@@ -101,7 +97,7 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
-        filterDevice.filterBySerialNo(serialNo + "");
+        filterBySerialNo(serialNo + "");
     }
 
     public void successfullyEditADeviceName(){
@@ -544,7 +540,7 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-devices-mButton")));
         devicesButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
-        filterDevice.filterByStatus();
+        filterByStatusInactive();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_11")));
         devicesDropdownButtonInactive.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_11")));
