@@ -254,7 +254,7 @@ public class DevicePageTests extends BaseTest {
     }
 
     @Test
-    public void succesfulUnAssignDevice() {
+    public void succesfullyUnAssignDevice() {
         devicePage.succesfullyUnAssignDevice();
         WebElement succesToaster = driver.findElement(By.id("success_toaster"));
         Assert.assertEquals(succesToaster.getText(), "Item updated successfully!");
@@ -276,5 +276,33 @@ public class DevicePageTests extends BaseTest {
         devicePage.assignDeviceInactiveStatus();
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(deviceRowText.contains("inactive"));
+    }
+
+    @Test
+    public void successfullyDeleteDevice() {
+        devicePage.deleteDevice();
+        String text = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(text, "Item deleted successfully!");
+        String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
+        Assert.assertTrue(deviceRowText.contains("inactive"));
+    }
+
+    @Test
+    public void successfullyDeleteAssignedDevice() {
+        devicePage.successfullyDeleteAssignedDevice();
+        String text = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(text, "Item deleted successfully!");
+        String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
+        Assert.assertTrue(deviceRowText.contains("inactive"));
+    }
+
+    @Test
+    public void deleteInactiveDevice(){
+        devicePage.deleteInactiveDevice();
+        String text = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(text, "Item deleted successfully!");
+        String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
+        Assert.assertTrue(deviceRowText.contains("inactive"));
+
     }
 }
