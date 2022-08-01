@@ -1,5 +1,7 @@
 package utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -13,6 +15,11 @@ public class RandomGenerator {
     public static String randomName() {
         String name = UUID.randomUUID().toString();
         return name.replaceAll("-", "");
+    }
+
+    public static String randomDate(){
+        String date = new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+        return date;
     }
 
 }

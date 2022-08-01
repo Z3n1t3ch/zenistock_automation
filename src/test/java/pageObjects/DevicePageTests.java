@@ -222,6 +222,28 @@ public class DevicePageTests extends BaseTest {
     }
 
     @Test
+    public void successfullyEditInvoiceDate(){
+        devicePage.successfullyEditInvoiceDate();
+        String successEdit = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(successEdit, "Item updated successfully!");
+    }
+
+    @Test
+    public void successfullyEditStartDateAndEndDate(){
+        devicePage.successfullyEditStartDateAndEndDate();
+        String successEdit = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(successEdit, "Item updated successfully!");
+    }
+
+    @Test
+    public void editEndDateToBeEarlierThenStartDate(){
+        devicePage.editEndDateToBeEarlierThenStartDate();
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(),"The field \"warrantyEndDate\" is inconsistent.");
+    }
+
+
+    @Test
     public void succesfulAssignDevice() {
         devicePage.successfullyAssignDevice();
         WebElement succesToaster = driver.findElement(By.id("success_toaster"));
