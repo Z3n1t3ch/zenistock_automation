@@ -303,6 +303,5 @@ public class DevicePageTests extends BaseTest {
         Assert.assertEquals(text, "Item deleted successfully!");
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(deviceRowText.contains("inactive"));
-
     }
 }

@@ -606,5 +606,36 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_update")));
         assignUpdateButton.click();
     }
+    public void deleteDevice() {
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + deviceName)));
+        driver.findElement(By.id("device_delete_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+    }
+
+    public void successfullyDeleteAssignedDevice() {
+        successfullyAssignDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + deviceName)));
+        driver.findElement(By.id("device_delete_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+    }
+
+    public void deleteInactiveDevice() {
+        signInAsAdmin();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-devices-mButton")));
+        devicesButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+        filterByStatusInactive();
+        String inactiveDeviceName = getDeviceName();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + inactiveDeviceName)));
+        driver.findElement(By.id("device_dropdown_" + inactiveDeviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + inactiveDeviceName)));
+        driver.findElement(By.id("device_delete_" + inactiveDeviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+    }
 
 }
