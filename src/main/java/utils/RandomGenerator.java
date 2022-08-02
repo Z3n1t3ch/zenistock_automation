@@ -17,9 +17,4 @@ public class RandomGenerator {
         return name.replaceAll("-", "");
     }
 
-    public static String randomDate(){
-        String date = new SimpleDateFormat("MM/dd/yyyy").format(new Date());
-        return date;
-    }
-
 }

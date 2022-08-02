@@ -497,7 +497,7 @@ public class DevicePage extends DriverFactory {
         invoiceDateField.click();
         invoiceDateField.sendKeys(Keys.CONTROL + "a");
         invoiceDateField.sendKeys(Keys.DELETE);
-        invoiceDateField.sendKeys(RandomGenerator.randomDate());
+        invoiceDateField.sendKeys(Constants.date);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
     }

@@ -1,5 +1,8 @@
 package utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Constants {
     public static final String BASE_URL = "https://zenistock.zenitech.local/";
     public static final String LOGIN_URL = BASE_URL + "login";
@@ -28,4 +31,6 @@ public class Constants {
     public static final String WARRANTY_END_DATE = "23/07/2022";
 
     public static final String WARRANTY_END_DATE_ERROR= "01/06/2022";
+
+    public static final String date = new SimpleDateFormat("MM/dd/yyyy").format(new Date());
 }
