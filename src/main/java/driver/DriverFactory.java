@@ -51,7 +51,31 @@ public class DriverFactory {
         signInButton.click();
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
     }
-
+    public String getLicenseName() {
+        String firstRowText = driver.findElement(By.id("license-table-row-0")).getText();
+        String[] attributes = firstRowText.split("\n");
+        return attributes[0];
+    }
+    public String getCategory() {
+        String firstRowText = driver.findElement(By.id("license-table-row-0")).getText();
+        String[] attributes = firstRowText.split("\n");
+        return attributes[1];
+    }
+    public String getStatus() {
+        String firstRowText = driver.findElement(By.id("license-table-row-0")).getText();
+        String[] attributes = firstRowText.split("\n");
+        return attributes[2];
+    }
+    public String getPurchaseDate() {
+        String firstRowText = driver.findElement(By.id("license-table-row-0")).getText();
+        String[] attributes = firstRowText.split("\n");
+        return attributes[3];
+    }
+    public String getDeviceName() {
+        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
+        String[] attributes = firstRowText.split("\n");
+        return attributes[0];
+    }
     public void filterBySerialNo(String serialNo) {
         driver.findElement(By.id("filter_device_button")).click();
         driver.findElement(By.id("device-filter-serialNo")).sendKeys(serialNo);
@@ -68,11 +92,7 @@ public class DriverFactory {
         driver.findElement(By.id("device-filter-apply-button")).click();
     }
 
-    public String getDeviceName() {
-        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
-        String[] attributes = firstRowText.split("\n");
-        return attributes[0];
-    }
+
     public String getEmployeeName() {
         String firstRowText = driver.findElement(By.id("undefined-table-row-0")).getText();
         String[] attributes = firstRowText.split("\n");
