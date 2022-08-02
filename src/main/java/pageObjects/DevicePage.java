@@ -297,7 +297,8 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_update")));
         assignUpdateButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+
     }
 
     public void succesfullyUnAssignDevice() {
@@ -403,5 +404,18 @@ public class DevicePage extends DriverFactory {
         locationsRomaniaListElement.click();
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+    }
+
+    public void successfullyEditADeviceSerialNo(){
+        successfullyCreateDevice();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        wait.until(ExpectedConditions.urlToBe("https://zenistock.zenitech.local/device-details"));
+        serialNoField.clear();
+        serialNoField.sendKeys(randomNumber()+ "");
+        saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
     }
 }
