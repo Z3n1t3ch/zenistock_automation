@@ -1,7 +1,6 @@
 package pageObjects;
 
 import driver.DriverFactory;
-import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -11,10 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
 import utils.RandomGenerator;
-
 import java.util.concurrent.TimeUnit;
-
-import static utils.Constants.*;
 import static utils.RandomGenerator.randomName;
 import static utils.RandomGenerator.randomNumber;
 
@@ -93,7 +89,7 @@ public class DevicePage extends DriverFactory {
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
-        descriptionField.sendKeys(DEVICE_DESCRIPTION);
+        descriptionField.sendKeys(Constants.DEVICE_DESCRIPTION);
         subcategoryList.click();
         subcategoryLaptopListElement.click();
         tagsList.click();
@@ -114,7 +110,6 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        nameField.click();
         nameField.clear();
         nameField.sendKeys(randomNumber()+ "");
         saveDeviceButton.click();
@@ -128,7 +123,6 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        serialNoField.click();
         serialNoField.clear();
         serialNoField.sendKeys(randomNumber()+ "");
         saveDeviceButton.click();
@@ -142,7 +136,6 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        inventoryNoField.click();
         inventoryNoField.clear();
         inventoryNoField.sendKeys(randomNumber()+ "");
         saveDeviceButton.click();
@@ -156,7 +149,6 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        invoiceNoField.click();
         invoiceNoField.clear();
         invoiceNoField.sendKeys(randomNumber()+ "");
         saveDeviceButton.click();
@@ -169,7 +161,6 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        descriptionField.click();
         descriptionField.clear();
         descriptionField.sendKeys(randomName());
         saveDeviceButton.click();
@@ -193,9 +184,9 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        nameField.click();
         nameField.clear();
         saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
 
     public void createDeviceWithoutSerialNo() {
@@ -216,9 +207,9 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        serialNoField.click();
         serialNoField.clear();
         saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
 
     public void createDeviceWithoutInventoryNo() {
@@ -239,9 +230,9 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        inventoryNoField.click();
         inventoryNoField.clear();
         saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
 
     public void createDeviceWithoutInvoiceNo() {
@@ -261,16 +252,16 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        invoiceNoField.click();
         invoiceNoField.clear();
         saveDeviceButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
 
     public void createDeviceWithWhiteSpacesNameField() {
         signInAsAdmin();
         devicesButton.click();
         addDeviceButton.click();
-        nameField.sendKeys(DEVICE_NAME_WS);
+        nameField.sendKeys(Constants.DEVICE_NAME_WS);
         serialNoField.sendKeys(deviceName + "");
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
@@ -285,9 +276,8 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        nameField.click();
         nameField.clear();
-        nameField.sendKeys(DEVICE_NAME_WS);
+        nameField.sendKeys(Constants.DEVICE_NAME_WS);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -297,7 +287,7 @@ public class DevicePage extends DriverFactory {
         devicesButton.click();
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
-        serialNoField.sendKeys(DEVICE_SERIAL_NO_WS);
+        serialNoField.sendKeys(Constants.DEVICE_SERIAL_NO_WS);
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
         saveDeviceButton.click();
@@ -311,9 +301,8 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        serialNoField.click();
         serialNoField.clear();
-        serialNoField.sendKeys(DEVICE_SERIAL_NO_WS);
+        serialNoField.sendKeys(Constants.DEVICE_SERIAL_NO_WS);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -325,7 +314,7 @@ public class DevicePage extends DriverFactory {
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
-        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO_WS);
+        inventoryNoField.sendKeys(Constants.DEVICE_INVENTORY_NO_WS);
         invoiceNoField.sendKeys(invoiceNo + "");
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
@@ -338,9 +327,8 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        inventoryNoField.click();
         inventoryNoField.clear();
-        inventoryNoField.sendKeys(DEVICE_INVENTORY_NO_WS);
+        inventoryNoField.sendKeys(Constants.DEVICE_INVENTORY_NO_WS);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -353,7 +341,7 @@ public class DevicePage extends DriverFactory {
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(DEVICE_INVOICE_NO_WS);
+        invoiceNoField.sendKeys(Constants.DEVICE_INVOICE_NO_WS);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -365,9 +353,8 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        invoiceNoField.click();
         invoiceNoField.clear();
-        invoiceNoField.sendKeys(DEVICE_INVOICE_NO_WS);
+        invoiceNoField.sendKeys(Constants.DEVICE_INVOICE_NO_WS);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -380,7 +367,7 @@ public class DevicePage extends DriverFactory {
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
-        descriptionField.sendKeys(DEVICE_DESCRIPTION_WS);
+        descriptionField.sendKeys(Constants.DEVICE_DESCRIPTION_WS);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -392,9 +379,8 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        descriptionField.click();
         descriptionField.clear();
-        descriptionField.sendKeys(DEVICE_DESCRIPTION_WS);
+        descriptionField.sendKeys(Constants.DEVICE_DESCRIPTION_WS);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -403,7 +389,7 @@ public class DevicePage extends DriverFactory {
         signInAsAdmin();
         devicesButton.click();
         addDeviceButton.click();
-        nameField.sendKeys(DEVICE_NAME_TOO_LONG);
+        nameField.sendKeys(Constants.DEVICE_NAME_TOO_LONG);
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
@@ -418,9 +404,8 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        nameField.click();
         nameField.clear();
-        nameField.sendKeys(DEVICE_NAME_TOO_LONG);
+        nameField.sendKeys(Constants.DEVICE_NAME_TOO_LONG);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -431,7 +416,7 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
-        serialNoField.sendKeys(DEVICE_NUMBER_OVER_30_CHAR);
+        serialNoField.sendKeys(Constants.DEVICE_NUMBER_OVER_30_CHAR);
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
         saveDeviceButton.click();
@@ -445,9 +430,8 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        serialNoField.click();
         serialNoField.clear();
-        serialNoField.sendKeys((DEVICE_NUMBER_OVER_30_CHAR));
+        serialNoField.sendKeys((Constants.DEVICE_NUMBER_OVER_30_CHAR));
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -458,7 +442,7 @@ public class DevicePage extends DriverFactory {
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
-        inventoryNoField.sendKeys(DEVICE_NUMBER_OVER_30_CHAR);
+        inventoryNoField.sendKeys(Constants.DEVICE_NUMBER_OVER_30_CHAR);
         invoiceNoField.sendKeys(invoiceNo + "");
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
@@ -471,9 +455,8 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        inventoryNoField.click();
         inventoryNoField.clear();
-        inventoryNoField.sendKeys((DEVICE_NUMBER_OVER_30_CHAR));
+        inventoryNoField.sendKeys((Constants.DEVICE_NUMBER_OVER_30_CHAR));
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -486,7 +469,7 @@ public class DevicePage extends DriverFactory {
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(DEVICE_NUMBER_OVER_30_CHAR);
+        invoiceNoField.sendKeys(Constants.DEVICE_NUMBER_OVER_30_CHAR);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -498,9 +481,8 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        invoiceNoField.click();
         invoiceNoField.clear();
-        invoiceNoField.sendKeys((DEVICE_NUMBER_OVER_30_CHAR));
+        invoiceNoField.sendKeys((Constants.DEVICE_NUMBER_OVER_30_CHAR));
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
@@ -529,11 +511,11 @@ public class DevicePage extends DriverFactory {
         startDateWarrantyField.click();
         startDateWarrantyField.sendKeys(Keys.CONTROL + "a");
         startDateWarrantyField.sendKeys(Keys.DELETE);
-        startDateWarrantyField.sendKeys(WARRANTY_START_DATE);
+        startDateWarrantyField.sendKeys(Constants.WARRANTY_START_DATE);
         endDateWarrantyField.click();
         endDateWarrantyField.sendKeys(Keys.CONTROL + "a");
         endDateWarrantyField.sendKeys(Keys.DELETE);
-        endDateWarrantyField.sendKeys(WARRANTY_END_DATE);
+        endDateWarrantyField.sendKeys(Constants.WARRANTY_END_DATE);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
     }
@@ -547,7 +529,7 @@ public class DevicePage extends DriverFactory {
         endDateWarrantyField.click();
         endDateWarrantyField.sendKeys(Keys.CONTROL + "a");
         endDateWarrantyField.sendKeys(Keys.DELETE);
-        endDateWarrantyField.sendKeys(WARRANTY_END_DATE_ERROR);
+        endDateWarrantyField.sendKeys(Constants.WARRANTY_END_DATE_ERROR);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }

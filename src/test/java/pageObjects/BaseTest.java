@@ -1,5 +1,6 @@
 package pageObjects;
 
+import driver.DriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,6 +11,10 @@ public class BaseTest {
     public static WebDriver driver;
     public static LoginPage loginPage;
     public static DevicePage devicePage;
+    public static Permissions permissionForAllRoles;
+    public static EmployeePage employeePage;
+
+    public static DriverFactory driverFactory;
 
     @BeforeMethod
     public void openApplication() {
@@ -18,6 +23,9 @@ public class BaseTest {
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
         devicePage = new DevicePage(driver);
+        permissionForAllRoles = new Permissions(driver);
+        employeePage = new EmployeePage(driver);
+        driverFactory = new DriverFactory(driver);
     }
 
     @AfterMethod

@@ -1,5 +1,7 @@
 package pageObjects;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import driver.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -18,18 +20,24 @@ public class DevicePageTests extends BaseTest {
         devicePage.successfullyEditADeviceName();
         String successEdit = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(successEdit, "Item updated successfully!");
+        String editedDevice =driver.findElement(By.id("device-table-row-0")).getText();
+        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceName()));
     }
     @Test
     public void successfullyEditADeviceSerialNo(){
         devicePage.successfullyEditADeviceSerialNo();
         String successEdit = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(successEdit, "Item updated successfully!");
+        String editedDevice =driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceSerialNo()));
     }
     @Test
     public void successfullyEditADeviceInventoryNo(){
         devicePage.successfullyEditADeviceInventoryNo();
         String successEdit = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(successEdit, "Item updated successfully!");
+        String editedDevice =driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceInventoryNo()));
     }
 
     @Test
@@ -37,6 +45,8 @@ public class DevicePageTests extends BaseTest {
         devicePage.successfullyEditADeviceInvoiceNo();
         String successEdit = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(successEdit, "Item updated successfully!");
+        String editedDevice =driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceInvoiceNo()));
     }
     @Test
     public void successfullyEditDescription(){
@@ -225,6 +235,8 @@ public class DevicePageTests extends BaseTest {
         devicePage.successfullyEditInvoiceDate();
         String successEdit = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(successEdit, "Item updated successfully!");
+        String editedDevice =driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceInvoiceDate()));
     }
 
     @Test
@@ -232,6 +244,9 @@ public class DevicePageTests extends BaseTest {
         devicePage.successfullyEditStartDateAndEndDate();
         String successEdit = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(successEdit, "Item updated successfully!");
+        String editedDevice =driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceWarrantyStartDate()));
+        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceWarrantyEndDate()));
     }
 
     @Test
