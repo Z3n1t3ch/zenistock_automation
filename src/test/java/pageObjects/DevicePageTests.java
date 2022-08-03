@@ -1,11 +1,10 @@
 package pageObjects;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import driver.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.Constants;
 
 public class DevicePageTests extends BaseTest {
 
@@ -18,35 +17,31 @@ public class DevicePageTests extends BaseTest {
     @Test
     public void successfullyEditADeviceName() {
         devicePage.successfullyEditADeviceName();
-        String successEdit = driver.findElement(By.id("success_toaster")).getText();
-        Assert.assertEquals(successEdit, "Item updated successfully!");
-        String editedDevice =driver.findElement(By.id("device-table-row-0")).getText();
-        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceName()));
+        Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
+        String field = driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(field.contains(devicePage.name));
     }
     @Test
     public void successfullyEditADeviceSerialNo(){
         devicePage.successfullyEditADeviceSerialNo();
-        String successEdit = driver.findElement(By.id("success_toaster")).getText();
-        Assert.assertEquals(successEdit, "Item updated successfully!");
-        String editedDevice =driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceSerialNo()));
+        Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
+        String field = driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(field.contains(devicePage.number));
     }
     @Test
     public void successfullyEditADeviceInventoryNo(){
         devicePage.successfullyEditADeviceInventoryNo();
-        String successEdit = driver.findElement(By.id("success_toaster")).getText();
-        Assert.assertEquals(successEdit, "Item updated successfully!");
-        String editedDevice =driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceInventoryNo()));
+        Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
+        String field = driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(field.contains(devicePage.number));
     }
 
     @Test
-    public void successfullyEditADeviceInvoiceNo(){
+    public void successfullyEditADeviceInvoiceNo() throws InterruptedException {
         devicePage.successfullyEditADeviceInvoiceNo();
-        String successEdit = driver.findElement(By.id("success_toaster")).getText();
-        Assert.assertEquals(successEdit, "Item updated successfully!");
-        String editedDevice =driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceInvoiceNo()));
+        Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
+        String field = driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(field.contains(devicePage.number));
     }
     @Test
     public void successfullyEditDescription(){
@@ -230,24 +225,23 @@ public class DevicePageTests extends BaseTest {
         Assert.assertEquals(errorToaster.getText(), "The field \"invoiceNumber\" is too long.");
     }
 
-    @Test
-    public void successfullyEditInvoiceDate(){
-        devicePage.successfullyEditInvoiceDate();
-        String successEdit = driver.findElement(By.id("success_toaster")).getText();
-        Assert.assertEquals(successEdit, "Item updated successfully!");
-        String editedDevice =driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceInvoiceDate()));
-    }
+//    @Test
+//    public void successfullyEditInvoiceDate(){
+//        devicePage.successfullyEditInvoiceDate();
+//        Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
+//        String field = driver.findElement(By.id("device-table")).getText();
+//        Assert.assertTrue(field.contains(Constants.INVOICE_DATE));
+//    }
 
-    @Test
-    public void successfullyEditStartDateAndEndDate(){
-        devicePage.successfullyEditStartDateAndEndDate();
-        String successEdit = driver.findElement(By.id("success_toaster")).getText();
-        Assert.assertEquals(successEdit, "Item updated successfully!");
-        String editedDevice =driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceWarrantyStartDate()));
-        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceWarrantyEndDate()));
-    }
+//    @Test
+//    public void successfullyEditStartDateAndEndDate(){
+//        devicePage.successfullyEditStartDateAndEndDate();
+//        String successEdit = driver.findElement(By.id("success_toaster")).getText();
+//        Assert.assertEquals(successEdit, "Item updated successfully!");
+//        String editedDevice =driver.findElement(By.id("device-table")).getText();
+//        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceWarrantyStartDate()));
+//        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceWarrantyEndDate()));
+//    }
 
     @Test
     public void editEndDateToBeEarlierThenStartDate(){

@@ -1,15 +1,11 @@
 package pageObjects;
 
 import driver.DriverFactory;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
-import utils.RandomGenerator;
 import java.util.concurrent.TimeUnit;
 import static utils.RandomGenerator.randomName;
 import static utils.RandomGenerator.randomNumber;
@@ -32,7 +28,7 @@ public class DevicePage extends DriverFactory {
     @FindBy(id = "add_device_button")
     private WebElement addDeviceButton;
     @FindBy(id = "device-information-name")
-    private WebElement nameField;
+    public WebElement nameField;
     @FindBy(id = "device-information-serialNo")
     private WebElement serialNoField;
     @FindBy(id = "device-information-inventoryNo")
@@ -75,6 +71,30 @@ public class DevicePage extends DriverFactory {
     @FindBy(id = "device-information-endWarranty")
     private WebElement endDateWarrantyField;
 
+    @FindBy (xpath = "//*[text()='Columns']")
+    private WebElement columnsButton;
+
+    @FindBy (xpath = "//*[text()='Inventory no']")
+    private WebElement inventoryNoInColumns;
+
+    @FindBy (xpath = "//*[text()='Invoice no']")
+    private WebElement invoiceNoInColumns;
+
+    @FindBy (xpath = "//*[text()='Invoice Date']")
+    private WebElement invoiceDateInColumns;
+
+    @FindBy (xpath = "//*[text()='Warranty start date']")
+    private WebElement warrantyStartDateInColumns;
+
+    @FindBy (xpath ="//*[text()='Warranty end date']")
+    private WebElement warrantyEndDateInColumns;
+
+
+    String name = randomName()+ "";
+
+    String number = "0000" + randomNumber() + "";
+    String successEdit;
+
 
     public void successfullyCreateDevice() {
         signInAsAdmin();
@@ -111,9 +131,18 @@ public class DevicePage extends DriverFactory {
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
         nameField.clear();
-        nameField.sendKeys(randomNumber()+ "");
+        nameField.sendKeys(name);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        successEdit = driver.findElement(By.id("success_toaster")).getText();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+        driver.findElement(By.id("filter_device_button")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-clearButton")));
+        driver.findElement(By.id("device-filter-clearButton")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+        filterBySerialNo(serialNo+ "");
+        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
 
     public void successfullyEditADeviceSerialNo(){
@@ -124,9 +153,18 @@ public class DevicePage extends DriverFactory {
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
         serialNoField.clear();
-        serialNoField.sendKeys(randomNumber()+ "");
+        serialNoField.sendKeys(number);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        successEdit = driver.findElement(By.id("success_toaster")).getText();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+        driver.findElement(By.id("filter_device_button")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-clearButton")));
+        driver.findElement(By.id("device-filter-clearButton")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+        filterBySerialNo(serialNo+ "");
+        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
 
     public void successfullyEditADeviceInventoryNo(){
@@ -137,22 +175,54 @@ public class DevicePage extends DriverFactory {
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
         inventoryNoField.clear();
-        inventoryNoField.sendKeys(randomNumber()+ "");
+        inventoryNoField.sendKeys(number);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        successEdit = driver.findElement(By.id("success_toaster")).getText();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+        driver.findElement(By.id("filter_device_button")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-clearButton")));
+        driver.findElement(By.id("device-filter-clearButton")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+        filterBySerialNo(serialNo+ "");
+        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        columnsButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Inventory no']")));
+        inventoryNoInColumns.click();
+        WebElement element = driver.switchTo().activeElement();
+        element.sendKeys(Keys.ESCAPE);
     }
 
-    public void successfullyEditADeviceInvoiceNo(){
+    public void successfullyEditADeviceInvoiceNo() throws InterruptedException {
         successfullyCreateDevice();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
         driver.findElement(By.id("device_dropdown_" + deviceName)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
         driver.findElement(By.id("device_edit_" + deviceName)).click();
         wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        invoiceNoField.clear();
-        invoiceNoField.sendKeys(randomNumber()+ "");
+        invoiceNoField.sendKeys(Keys.CONTROL + "a");
+        invoiceNoField.sendKeys(Keys.DELETE);
+        invoiceNoField.sendKeys(number);
+        System.out.println(serialNo);
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        successEdit = driver.findElement(By.id("success_toaster")).getText();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+        driver.findElement(By.id("filter_device_button")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-clearButton")));
+        driver.findElement(By.id("device-filter-clearButton")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+        filterBySerialNo(serialNo+ "");
+        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        columnsButton.click();
+        WebElement scroll = driver.findElement(By.xpath("//*[text()='Invoice no']"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
+        invoiceNoInColumns.click();
+        WebElement element = driver.switchTo().activeElement();
+        element.sendKeys(Keys.ESCAPE);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-table")));
     }
     public void successfullyEditDescription(){
         successfullyCreateDevice();
@@ -487,38 +557,66 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
 
-    public void successfullyEditInvoiceDate(){
-        successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        invoiceDateField.click();
-        invoiceDateField.sendKeys(Keys.CONTROL + "a");
-        invoiceDateField.sendKeys(Keys.DELETE);
-        invoiceDateField.sendKeys(Constants.date);
-        saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
-    }
-    public void successfullyEditStartDateAndEndDate(){
-        successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
-        startDateWarrantyField.click();
-        startDateWarrantyField.sendKeys(Keys.CONTROL + "a");
-        startDateWarrantyField.sendKeys(Keys.DELETE);
-        startDateWarrantyField.sendKeys(Constants.WARRANTY_START_DATE);
-        endDateWarrantyField.click();
-        endDateWarrantyField.sendKeys(Keys.CONTROL + "a");
-        endDateWarrantyField.sendKeys(Keys.DELETE);
-        endDateWarrantyField.sendKeys(Constants.WARRANTY_END_DATE);
-        saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
-    }
+//    public void successfullyEditInvoiceDate(){
+//        successfullyCreateDevice();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+//        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+//        driver.findElement(By.id("device_edit_" + deviceName)).click();
+//        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+//        invoiceDateField.sendKeys(Keys.CONTROL + "a");
+//        invoiceNoField.sendKeys(Keys.DELETE);
+//        invoiceDateField.sendKeys(Constants.INVOICE_DATE);
+//        saveDeviceButton.click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+//        successEdit = driver.findElement(By.id("success_toaster")).getText();
+//        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+//        driver.findElement(By.id("filter_device_button")).click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-clearButton")));
+//        driver.findElement(By.id("device-filter-clearButton")).click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
+//        filterBySerialNo(serialNo+ "");
+//        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+//        columnsButton.click();
+//        WebElement scroll = driver.findElement(By.xpath("//*[text()='Invoice Date']"));
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
+//        invoiceDateInColumns.click();
+//        WebElement element = driver.switchTo().activeElement();
+//        element.sendKeys(Keys.ESCAPE);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-table")));
+//    } ( will work when it will be repaired)
+
+//    public void successfullyEditStartDateAndEndDate(){
+//        successfullyCreateDevice();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+//        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+//        driver.findElement(By.id("device_edit_" + deviceName)).click();
+//        wait.until(ExpectedConditions.urlToBe(Credentials.device_details));
+//        startDateWarrantyField.click();
+//        startDateWarrantyField.sendKeys(Keys.CONTROL + "a");
+//        startDateWarrantyField.sendKeys(Keys.DELETE);
+//        startDateWarrantyField.sendKeys(Constants.WARRANTY_START_DATE);
+//        endDateWarrantyField.click();
+//        endDateWarrantyField.sendKeys(Keys.CONTROL + "a");
+//        endDateWarrantyField.sendKeys(Keys.DELETE);
+//        endDateWarrantyField.sendKeys(Constants.WARRANTY_END_DATE);
+//        saveDeviceButton.click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+//        successEdit = driver.findElement(By.id("success_toaster")).getText();
+//        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+//        columnsButton.click();
+//        WebElement scroll = driver.findElement(By.xpath("//*[text()='Invoice no']"));
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Warranty start date']")));
+//        warrantyStartDateInColumns.click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Warranty end date']")));
+//        warrantyEndDateInColumns.click();
+//        WebElement element = driver.switchTo().activeElement();
+//        element.sendKeys(Keys.ESCAPE);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-table")));
+//    } (will work when it will be repaired)
     public void editEndDateToBeEarlierThenStartDate(){
         successfullyCreateDevice();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));

@@ -68,40 +68,9 @@ public class DriverFactory {
         driver.findElement(By.id("device-filter-apply-button")).click();
     }
     public String getDeviceName() {
-        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
+        String firstRowText = driver.findElement(By.id("device-table")).getText();
         String[] attributes = firstRowText.split("\n");
         return attributes[0];
-    }
-    public String getDeviceSerialNo() {
-        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
-        String[] attributes = firstRowText.split("\n");
-        return attributes[1];
-    }
-    public String getDeviceInventoryNo(){
-        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
-        String[] attributes = firstRowText.split("\n");
-        return attributes[2];
-    }
-    public String getDeviceInvoiceNo(){
-        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
-        String[] attributes = firstRowText.split("\n");
-        return attributes[3];
-    }
-
-    public String getDeviceInvoiceDate(){
-        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
-        String[] attributes = firstRowText.split("\n");
-        return attributes[4];
-    }
-    public String getDeviceWarrantyStartDate(){
-        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
-        String[] attributes = firstRowText.split("\n");
-        return attributes[5];
-    }
-    public String getDeviceWarrantyEndDate(){
-        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
-        String[] attributes = firstRowText.split("\n");
-        return attributes[6];
     }
 
     public String getEmployeeName() {

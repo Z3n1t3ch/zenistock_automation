@@ -13,7 +13,6 @@ public class BaseTest {
     public static DevicePage devicePage;
     public static Permissions permissionForAllRoles;
     public static EmployeePage employeePage;
-
     public static DriverFactory driverFactory;
 
     @BeforeMethod
