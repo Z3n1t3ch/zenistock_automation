@@ -25,6 +25,6 @@ public class Constants {
     public static final String WHITE_SPACE_NAME_WS = "     ";
     public static final String PURCHASE_DATE_WS = "01/04/2022";
     public static final String EXPIRATION_DATE_WS = "01/08/2022";
-    public static final String NEW_EXPIRATION_DATE_WS = "09/09/2022";
+   // public static final String NEW_EXPIRATION_DATE_WS = "09/09/2022";
     public static final String LICENSE_NAME_IS_TOO_LONG = "This is a test name that has over one hundred characters and it will be invalidated by the application";
 }
