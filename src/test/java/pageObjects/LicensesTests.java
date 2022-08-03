@@ -13,28 +13,24 @@ public class LicensesTests extends BaseTest {
         String URL = driver.getCurrentUrl();
         Assert.assertEquals(URL, Constants.LICENSES_URL);
     }
-
     @Test
     public void checkIfNameFieldIsMandatory() {
         licenses.checkIfNameFieldIsMandatory();
         boolean requiredNameField = Boolean.parseBoolean(driver.findElement(By.id("license_name")).getAttribute("required"));
         Assert.assertTrue(requiredNameField);
     }
-
     @Test
     public void createDeviceWithTooLongName() {
         licenses.addLicenseTooLongName();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"name\" is too long.");
     }
-
     @Test
     public void saveLicenseWhiteSpaceNameField() {
         licenses.createLicenseWithWhiteSpacesNameField();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"name\" contains only whitespaces.");
     }
-
     @Test
     public void createLicenseWithIndividualType() {
         licenses.createLicenseWithIndividualType();
@@ -44,7 +40,6 @@ public class LicensesTests extends BaseTest {
         Assert.assertEquals(success, "License created successfully!");
 
     }
-
     @Test
     public void createLicenseWithPackType() {
         licenses.createLicenseWithPackType();
@@ -53,7 +48,6 @@ public class LicensesTests extends BaseTest {
         Assert.assertEquals(URL, Constants.LICENSES_URL);
         Assert.assertEquals(success, "License created successfully!");
     }
-
     @Test
     public void createLicenseWithLocation() {
         licenses.createLicenseWithLocation();
@@ -62,7 +56,6 @@ public class LicensesTests extends BaseTest {
         Assert.assertEquals(URL, Constants.LICENSES_URL);
         Assert.assertEquals(success, "License created successfully!");
     }
-
     @Test
     public void createLicenseWithEmptyNameField() {
         licenses.createLicenseWithEmptyNameField();
@@ -72,14 +65,12 @@ public class LicensesTests extends BaseTest {
         Assert.assertEquals(URL, Constants.LICENSE_DETAILS_URL);
         Assert.assertTrue(errorMessage);
     }
-
     @Test
     public void createLicenseWithExpirationDateEarlierThanPurchaseDate() {
         licenses.createLicenseWithExpirationDateEarlierThanPurchaseDate();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"expirationDate\" is inconsistent.");
     }
-
     @Test
     public void createLicenseWithEmptyExpirationDate() {
         licenses.createLicenseWithEmptyExpirationDate();
@@ -87,7 +78,6 @@ public class LicensesTests extends BaseTest {
         boolean errorMessage = driver.getPageSource().contains(errorToaster);
         Assert.assertTrue(errorMessage);
     }
-
     @Test
     public void createLicenseWithEmptyPurchaseDate() {
         licenses.createLicenseWithEmptyPurchaseDate();
@@ -95,7 +85,6 @@ public class LicensesTests extends BaseTest {
         boolean errorMessage = driver.getPageSource().contains(errorToaster);
         Assert.assertTrue(errorMessage);
     }
-
     @Test
     public void successfulEditLicenseName() {
         licenses.successfulEditLicenseName();
@@ -113,6 +102,7 @@ public class LicensesTests extends BaseTest {
 //        Assert.assertEquals(success, "License updated successfully!");
 //    }
 }
+
 
 
 

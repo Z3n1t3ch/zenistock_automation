@@ -244,6 +244,7 @@ public void createLicenseWithExpirationDateEarlierThanPurchaseDate()
         saveLicense.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
     }
+
 //    public void successfulEditExpirationDate()
 //    {
 //        signInAsAdmin();
