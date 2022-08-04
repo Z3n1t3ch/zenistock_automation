@@ -2,10 +2,6 @@ package pageObjects;
 
 import driver.DriverFactory;
 import org.openqa.selenium.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,13 +11,6 @@ import java.text.ParseException;
 import java.util.concurrent.TimeUnit;
 
 import static utils.Constants.DEVICE_DESCRIPTION;
-import static utils.Constants.DEVICE_DESCRIPTION_WS;
-import static utils.Constants.DEVICE_INVENTORY_NO_WS;
-import static utils.Constants.DEVICE_INVOICE_NO_WS;
-import static utils.Constants.DEVICE_NAME_TOO_LONG;
-import static utils.Constants.DEVICE_NAME_WS;
-import static utils.Constants.DEVICE_NUMBER_OVER_30_CHAR;
-import static utils.Constants.DEVICE_SERIAL_NO_WS;
 import static utils.RandomGenerator.randomDateBefore;
 import static utils.RandomGenerator.randomName;
 import static utils.RandomGenerator.randomNumber;
