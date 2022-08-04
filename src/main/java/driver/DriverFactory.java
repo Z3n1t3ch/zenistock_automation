@@ -10,8 +10,8 @@ import pageObjects.Credentials;
 
 public class DriverFactory {
 
-    public WebDriver driver;
-    public WebDriverWait wait;
+    public static WebDriver driver;
+    public static WebDriverWait wait;
 
     public DriverFactory(WebDriver driver) {
         this.driver = driver;
@@ -20,15 +20,15 @@ public class DriverFactory {
     }
 
     @FindBy(id = "username")
-    private WebElement usernameField;
+    private static WebElement usernameField;
 
     @FindBy(id = "password")
-    private WebElement passwordField;
+    private static WebElement passwordField;
 
     @FindBy(id = "log-in-button")
-    private WebElement signInButton;
+    private static WebElement signInButton;
 
-    public void signInAsSuperAdmin() {
+    public static void signInAsSuperAdmin() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameSuperAdminRole);
         passwordField.sendKeys(Credentials.passwordSuperAdminRole);

@@ -13,6 +13,8 @@ public class BaseTest {
     public static Permissions permissionForAllRoles;
 
     public static EmployeePage employeePage;
+    public static Filter filter;
+
 
     @BeforeMethod
     public void openApplication() {
@@ -23,6 +25,7 @@ public class BaseTest {
         permissionForAllRoles = new Permissions(driver);
         devicePage = new DevicePage(driver);
         employeePage = new EmployeePage(driver);
+        filter=new Filter(driver);
     }
 
     @AfterMethod
