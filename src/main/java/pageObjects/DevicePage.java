@@ -310,6 +310,7 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_update")));
         assignUpdateButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
     }
 
     public void assignDeviceWithoutUser() {
@@ -357,6 +358,7 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + deviceName)));
         driver.findElement(By.id("device_delete_" + deviceName)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
     }
 
     public void deleteInactiveDevice() {
@@ -418,4 +420,5 @@ public class DevicePage extends DriverFactory {
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
     }
+
 }

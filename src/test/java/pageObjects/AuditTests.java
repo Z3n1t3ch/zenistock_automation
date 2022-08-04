@@ -16,6 +16,10 @@ public class AuditTests extends BaseTest {
     @Test
     public void successfullyAuditForAssignDevice() {
         audit.successfullyAssignDeviceAudit();
+        String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
+        Assert.assertTrue(deviceRowText.contains("assigned"));
+        deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
+        Assert.assertTrue(deviceRowText.contains("Dovydas Adamonis"));
         String tableText = driver.findElement(By.className("MuiCollapse-wrapper")).getText();
         Assert.assertTrue(tableText.contains("ASSIGN"));
     }
@@ -36,8 +40,9 @@ public class AuditTests extends BaseTest {
 
     @Test
     public void successfullyAuditForEditDevice() {
-        audit.successfullyEdicDeviceAudit();
+        audit.successfullyEditDeviceAudit();
         String tableText = driver.findElement(By.className("MuiCollapse-wrapper")).getText();
         Assert.assertTrue(tableText.contains("EDIT"));
     }
+
 }

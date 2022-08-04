@@ -23,36 +23,29 @@ public class Audit extends DriverFactory {
 
     public void successfullyCreateDeviceAudit() {
         devicePage.successfullyCreateDevice();
-        waitAuditTableOpen();
+        waitForAuditDisplay();
     }
 
     public void successfullyAssignDeviceAudit() {
         devicePage.successfullyAssignDevice();
-        waitAuditTableOpen();
+        waitForAuditDisplay();
 
     }
 
     public void successfullyDeleteDeviceAudit() {
         devicePage.deleteDevice();
-        waitAuditTableOpen();
+        waitForAuditDisplay();
     }
 
     public void successfullyUnAssignDeviceAudit() {
         devicePage.succesfullyUnAssignDevice();
-        waitAuditTableOpen();
+        waitForAuditDisplay();
 
     }
 
-    public void successfullyEdicDeviceAudit() {
+    public void successfullyEditDeviceAudit() {
         devicePage.successfullyEditADeviceSerialNo();
-        waitAuditTableOpen();
+        waitForAuditDisplay();
     }
 
-    private void waitAuditTableOpen(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-table-row-0-button-audit")));
-        auditButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("MuiTableRow-root")));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("MuiCollapse-wrapper")));
-
-    }
 }

@@ -112,7 +112,7 @@ public class DevicePageTests extends BaseTest {
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(deviceRowText.contains("assigned"));
         deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
-        Assert.assertTrue(deviceRowText.contains("Andreea Apetroae"));
+        Assert.assertTrue(deviceRowText.contains("Dovydas Adamonis"));
     }
 
     @Test
@@ -121,7 +121,7 @@ public class DevicePageTests extends BaseTest {
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(deviceRowText.contains("available"));
         deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
-        Assert.assertFalse(deviceRowText.contains("Andreea Apetroae"));
+        Assert.assertFalse(deviceRowText.contains("Dovydas Adamonis"));
     }
 
     @Test
