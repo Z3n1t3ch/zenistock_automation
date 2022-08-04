@@ -11,7 +11,7 @@ public class Constants {
     public static final String EMPLOYEES_URL = BASE_URL + "users";
     public static final String EMPLOYEE_DETAILS_URL = BASE_URL + "user-details";
     public static final String LICENSES_URL = BASE_URL + "licenses";
-   public static final String LICENSE_DETAILS_URL = BASE_URL + "license-details";
+    public static final String LICENSE_DETAILS_URL = BASE_URL + "license-details";
     public static final String DEVICE_DESCRIPTION = "Touchpad defect";
     public static final String DEVICE_NAME_WS = "Laptop Lenovo ";
     public static final String DEVICE_SERIAL_NO_WS = "A23456 ";
@@ -25,6 +25,5 @@ public class Constants {
     public static final String WHITE_SPACE_NAME_WS = "     ";
     public static final String PURCHASE_DATE_WS = "01/04/2022";
     public static final String EXPIRATION_DATE_WS = "01/08/2022";
-   // public static final String NEW_EXPIRATION_DATE_WS = "09/09/2022";
     public static final String LICENSE_NAME_IS_TOO_LONG = "This is a test name that has over one hundred characters and it will be invalidated by the application";
 }

@@ -14,12 +14,6 @@ public class LicensesTests extends BaseTest {
         Assert.assertEquals(URL, Constants.LICENSES_URL);
     }
     @Test
-    public void checkIfNameFieldIsMandatory() {
-        licenses.checkIfNameFieldIsMandatory();
-        boolean requiredNameField = Boolean.parseBoolean(driver.findElement(By.id("license_name")).getAttribute("required"));
-        Assert.assertTrue(requiredNameField);
-    }
-    @Test
     public void createDeviceWithTooLongName() {
         licenses.addLicenseTooLongName();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
@@ -38,7 +32,6 @@ public class LicensesTests extends BaseTest {
         String success = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(URL, Constants.LICENSES_URL);
         Assert.assertEquals(success, "License created successfully!");
-
     }
     @Test
     public void createLicenseWithPackType() {
@@ -93,18 +86,4 @@ public class LicensesTests extends BaseTest {
         Assert.assertEquals(URL, Constants.LICENSES_URL);
         Assert.assertEquals(success, "License updated successfully!");
     }
-//    @Test
-//    public void successfulLicenceEditExpirationDate() {
-//        licenses.successfulEditExpirationDate();
-//        String URL = driver.getCurrentUrl();
-//        String success = driver.findElement(By.id("success_toaster")).getText();
-//        Assert.assertEquals(URL, Constants.LICENSES_URL);
-//        Assert.assertEquals(success, "License updated successfully!");
-//    }
 }
-
-
-
-
-
-

@@ -26,8 +26,7 @@ public class BaseTest {
         permissionForAllRoles = new Permissions(driver);
         devicePage = new DevicePage(driver);
         employeePage = new EmployeePage(driver);
-        licenses = new Licenses(driver);
-        driverFactory= new DriverFactory(driver);
+        licenses=new Licenses(driver);
     }
 
     @AfterMethod

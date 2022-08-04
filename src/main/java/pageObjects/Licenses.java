@@ -9,8 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
-import utils.RandomGenerator;
-
 import static utils.Constants.*;
 
 public class Licenses extends DriverFactory {
@@ -23,7 +21,6 @@ public class Licenses extends DriverFactory {
     private WebElement licenseButton;
     @FindBy(id = "add-license")
     private WebElement addLicenseButton;
-
     @FindBy(id = "license_name")
     private WebElement nameField;
     @FindBy(id = "item_save")
@@ -35,26 +32,26 @@ public class Licenses extends DriverFactory {
     @FindBy(id = "license_type-selectList")
     private WebElement licenseTypeList;
     @FindBy(id = "license_type-selectList-pack")
-    private WebElement selectPackList;
+    private WebElement selectPackOption;
     @FindBy(id = "license_type-selectList-individual")
-    private WebElement selectIndividualList;
+    private WebElement selectIndividualOption;
     @FindBy(id = "license-locations-selectList")
     private WebElement licenseLocationList;
-    @FindBy(id= "license-locations-selectList-romania")
+    @FindBy(id = "license-locations-selectList-romania")
     private WebElement RomaniaList;
     @FindBy(id = "license_dropdown_11111")
     private WebElement licenceDropdown;
     @FindBy(id = "license_edit_11111")
     private WebElement licenceEditDropdown;
+    @FindBy(id = "success_toaster")
+    private WebElement successToaster;
+    @FindBy(id = "error_toaster")
+    private WebElement errorToaster;
 
-    public void checkIfUserCanAddLicense() {
-        signInAsUser();
-        licenseButton.click();
-    }
     public void successfulCreateLicense() {
         signInAsAdmin();
         licenseButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-license")));
+        wait.until(ExpectedConditions.visibilityOf(addLicenseButton));
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.sendKeys(LICENSE_NAME_WS);
@@ -63,16 +60,6 @@ public class Licenses extends DriverFactory {
         saveLicense.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
     }
-
-    public void checkIfNameFieldIsMandatory() {
-        signInAsAdmin();
-        licenseButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-license")));
-        addLicenseButton.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
-        saveLicense.click();
-    }
-
     public void createLicenseWithWhiteSpacesNameField() {
         signInAsAdmin();
         licenseButton.click();
@@ -82,29 +69,26 @@ public class Licenses extends DriverFactory {
         purchaseDate.sendKeys(PURCHASE_DATE_WS);
         expirationDate.sendKeys(EXPIRATION_DATE_WS);
         saveLicense.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+        wait.until(ExpectedConditions.visibilityOf(errorToaster));
     }
-
     public void addLicenseTooLongName() {
         signInAsAdmin();
         licenseButton.click();
         addLicenseButton.click();
         nameField.sendKeys(LICENSE_NAME_IS_TOO_LONG);
         saveLicense.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+        wait.until(ExpectedConditions.visibilityOf(errorToaster));
     }
-
     public void createLicenseWithPackType() {
         signInAsAdmin();
         licenseButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-license")));
+        wait.until(ExpectedConditions.visibilityOf(addLicenseButton));
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
-        nameField.click();
         nameField.sendKeys(LICENSE_NAME_WS);
         licenseTypeList.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("license_type-selectList-pack")));
-        selectPackList.click();
+        wait.until(ExpectedConditions.visibilityOf(selectPackOption));
+        selectPackOption.click();
         purchaseDate.click();
         purchaseDate.sendKeys(Keys.CONTROL + "a");
         purchaseDate.sendKeys(Keys.DELETE);
@@ -119,14 +103,14 @@ public class Licenses extends DriverFactory {
     public void createLicenseWithIndividualType() {
         signInAsAdmin();
         licenseButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-license")));
+        wait.until(ExpectedConditions.visibilityOf(addLicenseButton));
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.click();
         nameField.sendKeys(LICENSE_NAME_WS);
         licenseTypeList.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("license_type-selectList-individual")));
-        selectIndividualList.click();
+        wait.until(ExpectedConditions.visibilityOf(selectIndividualOption));
+        selectIndividualOption.click();
         purchaseDate.click();
         purchaseDate.sendKeys(Keys.CONTROL + "a");
         purchaseDate.sendKeys(Keys.DELETE);
@@ -141,13 +125,13 @@ public class Licenses extends DriverFactory {
     public void createLicenseWithLocation() {
         signInAsAdmin();
         licenseButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-license")));
+        wait.until(ExpectedConditions.visibilityOf(addLicenseButton));
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.click();
         nameField.sendKeys(LICENSE_NAME_WS);
         licenseLocationList.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("license-locations-selectList-romania")));
+        wait.until(ExpectedConditions.visibilityOf(RomaniaList));
         RomaniaList.click();
         purchaseDate.click();
         purchaseDate.sendKeys(Keys.CONTROL + "a");
@@ -160,44 +144,42 @@ public class Licenses extends DriverFactory {
         saveLicense.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
     }
-public void createLicenseWithEmptyNameField()
-{
-    signInAsAdmin();
-    licenseButton.click();
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-license")));
-    addLicenseButton.click();
-    wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
-    purchaseDate.click();
-    purchaseDate.sendKeys(Keys.CONTROL + "a");
-    purchaseDate.sendKeys(Keys.DELETE);
-    purchaseDate.sendKeys((PURCHASE_DATE_WS));
-    expirationDate.click();
-    expirationDate.sendKeys(Keys.CONTROL + "a");
-    expirationDate.sendKeys(Keys.DELETE);
-    expirationDate.sendKeys((EXPIRATION_DATE_WS));
-    saveLicense.click();
-    wait.until(ExpectedConditions.urlToBe(LICENSE_DETAILS_URL));
-}
-public void createLicenseWithExpirationDateEarlierThanPurchaseDate()
-{
-    signInAsAdmin();
-    licenseButton.click();
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-license")));
-    addLicenseButton.click();
-    wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
-    nameField.click();
-    nameField.sendKeys(LICENSE_NAME_WS);
-    expirationDate.click();
-    expirationDate.sendKeys(Keys.CONTROL + "a");
-    expirationDate.sendKeys(Keys.DELETE);
-    expirationDate.sendKeys((EXPIRATION_DATE_WS));
-    saveLicense.click();
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
-}
-    public void createLicenseWithEmptyExpirationDate (){
+    public void createLicenseWithEmptyNameField() {
         signInAsAdmin();
         licenseButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-license")));
+        wait.until(ExpectedConditions.visibilityOf(addLicenseButton));
+        addLicenseButton.click();
+        wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
+        purchaseDate.click();
+        purchaseDate.sendKeys(Keys.CONTROL + "a");
+        purchaseDate.sendKeys(Keys.DELETE);
+        purchaseDate.sendKeys((PURCHASE_DATE_WS));
+        expirationDate.click();
+        expirationDate.sendKeys(Keys.CONTROL + "a");
+        expirationDate.sendKeys(Keys.DELETE);
+        expirationDate.sendKeys((EXPIRATION_DATE_WS));
+        saveLicense.click();
+        wait.until(ExpectedConditions.urlToBe(LICENSE_DETAILS_URL));
+    }
+    public void createLicenseWithExpirationDateEarlierThanPurchaseDate() {
+        signInAsAdmin();
+        licenseButton.click();
+        wait.until(ExpectedConditions.visibilityOf(addLicenseButton));
+        addLicenseButton.click();
+        wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
+        nameField.click();
+        nameField.sendKeys(LICENSE_NAME_WS);
+        expirationDate.click();
+        expirationDate.sendKeys(Keys.CONTROL + "a");
+        expirationDate.sendKeys(Keys.DELETE);
+        expirationDate.sendKeys((EXPIRATION_DATE_WS));
+        saveLicense.click();
+        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+    }
+    public void createLicenseWithEmptyExpirationDate() {
+        signInAsAdmin();
+        licenseButton.click();
+        wait.until(ExpectedConditions.visibilityOf(addLicenseButton));
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.click();
@@ -211,10 +193,10 @@ public void createLicenseWithExpirationDateEarlierThanPurchaseDate()
         expirationDate.sendKeys(Keys.DELETE);
         saveLicense.click();
     }
-    public void createLicenseWithEmptyPurchaseDate (){
+    public void createLicenseWithEmptyPurchaseDate() {
         signInAsAdmin();
         licenseButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-license")));
+        wait.until(ExpectedConditions.visibilityOf(addLicenseButton));
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.click();
@@ -228,37 +210,19 @@ public void createLicenseWithExpirationDateEarlierThanPurchaseDate()
         expirationDate.sendKeys((EXPIRATION_DATE_WS));
         saveLicense.click();
     }
-    public void successfulEditLicenseName()
-    {
+    public void successfulEditLicenseName() {
         signInAsAdmin();
         licenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("license_dropdown_11111")));
+        wait.until(ExpectedConditions.visibilityOf(licenceDropdown));
         licenceDropdown.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("license_edit_11111")));
+        wait.until(ExpectedConditions.visibilityOf(licenceEditDropdown));
         licenceEditDropdown.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.click();
         nameField.clear();
         nameField.sendKeys(LICENSE_NAME_WS);
         saveLicense.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.visibilityOf(successToaster));
     }
-
-//    public void successfulEditExpirationDate()
-//    {
-//        signInAsAdmin();
-//        licenseButton.click();
-//        wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("license_dropdown_11111")));
-//        licenceDropdown.click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("license_edit_11111")));
-//        licenceEditDropdown.click();
-//        wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
-//        expirationDate.sendKeys(Keys.CONTROL + "a");
-//        expirationDate.sendKeys(Keys.DELETE);
-//        expirationDate.sendKeys(NEW_EXPIRATION_DATE_WS);
-//        saveLicense.click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
-//    }
 }
