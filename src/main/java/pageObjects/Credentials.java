@@ -9,5 +9,6 @@ public final class Credentials {
     public static final String passwordSuperAdminRole = "qwer3#qazxsw09*";
     public static final String login = "https://zenistock.zenitech.local/login";
     public static final String dashboard = "https://zenistock.zenitech.local/dashboard";
+    public static final String device_details = "https://zenistock.zenitech.local/device-details";
 
 }

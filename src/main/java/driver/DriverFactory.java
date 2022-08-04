@@ -15,8 +15,8 @@ public class DriverFactory {
 
     public DriverFactory(WebDriver driver) {
         this.driver = driver;
-        driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 20);
+        driver.manage().window().maximize();
     }
 
     @FindBy(id = "username")
@@ -67,17 +67,19 @@ public class DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-apply-button")));
         driver.findElement(By.id("device-filter-apply-button")).click();
     }
-
     public String getDeviceName() {
         String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
         String[] attributes = firstRowText.split("\n");
         return attributes[0];
     }
+
     public String getEmployeeName() {
         String firstRowText = driver.findElement(By.id("undefined-table-row-0")).getText();
         String[] attributes = firstRowText.split("\n");
         return attributes[1];
     }
+
+
     public String getEmail() {
         String firstRowText = driver.findElement(By.id("undefined-table-row-0")).getText();
         String[] attributes = firstRowText.split("\n");
@@ -110,4 +112,5 @@ public class DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-filter-filter-apply-button")));
         driver.findElement(By.id("user-filter-filter-apply-button")).click();
     }
+
 }
