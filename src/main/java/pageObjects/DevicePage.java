@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.text.ParseException;
-import java.util.concurrent.TimeUnit;
 
 import static utils.Constants.DEVICE_DESCRIPTION;
 import static utils.Constants.DEVICE_DESCRIPTION_WS;
