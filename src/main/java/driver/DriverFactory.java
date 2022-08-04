@@ -68,7 +68,7 @@ public class DriverFactory {
         driver.findElement(By.id("device-filter-apply-button")).click();
     }
     public String getDeviceName() {
-        String firstRowText = driver.findElement(By.id("device-table")).getText();
+        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
         String[] attributes = firstRowText.split("\n");
         return attributes[0];
     }

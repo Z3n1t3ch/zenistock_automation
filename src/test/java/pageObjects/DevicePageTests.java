@@ -19,29 +19,29 @@ public class DevicePageTests extends BaseTest {
         devicePage.successfullyEditADeviceName();
         Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
         String field = driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(field.contains(devicePage.name));
+        Assert.assertTrue(field.contains(Constants.name));
     }
     @Test
     public void successfullyEditADeviceSerialNo(){
         devicePage.successfullyEditADeviceSerialNo();
         Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
         String field = driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(field.contains(devicePage.number));
+        Assert.assertTrue(field.contains(Constants.number));
     }
     @Test
     public void successfullyEditADeviceInventoryNo(){
         devicePage.successfullyEditADeviceInventoryNo();
         Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
         String field = driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(field.contains(devicePage.number));
+        Assert.assertTrue(field.contains(Constants.number));
     }
 
     @Test
-    public void successfullyEditADeviceInvoiceNo() throws InterruptedException {
+    public void successfullyEditADeviceInvoiceNo() {
         devicePage.successfullyEditADeviceInvoiceNo();
         Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
         String field = driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(field.contains(devicePage.number));
+        Assert.assertTrue(field.contains(Constants.number));
     }
     @Test
     public void successfullyEditDescription(){
@@ -225,23 +225,22 @@ public class DevicePageTests extends BaseTest {
         Assert.assertEquals(errorToaster.getText(), "The field \"invoiceNumber\" is too long.");
     }
 
-//    @Test
-//    public void successfullyEditInvoiceDate(){
-//        devicePage.successfullyEditInvoiceDate();
-//        Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
-//        String field = driver.findElement(By.id("device-table")).getText();
-//        Assert.assertTrue(field.contains(Constants.INVOICE_DATE));
-//    }
 
-//    @Test
-//    public void successfullyEditStartDateAndEndDate(){
-//        devicePage.successfullyEditStartDateAndEndDate();
-//        String successEdit = driver.findElement(By.id("success_toaster")).getText();
-//        Assert.assertEquals(successEdit, "Item updated successfully!");
-//        String editedDevice =driver.findElement(By.id("device-table")).getText();
-//        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceWarrantyStartDate()));
-//        Assert.assertTrue(editedDevice.contains(devicePage.getDeviceWarrantyEndDate()));
-//    }
+    //    @Test
+    public void successfullyEditInvoiceDate(){
+        devicePage.successfullyEditInvoiceDate();
+        Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
+        String field = driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(field.contains(Constants.INVOICE_DATE));
+    }
+
+    //    @Test
+        public void successfullyEditStartDateAndEndDate(){
+        devicePage.successfullyEditStartDateAndEndDate();
+        String successEdit = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(successEdit, "Item updated successfully!");
+        String editedDevice =driver.findElement(By.id("device-table")).getText();
+    }
 
     @Test
     public void editEndDateToBeEarlierThenStartDate(){
@@ -259,7 +258,7 @@ public class DevicePageTests extends BaseTest {
         String statusField = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(statusField.contains("assigned"));
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
-        Assert.assertTrue(deviceRowText.contains("USER1 USER1"));
+        Assert.assertTrue(deviceRowText.contains("Dovydas Adamonis"));
     }
 
     @Test
@@ -270,7 +269,7 @@ public class DevicePageTests extends BaseTest {
         String statusField = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(statusField.contains("available"));
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
-        Assert.assertFalse(deviceRowText.contains("USER1 USER1"));
+        Assert.assertFalse(deviceRowText.contains("Dovydas Adamonis"));
     }
 
     @Test
