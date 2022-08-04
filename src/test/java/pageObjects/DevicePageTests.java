@@ -239,6 +239,7 @@ public class DevicePageTests extends BaseTest {
         devicePage.successfullyEditStartDateAndEndDate();
         String successEdit = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(successEdit, "Item updated successfully!");
+        String editedDevice =driver.findElement(By.id("device-table")).getText();
     }
 
     @Test

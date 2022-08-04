@@ -627,6 +627,7 @@ public class DevicePage extends DriverFactory {
         element.sendKeys(Keys.ESCAPE);
         wait.until(ExpectedConditions.visibilityOf(deviceTable));
     }
+
     public void editEndDateToBeEarlierThenStartDate() {
         successfullyCreateDevice();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
