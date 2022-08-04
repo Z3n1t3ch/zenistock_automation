@@ -312,4 +312,11 @@ public class DevicePageTests extends BaseTest {
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(deviceRowText.contains("inactive"));
     }
+
+    @Test
+    public void createDeviceInvalidWarrantyEndDate() {
+        devicePage.createDeviceInvalidWarrantyEndDate();
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(),"The field \"warrantyEndDate\" is inconsistent.");
+    }
 }
