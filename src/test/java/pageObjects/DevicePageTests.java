@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.Constants;
 
 public class DevicePageTests extends BaseTest {
 
@@ -14,15 +15,62 @@ public class DevicePageTests extends BaseTest {
     }
 
     @Test
+    public void successfullyEditADeviceName() {
+        devicePage.successfullyEditADeviceName();
+        Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
+        String field = driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(field.contains(Constants.name));
+    }
+    @Test
+    public void successfullyEditADeviceSerialNo(){
+        devicePage.successfullyEditADeviceSerialNo();
+        Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
+        String field = driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(field.contains(Constants.number));
+    }
+    @Test
+    public void successfullyEditADeviceInventoryNo(){
+        devicePage.successfullyEditADeviceInventoryNo();
+        Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
+        String field = driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(field.contains(Constants.number));
+    }
+
+    @Test
+    public void successfullyEditADeviceInvoiceNo() {
+        devicePage.successfullyEditADeviceInvoiceNo();
+        Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
+        String field = driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(field.contains(Constants.number));
+    }
+    @Test
+    public void successfullyEditDescription(){
+        devicePage.successfullyEditDescription();
+        String successEdit = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(successEdit, "Item updated successfully!");
+    }
+
+    @Test
     public void createDeviceEmptyName() {
         devicePage.createDeviceWithoutName();
         boolean requiredNameField = Boolean.parseBoolean(driver.findElement(By.id("device-information-name")).getAttribute("required"));
         Assert.assertTrue(requiredNameField);
     }
-
+    @Test
+    public void editDeviceWithoutName(){
+        devicePage.editDeviceWithoutName();
+        boolean requiredNameField = Boolean.parseBoolean(driver.findElement(By.id("device-information-name")).getAttribute("required"));
+        Assert.assertTrue(requiredNameField);
+    }
     @Test
     public void createDeviceEmptySerialNo() {
         devicePage.createDeviceWithoutSerialNo();
+        boolean requireSerialNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-serialNo")).getAttribute("required"));
+        Assert.assertTrue(requireSerialNoField);
+    }
+    @Test
+    public void editDeviceWithoutSerialNo(){
+        devicePage.editDeviceWithoutSerialNo();
         boolean requireSerialNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-serialNo")).getAttribute("required"));
         Assert.assertTrue(requireSerialNoField);
     }
@@ -34,10 +82,21 @@ public class DevicePageTests extends BaseTest {
         Assert.assertTrue(requireInventoryNoField);
     }
 
+    @Test public void editDeviceWithoutInventoryNo(){
+        devicePage.editDeviceWithoutInventoryNo();
+        boolean requireInventoryNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-inventoryNo")).getAttribute("required"));
+        Assert.assertTrue(requireInventoryNoField);
+    }
+
     @Test
     public void createDeviceEmptyInvoiceNo() {
-
         devicePage.createDeviceWithoutInvoiceNo();
+        boolean requireInvoiceNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-invoiceNo")).getAttribute("required"));
+        Assert.assertTrue(requireInvoiceNoField);
+    }
+    @Test
+    public void editDeviceWithoutInvoiceNo(){
+        devicePage.editDeviceWithoutInvoiceNo();
         boolean requireInvoiceNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-invoiceNo")).getAttribute("required"));
         Assert.assertTrue(requireInvoiceNoField);
     }
@@ -50,8 +109,21 @@ public class DevicePageTests extends BaseTest {
     }
 
     @Test
+    public void editDeviceWithWhiteSpacesNameField() {
+        devicePage.editDeviceWithWhiteSpacesNameField();
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(), "The field \"name\" contains only whitespaces.");
+    }
+
+    @Test
     public void createDeviceWhiteSpaceSerialNoField() {
         devicePage.createDeviceWithWhiteSpaceSerialNoField();
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(), "The field \"serialNumber\" contains only whitespaces.");
+    }
+    @Test
+    public void editDeviceWithWhiteSpaceSerialNoField(){
+        devicePage.editDeviceWithWhiteSpaceSerialNoField();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"serialNumber\" contains only whitespaces.");
     }
@@ -59,6 +131,12 @@ public class DevicePageTests extends BaseTest {
     @Test
     public void createDeviceWhiteSpaceInventoryNoField() {
         devicePage.createDeviceWithWhiteSpaceInventoryNoField();
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(), "The field \"inventoryNumber\" contains only whitespaces.");
+    }
+    @Test
+    public void editDeviceWithWhiteSpaceInventoryNo(){
+        devicePage.editDeviceWithWhiteSpaceInventoryNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"inventoryNumber\" contains only whitespaces.");
     }
@@ -71,8 +149,22 @@ public class DevicePageTests extends BaseTest {
     }
 
     @Test
+    public void editDeviceWithWhiteSpaceInvoiceNo(){
+        devicePage.editDeviceWithWhiteSpaceInvoiceNo();
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(), "The field \"invoiceNumber\" contains only whitespaces.");
+    }
+
+    @Test
     public void createDeviceWhiteSpaceDescriptionField() {
         devicePage.createDeviceWithWhiteSpaceDescriptionField();
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(), "The field \"description\" contains only whitespaces.");
+    }
+
+    @Test
+    public void editDeviceWithWhiteSpaceDescriptionField(){
+        devicePage.editDeviceWithWhiteSpaceDescriptionField();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"description\" contains only whitespaces.");
     }
@@ -85,11 +177,24 @@ public class DevicePageTests extends BaseTest {
     }
 
     @Test
+    public void editDeviceTooLongName(){
+        devicePage.editDeviceTooLongName();
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(), "The field \"name\" is too long.");
+    }
+
+    @Test
     public void createDeviceWithTooLongSerialNo() {
         devicePage.createDeviceTooLongSerialNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"serialNumber\" is too long.");
+    }
 
+    @Test
+    public void editDeviceTooLongSerialNo(){
+        devicePage.editDeviceTooLongSerialNo();
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(), "The field \"serialNumber\" is too long.");
     }
 
     @Test
@@ -100,11 +205,50 @@ public class DevicePageTests extends BaseTest {
     }
 
     @Test
+    public void editDeviceTooLongInventoryNo() {
+        devicePage.editDeviceTooLongInventoryNo();
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(), "The field \"inventoryNumber\" is too long.");
+    }
+
+    @Test
     public void createDeviceWithTooLongInvoiceNo() {
         devicePage.createDeviceTooLongInvoiceNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"invoiceNumber\" is too long.");
     }
+
+    @Test
+    public void editDeviceTooLongInvoiceNo(){
+        devicePage.editDeviceTooLongInvoiceNo();
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(), "The field \"invoiceNumber\" is too long.");
+    }
+
+
+    //    @Test
+    public void successfullyEditInvoiceDate(){
+        devicePage.successfullyEditInvoiceDate();
+        Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
+        String field = driver.findElement(By.id("device-table")).getText();
+        Assert.assertTrue(field.contains(Constants.INVOICE_DATE));
+    }
+
+    //    @Test
+        public void successfullyEditStartDateAndEndDate(){
+        devicePage.successfullyEditStartDateAndEndDate();
+        String successEdit = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(successEdit, "Item updated successfully!");
+        String editedDevice =driver.findElement(By.id("device-table")).getText();
+    }
+
+    @Test
+    public void editEndDateToBeEarlierThenStartDate(){
+        devicePage.editEndDateToBeEarlierThenStartDate();
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(),"The field \"warrantyEndDate\" is inconsistent.");
+    }
+
 
     @Test
     public void succesfulAssignDevice() {

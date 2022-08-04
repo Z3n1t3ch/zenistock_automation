@@ -79,7 +79,6 @@ public class DriverFactory {
         wait.until(ExpectedConditions.visibilityOf(deviceFilterApplyButton));
         deviceFilterApplyButton.click();
     }
-
     public String getDeviceName() {
         String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
         String[] attributes = firstRowText.split("\n");
