@@ -1,7 +1,11 @@
 package pageObjects;
 
 import driver.DriverFactory;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,7 +13,6 @@ import utils.Constants;
 
 import java.text.ParseException;
 import java.util.concurrent.TimeUnit;
-
 import static utils.Constants.DEVICE_DESCRIPTION;
 import static utils.RandomGenerator.randomDateBefore;
 import static utils.RandomGenerator.randomName;
@@ -670,7 +673,8 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_update")));
         assignUpdateButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+
     }
 
     public void succesfullyUnAssignDevice() {
@@ -681,7 +685,8 @@ public class DevicePage extends DriverFactory {
         driver.findElement(By.id("device_assign_" + deviceName)).click();
         wait.until(ExpectedConditions.visibilityOf(assignUpdateButton));
         assignUpdateButton.click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
     }
 
     public void assignDeviceWithoutUser() {
@@ -728,7 +733,8 @@ public class DevicePage extends DriverFactory {
         driver.findElement(By.id("device_dropdown_" + deviceName)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + deviceName)));
         driver.findElement(By.id("device_delete_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
     }
 
     public void deleteInactiveDevice() {
@@ -777,4 +783,5 @@ public class DevicePage extends DriverFactory {
         saveDeviceButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
     }
+
 }

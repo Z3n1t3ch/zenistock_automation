@@ -12,6 +12,7 @@ public class BaseTest {
     public static DevicePage devicePage;
     public static Permissions permissionForAllRoles;
     public static EmployeePage employeePage;
+    public static Audit audit;
 
     @BeforeMethod
     public void openApplication() {
@@ -19,10 +20,10 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
-        devicePage = new DevicePage(driver);
         permissionForAllRoles = new Permissions(driver);
+        devicePage = new DevicePage(driver);
         employeePage = new EmployeePage(driver);
-
+        audit = new Audit(driver);
     }
 
     @AfterMethod
