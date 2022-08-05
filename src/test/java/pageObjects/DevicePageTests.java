@@ -13,7 +13,6 @@ public class DevicePageTests extends BaseTest {
         devicePage.successfullyCreateDevice();
         Assert.assertTrue(driver.findElement(By.id("device-table-row-0")).isDisplayed());
     }
-
     @Test
     public void successfullyEditADeviceName() {
         devicePage.successfullyEditADeviceName();
@@ -22,20 +21,19 @@ public class DevicePageTests extends BaseTest {
         Assert.assertTrue(field.contains(Constants.name));
     }
     @Test
-    public void successfullyEditADeviceSerialNo(){
+    public void successfullyEditADeviceSerialNo() {
         devicePage.successfullyEditADeviceSerialNo();
         Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
         String field = driver.findElement(By.id("device-table")).getText();
         Assert.assertTrue(field.contains(Constants.number));
     }
     @Test
-    public void successfullyEditADeviceInventoryNo(){
+    public void successfullyEditADeviceInventoryNo() {
         devicePage.successfullyEditADeviceInventoryNo();
         Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
         String field = driver.findElement(By.id("device-table")).getText();
         Assert.assertTrue(field.contains(Constants.number));
     }
-
     @Test
     public void successfullyEditADeviceInvoiceNo() {
         devicePage.successfullyEditADeviceInvoiceNo();
@@ -44,12 +42,11 @@ public class DevicePageTests extends BaseTest {
         Assert.assertTrue(field.contains(Constants.number));
     }
     @Test
-    public void successfullyEditDescription(){
+    public void successfullyEditDescription() {
         devicePage.successfullyEditDescription();
         String successEdit = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(successEdit, "Item updated successfully!");
     }
-
     @Test
     public void createDeviceEmptyName() {
         devicePage.createDeviceWithoutName();
@@ -57,7 +54,7 @@ public class DevicePageTests extends BaseTest {
         Assert.assertTrue(requiredNameField);
     }
     @Test
-    public void editDeviceWithoutName(){
+    public void editDeviceWithoutName() {
         devicePage.editDeviceWithoutName();
         boolean requiredNameField = Boolean.parseBoolean(driver.findElement(By.id("device-information-name")).getAttribute("required"));
         Assert.assertTrue(requiredNameField);
@@ -69,25 +66,23 @@ public class DevicePageTests extends BaseTest {
         Assert.assertTrue(requireSerialNoField);
     }
     @Test
-    public void editDeviceWithoutSerialNo(){
+    public void editDeviceWithoutSerialNo() {
         devicePage.editDeviceWithoutSerialNo();
         boolean requireSerialNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-serialNo")).getAttribute("required"));
         Assert.assertTrue(requireSerialNoField);
     }
-
     @Test
     public void createDeviceEmptyInventoryNo() {
         devicePage.createDeviceWithoutInventoryNo();
         boolean requireInventoryNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-inventoryNo")).getAttribute("required"));
         Assert.assertTrue(requireInventoryNoField);
     }
-
-    @Test public void editDeviceWithoutInventoryNo(){
+    @Test
+    public void editDeviceWithoutInventoryNo() {
         devicePage.editDeviceWithoutInventoryNo();
         boolean requireInventoryNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-inventoryNo")).getAttribute("required"));
         Assert.assertTrue(requireInventoryNoField);
     }
-
     @Test
     public void createDeviceEmptyInvoiceNo() {
         devicePage.createDeviceWithoutInvoiceNo();
@@ -95,26 +90,23 @@ public class DevicePageTests extends BaseTest {
         Assert.assertTrue(requireInvoiceNoField);
     }
     @Test
-    public void editDeviceWithoutInvoiceNo(){
+    public void editDeviceWithoutInvoiceNo() {
         devicePage.editDeviceWithoutInvoiceNo();
         boolean requireInvoiceNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-invoiceNo")).getAttribute("required"));
         Assert.assertTrue(requireInvoiceNoField);
     }
-
     @Test
     public void createDeviceWhiteSpaceNameField() {
         devicePage.createDeviceWithWhiteSpacesNameField();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"name\" contains only whitespaces.");
     }
-
     @Test
     public void editDeviceWithWhiteSpacesNameField() {
         devicePage.editDeviceWithWhiteSpacesNameField();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"name\" contains only whitespaces.");
     }
-
     @Test
     public void createDeviceWhiteSpaceSerialNoField() {
         devicePage.createDeviceWithWhiteSpaceSerialNoField();
@@ -122,12 +114,11 @@ public class DevicePageTests extends BaseTest {
         Assert.assertEquals(errorToaster.getText(), "The field \"serialNumber\" contains only whitespaces.");
     }
     @Test
-    public void editDeviceWithWhiteSpaceSerialNoField(){
+    public void editDeviceWithWhiteSpaceSerialNoField() {
         devicePage.editDeviceWithWhiteSpaceSerialNoField();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"serialNumber\" contains only whitespaces.");
     }
-
     @Test
     public void createDeviceWhiteSpaceInventoryNoField() {
         devicePage.createDeviceWithWhiteSpaceInventoryNoField();
@@ -135,121 +126,103 @@ public class DevicePageTests extends BaseTest {
         Assert.assertEquals(errorToaster.getText(), "The field \"inventoryNumber\" contains only whitespaces.");
     }
     @Test
-    public void editDeviceWithWhiteSpaceInventoryNo(){
+    public void editDeviceWithWhiteSpaceInventoryNo() {
         devicePage.editDeviceWithWhiteSpaceInventoryNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"inventoryNumber\" contains only whitespaces.");
     }
-
     @Test
     public void createDeviceWhiteSpaceInvoiceNoField() {
         devicePage.createDeviceWithWhiteSpaceInvoiceNoField();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"invoiceNumber\" contains only whitespaces.");
     }
-
     @Test
-    public void editDeviceWithWhiteSpaceInvoiceNo(){
+    public void editDeviceWithWhiteSpaceInvoiceNo() {
         devicePage.editDeviceWithWhiteSpaceInvoiceNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"invoiceNumber\" contains only whitespaces.");
     }
-
     @Test
     public void createDeviceWhiteSpaceDescriptionField() {
         devicePage.createDeviceWithWhiteSpaceDescriptionField();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"description\" contains only whitespaces.");
     }
-
     @Test
-    public void editDeviceWithWhiteSpaceDescriptionField(){
+    public void editDeviceWithWhiteSpaceDescriptionField() {
         devicePage.editDeviceWithWhiteSpaceDescriptionField();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"description\" contains only whitespaces.");
     }
-
     @Test
     public void createDeviceWithTooLongName() {
         devicePage.createDeviceTooLongName();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"name\" is too long.");
     }
-
     @Test
-    public void editDeviceTooLongName(){
+    public void editDeviceTooLongName() {
         devicePage.editDeviceTooLongName();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"name\" is too long.");
     }
-
     @Test
     public void createDeviceWithTooLongSerialNo() {
         devicePage.createDeviceTooLongSerialNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"serialNumber\" is too long.");
     }
-
     @Test
-    public void editDeviceTooLongSerialNo(){
+    public void editDeviceTooLongSerialNo() {
         devicePage.editDeviceTooLongSerialNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"serialNumber\" is too long.");
     }
-
     @Test
     public void createDeviceWithTooLongInventoryNo() {
         devicePage.createDeviceTooLongInventoryNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"inventoryNumber\" is too long.");
     }
-
     @Test
     public void editDeviceTooLongInventoryNo() {
         devicePage.editDeviceTooLongInventoryNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"inventoryNumber\" is too long.");
     }
-
     @Test
     public void createDeviceWithTooLongInvoiceNo() {
         devicePage.createDeviceTooLongInvoiceNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"invoiceNumber\" is too long.");
     }
-
     @Test
-    public void editDeviceTooLongInvoiceNo(){
+    public void editDeviceTooLongInvoiceNo() {
         devicePage.editDeviceTooLongInvoiceNo();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
         Assert.assertEquals(errorToaster.getText(), "The field \"invoiceNumber\" is too long.");
     }
-
-
     //    @Test
-    public void successfullyEditInvoiceDate(){
+    public void successfullyEditInvoiceDate() {
         devicePage.successfullyEditInvoiceDate();
         Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
         String field = driver.findElement(By.id("device-table")).getText();
         Assert.assertTrue(field.contains(Constants.INVOICE_DATE));
     }
-
     //    @Test
-        public void successfullyEditStartDateAndEndDate(){
+    public void successfullyEditStartDateAndEndDate() {
         devicePage.successfullyEditStartDateAndEndDate();
         String successEdit = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(successEdit, "Item updated successfully!");
-        String editedDevice =driver.findElement(By.id("device-table")).getText();
+        String editedDevice = driver.findElement(By.id("device-table")).getText();
     }
-
     @Test
-    public void editEndDateToBeEarlierThenStartDate(){
+    public void editEndDateToBeEarlierThenStartDate() {
         devicePage.editEndDateToBeEarlierThenStartDate();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
-        Assert.assertEquals(errorToaster.getText(),"The field \"warrantyEndDate\" is inconsistent.");
+        Assert.assertEquals(errorToaster.getText(), "The field \"warrantyEndDate\" is inconsistent.");
     }
-
-
     @Test
     public void succesfulAssignDevice() {
         devicePage.successfullyAssignDevice();
@@ -258,7 +231,6 @@ public class DevicePageTests extends BaseTest {
         deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(deviceRowText.contains("Dovydas Adamonis"));
     }
-
     @Test
     public void succesfullyUnAssignDevice() {
         devicePage.succesfullyUnAssignDevice();
@@ -267,21 +239,18 @@ public class DevicePageTests extends BaseTest {
         deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertFalse(deviceRowText.contains("Dovydas Adamonis"));
     }
-
     @Test
     public void assignDeviceEmptyUserField() {
         devicePage.assignDeviceWithoutUser();
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(deviceRowText.contains("available"));
     }
-
     @Test
     public void assignDeviceStatusInactive() {
         devicePage.assignDeviceInactiveStatus();
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(deviceRowText.contains("inactive"));
     }
-
     @Test
     public void successfullyDeleteDevice() {
         devicePage.deleteDevice();
@@ -290,7 +259,6 @@ public class DevicePageTests extends BaseTest {
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(deviceRowText.contains("inactive"));
     }
-
     @Test
     public void successfullyDeleteAssignedDevice() {
         devicePage.successfullyDeleteAssignedDevice();
@@ -299,21 +267,18 @@ public class DevicePageTests extends BaseTest {
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(deviceRowText.contains("inactive"));
     }
-
     @Test
-    public void deleteInactiveDevice(){
+    public void deleteInactiveDevice() {
         devicePage.deleteInactiveDevice();
         String text = driver.findElement(By.id("success_toaster")).getText();
         Assert.assertEquals(text, "Item deleted successfully!");
         String deviceRowText = driver.findElement(By.id("device-table-row-0")).getText();
         Assert.assertTrue(deviceRowText.contains("inactive"));
     }
-
     @Test
     public void createDeviceInvalidWarrantyEndDate() {
         devicePage.createDeviceInvalidWarrantyEndDate();
         WebElement errorToaster = driver.findElement(By.id("error_toaster"));
-        Assert.assertEquals(errorToaster.getText(),"The field \"warrantyEndDate\" is inconsistent.");
+        Assert.assertEquals(errorToaster.getText(), "The field \"warrantyEndDate\" is inconsistent.");
     }
-
 }

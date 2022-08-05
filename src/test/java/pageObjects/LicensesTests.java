@@ -12,6 +12,8 @@ public class LicensesTests extends BaseTest {
         licenses.successfulCreateLicense();
         String URL = driver.getCurrentUrl();
         Assert.assertEquals(URL, Constants.LICENSES_URL);
+        String success = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(success, "License created successfully!");
     }
     @Test
     public void createDeviceWithTooLongName() {

@@ -1,7 +1,6 @@
 package pageObjects;
 
 import driver.DriverFactory;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,8 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
-import static utils.Constants.*;
-
 public class Licenses extends DriverFactory {
     public Licenses(WebDriver driver) {
         super(driver);
@@ -54,9 +51,9 @@ public class Licenses extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOf(addLicenseButton));
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
-        nameField.sendKeys(LICENSE_NAME_WS);
-        purchaseDate.sendKeys((PURCHASE_DATE_WS));
-        expirationDate.sendKeys((EXPIRATION_DATE_WS));
+        nameField.sendKeys(Constants.LICENSE_NAME_WS);
+        purchaseDate.sendKeys((Constants.PURCHASE_DATE_WS));
+        expirationDate.sendKeys((Constants.EXPIRATION_DATE_WS));
         saveLicense.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
     }
@@ -65,9 +62,9 @@ public class Licenses extends DriverFactory {
         licenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
         addLicenseButton.click();
-        nameField.sendKeys(WHITE_SPACE_NAME_WS);
-        purchaseDate.sendKeys(PURCHASE_DATE_WS);
-        expirationDate.sendKeys(EXPIRATION_DATE_WS);
+        nameField.sendKeys(Constants.WHITE_SPACE_NAME_WS);
+        purchaseDate.sendKeys(Constants.PURCHASE_DATE_WS);
+        expirationDate.sendKeys(Constants.EXPIRATION_DATE_WS);
         saveLicense.click();
         wait.until(ExpectedConditions.visibilityOf(errorToaster));
     }
@@ -75,7 +72,7 @@ public class Licenses extends DriverFactory {
         signInAsAdmin();
         licenseButton.click();
         addLicenseButton.click();
-        nameField.sendKeys(LICENSE_NAME_IS_TOO_LONG);
+        nameField.sendKeys(Constants.LICENSE_NAME_IS_TOO_LONG);
         saveLicense.click();
         wait.until(ExpectedConditions.visibilityOf(errorToaster));
     }
@@ -85,18 +82,18 @@ public class Licenses extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOf(addLicenseButton));
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
-        nameField.sendKeys(LICENSE_NAME_WS);
+        nameField.sendKeys(Constants.LICENSE_NAME_WS);
         licenseTypeList.click();
         wait.until(ExpectedConditions.visibilityOf(selectPackOption));
         selectPackOption.click();
         purchaseDate.click();
         purchaseDate.sendKeys(Keys.CONTROL + "a");
         purchaseDate.sendKeys(Keys.DELETE);
-        purchaseDate.sendKeys((PURCHASE_DATE_WS));
+        purchaseDate.sendKeys((Constants.PURCHASE_DATE_WS));
         expirationDate.click();
         expirationDate.sendKeys(Keys.CONTROL + "a");
         expirationDate.sendKeys(Keys.DELETE);
-        expirationDate.sendKeys((EXPIRATION_DATE_WS));
+        expirationDate.sendKeys((Constants.EXPIRATION_DATE_WS));
         saveLicense.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
     }
@@ -107,18 +104,18 @@ public class Licenses extends DriverFactory {
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.click();
-        nameField.sendKeys(LICENSE_NAME_WS);
+        nameField.sendKeys(Constants.LICENSE_NAME_WS);
         licenseTypeList.click();
         wait.until(ExpectedConditions.visibilityOf(selectIndividualOption));
         selectIndividualOption.click();
         purchaseDate.click();
         purchaseDate.sendKeys(Keys.CONTROL + "a");
         purchaseDate.sendKeys(Keys.DELETE);
-        purchaseDate.sendKeys((PURCHASE_DATE_WS));
+        purchaseDate.sendKeys((Constants.PURCHASE_DATE_WS));
         expirationDate.click();
         expirationDate.sendKeys(Keys.CONTROL + "a");
         expirationDate.sendKeys(Keys.DELETE);
-        expirationDate.sendKeys((EXPIRATION_DATE_WS));
+        expirationDate.sendKeys((Constants.EXPIRATION_DATE_WS));
         saveLicense.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
     }
@@ -129,18 +126,18 @@ public class Licenses extends DriverFactory {
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.click();
-        nameField.sendKeys(LICENSE_NAME_WS);
+        nameField.sendKeys(Constants.LICENSE_NAME_WS);
         licenseLocationList.click();
         wait.until(ExpectedConditions.visibilityOf(RomaniaList));
         RomaniaList.click();
         purchaseDate.click();
         purchaseDate.sendKeys(Keys.CONTROL + "a");
         purchaseDate.sendKeys(Keys.DELETE);
-        purchaseDate.sendKeys((PURCHASE_DATE_WS));
+        purchaseDate.sendKeys((Constants.PURCHASE_DATE_WS));
         expirationDate.click();
         expirationDate.sendKeys(Keys.CONTROL + "a");
         expirationDate.sendKeys(Keys.DELETE);
-        expirationDate.sendKeys((EXPIRATION_DATE_WS));
+        expirationDate.sendKeys((Constants.EXPIRATION_DATE_WS));
         saveLicense.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
     }
@@ -153,13 +150,13 @@ public class Licenses extends DriverFactory {
         purchaseDate.click();
         purchaseDate.sendKeys(Keys.CONTROL + "a");
         purchaseDate.sendKeys(Keys.DELETE);
-        purchaseDate.sendKeys((PURCHASE_DATE_WS));
+        purchaseDate.sendKeys((Constants.PURCHASE_DATE_WS));
         expirationDate.click();
         expirationDate.sendKeys(Keys.CONTROL + "a");
         expirationDate.sendKeys(Keys.DELETE);
-        expirationDate.sendKeys((EXPIRATION_DATE_WS));
+        expirationDate.sendKeys((Constants.EXPIRATION_DATE_WS));
         saveLicense.click();
-        wait.until(ExpectedConditions.urlToBe(LICENSE_DETAILS_URL));
+        wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
     }
     public void createLicenseWithExpirationDateEarlierThanPurchaseDate() {
         signInAsAdmin();
@@ -168,11 +165,11 @@ public class Licenses extends DriverFactory {
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.click();
-        nameField.sendKeys(LICENSE_NAME_WS);
+        nameField.sendKeys(Constants.LICENSE_NAME_WS);
         expirationDate.click();
         expirationDate.sendKeys(Keys.CONTROL + "a");
         expirationDate.sendKeys(Keys.DELETE);
-        expirationDate.sendKeys((EXPIRATION_DATE_WS));
+        expirationDate.sendKeys((Constants.EXPIRATION_DATE_WS));
         saveLicense.click();
         wait.until(ExpectedConditions.visibilityOf(errorToaster));
     }
@@ -183,11 +180,11 @@ public class Licenses extends DriverFactory {
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.click();
-        nameField.sendKeys(LICENSE_NAME_WS);
+        nameField.sendKeys(Constants.LICENSE_NAME_WS);
         purchaseDate.click();
         purchaseDate.sendKeys(Keys.CONTROL + "a");
         purchaseDate.sendKeys(Keys.DELETE);
-        purchaseDate.sendKeys((PURCHASE_DATE_WS));
+        purchaseDate.sendKeys((Constants.PURCHASE_DATE_WS));
         expirationDate.click();
         expirationDate.sendKeys(Keys.CONTROL + "a");
         expirationDate.sendKeys(Keys.DELETE);
@@ -200,14 +197,14 @@ public class Licenses extends DriverFactory {
         addLicenseButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.click();
-        nameField.sendKeys(LICENSE_NAME_WS);
+        nameField.sendKeys(Constants.LICENSE_NAME_WS);
         purchaseDate.click();
         purchaseDate.sendKeys(Keys.CONTROL + "a");
         purchaseDate.sendKeys(Keys.DELETE);
         expirationDate.click();
         expirationDate.sendKeys(Keys.CONTROL + "a");
         expirationDate.sendKeys(Keys.DELETE);
-        expirationDate.sendKeys((EXPIRATION_DATE_WS));
+        expirationDate.sendKeys((Constants.EXPIRATION_DATE_WS));
         saveLicense.click();
     }
     public void successfulEditLicenseName() {
@@ -220,8 +217,10 @@ public class Licenses extends DriverFactory {
         licenceEditDropdown.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.click();
-        nameField.clear();
-        nameField.sendKeys(LICENSE_NAME_WS);
+        //nameField.clear();
+        nameField.sendKeys(Keys.CONTROL + "a");
+        nameField.sendKeys(Keys.DELETE);
+        nameField.sendKeys(Constants.LICENSE_NAME_edit);
         saveLicense.click();
         wait.until(ExpectedConditions.visibilityOf(successToaster));
     }
