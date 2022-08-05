@@ -217,7 +217,6 @@ public class Licenses extends DriverFactory {
         licenceEditDropdown.click();
         wait.until(ExpectedConditions.urlToBe(Constants.LICENSE_DETAILS_URL));
         nameField.click();
-        //nameField.clear();
         nameField.sendKeys(Keys.CONTROL + "a");
         nameField.sendKeys(Keys.DELETE);
         nameField.sendKeys(Constants.LICENSE_NAME_edit);
