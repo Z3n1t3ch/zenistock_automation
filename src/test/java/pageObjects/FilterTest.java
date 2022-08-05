@@ -15,14 +15,14 @@ public class FilterTest extends BaseTest {
     @Test
     public void filterByName() {
         filter.filterByName();
-        String table = driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(table.contains("Name"));
+        String table = driver.findElement(By.id("device-table-row-0")).getText();
+        Assert.assertTrue(table.contains("0"));
     }
     @Test
     public void filterBySerialNo() {
         filter.filterBySerialNo();
         String table = driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(table.contains("100"));
+        Assert.assertTrue(table.contains("356"));
     }
     @Test
     public void filterByInventoryNo() {
@@ -44,7 +44,7 @@ public class FilterTest extends BaseTest {
     }
     @Test
     public void filterByTags() {
-        filter.filterBySubcategory();
+        filter.filterByTags();
         String table = driver.findElement(By.id("device-table")).getText();
         Assert.assertTrue(table.contains("pls_dnt_dell_test"));
     }
@@ -56,10 +56,9 @@ public class FilterTest extends BaseTest {
         Assert.assertTrue(table.contains("Name"));
     }
     @Test
-    public void clearAllButton() {
-        filter.clearAllButton();
-        String table = driver.findElement(By.id("device-table")).getText();
-        String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, Constants.DEVICES_URL);
+    public void clearAllFilterFieldsButton() {
+        filter.clearAllFilterFieldsButton();
+        String verifyFields = driver.findElement(By.id("device-filter-name")).getText();
+        Assert.assertFalse(verifyFields.contains(filter.name));
     }
 }

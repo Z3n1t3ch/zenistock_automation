@@ -14,13 +14,12 @@ public class Filter extends DriverFactory {
     }
 
     @FindBy(id = "undefined-devices-mButton")
-    static WebElement deviceButton;
+     WebElement deviceButton;
     @FindBy(id = "filter_device_button")
-    static WebElement filterButton;
+     WebElement filterButton;
     @FindBy(id = "device-filter-subcategory-autocomplete")
-    static WebElement subcategoryList;
+     WebElement subcategoryList;
     @FindBy(id = "device-filter-name")
-    static
     WebElement filterName;
     @FindBy(id = "device-filter-serialNo")
     WebElement filterSerialNo;
@@ -35,21 +34,22 @@ public class Filter extends DriverFactory {
     @FindBy(id = "device-filter-invoiceDate")
     WebElement filterInvoiceDate;
     @FindBy(id = "device-filter-apply-button")
-    static WebElement applyButton;
+     WebElement applyButton;
     @FindBy(id = "")
     WebElement option0;
     @FindBy(id = "device-filter-subcategory-autocomplete-option-0")
-    static WebElement laptopOption;
+     WebElement laptopOption;
     @FindBy(id = "device-filter-asignee-autocomplete-option-0")
-    static WebElement assignedToOption;
+     WebElement assignedToOption;
     @FindBy(id = "device-filter-status-autocomplete-option-0")
-    static WebElement filterStatusOption;
-    @FindBy(id = " device-filter-tags-autocomplete-option-0")
-    static WebElement filterTagsOption;
+     WebElement filterStatusOption;
+    @FindBy(id = "device-filter-tags-autocomplete-option-0")
+     WebElement filterTagsOption;
     @FindBy(id = "device-filter-clearButton")
-    static WebElement clearAllButton;
+     WebElement clearAllButton;
+    String name = "0";
 
-    public static void filterBySubcategory() {
+    public  void filterBySubcategory() {
         signInAsSuperAdmin();
         deviceButton.click();
         wait.until(ExpectedConditions.visibilityOf(filterButton));
@@ -69,7 +69,7 @@ public class Filter extends DriverFactory {
         filterButton.click();
         wait.until(ExpectedConditions.visibilityOf(filterName));
         filterName.click();
-        filterName.sendKeys("Nume");
+        filterName.sendKeys("0");
         wait.until(ExpectedConditions.visibilityOf(applyButton));
         applyButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
@@ -81,7 +81,7 @@ public class Filter extends DriverFactory {
         filterButton.click();
         wait.until(ExpectedConditions.visibilityOf(filterSerialNo));
         filterSerialNo.click();
-        filterSerialNo.sendKeys("100");
+        filterSerialNo.sendKeys("356");
         wait.until(ExpectedConditions.visibilityOf(applyButton));
         applyButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
@@ -129,15 +129,17 @@ public class Filter extends DriverFactory {
         deviceButton.click();
         wait.until(ExpectedConditions.visibilityOf(filterButton));
         filterButton.click();
+        WebElement scroll = driver.findElement(By.id("device-filter-status-autocomplete"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
         wait.until(ExpectedConditions.visibilityOf(filterTags));
-        filterTags.click();
+       filterTags.click();
         wait.until(ExpectedConditions.visibilityOf(filterTagsOption));
         filterTagsOption.click();
         wait.until(ExpectedConditions.visibilityOf(applyButton));
         applyButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
-    public static void filterBySubcategoryAndName() {
+    public  void filterBySubcategoryAndName() {
         signInAsSuperAdmin();
         deviceButton.click();
         wait.until(ExpectedConditions.visibilityOf(filterButton));
@@ -148,18 +150,26 @@ public class Filter extends DriverFactory {
         laptopOption.click();
         wait.until(ExpectedConditions.visibilityOf(filterName));
         filterName.click();
-        filterName.sendKeys("Nume");
+        filterName.sendKeys("0");
         wait.until(ExpectedConditions.visibilityOf(applyButton));
         applyButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
-    public static void clearAllButton() {
+    public  void clearAllFilterFieldsButton() {
         signInAsSuperAdmin();
         deviceButton.click();
         wait.until(ExpectedConditions.visibilityOf(filterButton));
         filterButton.click();
+        wait.until(ExpectedConditions.visibilityOf(filterName));
+        filterName.click();
+        filterName.sendKeys(name);
+        wait.until(ExpectedConditions.visibilityOf(applyButton));
+        applyButton.click();
+        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        filterButton.click();
         wait.until(ExpectedConditions.visibilityOf(clearAllButton));
         clearAllButton.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        filterButton.click();
     }
 }
