@@ -16,6 +16,7 @@ public class BaseTest {
     public static Licenses licenses;
     public static EmployeePage employeePage;
     public static DriverFactory driverFactory;
+    public static Audit audit;
 
     @BeforeMethod
     public void openApplication() {
@@ -27,6 +28,7 @@ public class BaseTest {
         devicePage = new DevicePage(driver);
         employeePage = new EmployeePage(driver);
         licenses=new Licenses(driver);
+        audit = new Audit(driver);
     }
 
     @AfterMethod

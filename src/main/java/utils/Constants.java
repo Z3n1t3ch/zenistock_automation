@@ -1,5 +1,9 @@
 package utils;
 
+
+import static utils.RandomGenerator.randomName;
+import static utils.RandomGenerator.randomNumber;
+
 public class Constants {
     public static final String BASE_URL = "https://zenistock.zenitech.local/";
     public static final String LOGIN_URL = BASE_URL + "login";
@@ -26,4 +30,10 @@ public class Constants {
     public static final String PURCHASE_DATE_WS = "01/04/2022";
     public static final String EXPIRATION_DATE_WS = "01/08/2022";
     public static final String LICENSE_NAME_IS_TOO_LONG = "This is a test name that has over one hundred characters and it will be invalidated by the application";
+    public static final String WARRANTY_START_DATE = "22/06/2022";
+    public static final String WARRANTY_END_DATE = "23/07/2022";
+    public static final String WARRANTY_END_DATE_ERROR = "01/06/2022";
+    public static final String INVOICE_DATE = "07/07/2022";
+    public static final String name = randomName() + "";
+    public static final String number = "0000" + randomNumber() + "";
 }
