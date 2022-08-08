@@ -11,6 +11,7 @@ public class BaseTest {
     public static LoginPage loginPage;
     public static DevicePage devicePage;
     public static Permissions permissionForAllRoles;
+    public static Licenses licenses;
     public static EmployeePage employeePage;
     public static Audit audit;
     public static TagsPage tagsPage;
@@ -24,10 +25,10 @@ public class BaseTest {
         permissionForAllRoles = new Permissions(driver);
         devicePage = new DevicePage(driver);
         employeePage = new EmployeePage(driver);
+        licenses=new Licenses(driver);
         audit = new Audit(driver);
         tagsPage = new TagsPage(driver);
     }
-
     @AfterMethod
     public void closeBrowser() {
 

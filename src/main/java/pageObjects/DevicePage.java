@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
 
 import java.text.ParseException;
-import java.util.concurrent.TimeUnit;
 import static utils.Constants.DEVICE_DESCRIPTION;
 import static utils.RandomGenerator.randomDateBefore;
 import static utils.RandomGenerator.randomName;
