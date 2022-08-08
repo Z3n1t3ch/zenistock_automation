@@ -80,7 +80,6 @@ public class LoginPage extends DriverFactory {
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
         logOutButton.click();
     }
-
     public void successfulLogOutAsAdmin() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameAdminRole);
@@ -89,7 +88,6 @@ public class LoginPage extends DriverFactory {
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
         logOutButton.click();
     }
-
     public void successfulLogOutAsUser() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameUserRole);
