@@ -9,8 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pageObjects.Credentials;
 
 public class DriverFactory {
-    public static WebDriver driver;
-    public static WebDriverWait wait;
+    public  WebDriver driver;
+    public  WebDriverWait wait;
 
     public DriverFactory(WebDriver driver) {
         this.driver = driver;
@@ -19,11 +19,11 @@ public class DriverFactory {
     }
 
     @FindBy(id = "username")
-    private static WebElement usernameField;
+    private  WebElement usernameField;
     @FindBy(id = "password")
-    private static WebElement passwordField;
+    private  WebElement passwordField;
     @FindBy(id = "log-in-button")
-    private static WebElement signInButton;
+    private  WebElement signInButton;
 
     public void signInAsSuperAdmin() {
         driver.get(Credentials.login);
