@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pageObjects.Credentials;
 
 public class DriverFactory {
-
     public static WebDriver driver;
     public static WebDriverWait wait;
 
@@ -21,21 +20,18 @@ public class DriverFactory {
 
     @FindBy(id = "username")
     private static WebElement usernameField;
-
     @FindBy(id = "password")
     private static WebElement passwordField;
-
     @FindBy(id = "log-in-button")
     private static WebElement signInButton;
 
-    public static void signInAsSuperAdmin() {
+    public void signInAsSuperAdmin() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameSuperAdminRole);
         passwordField.sendKeys(Credentials.passwordSuperAdminRole);
         signInButton.click();
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
     }
-
     public void signInAsAdmin() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameAdminRole);
@@ -43,7 +39,6 @@ public class DriverFactory {
         signInButton.click();
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
     }
-
     public void signInAsUser() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameUserRole);
@@ -51,14 +46,12 @@ public class DriverFactory {
         signInButton.click();
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
     }
-
     public void filterBySerialNo(String serialNo) {
         driver.findElement(By.id("filter_device_button")).click();
         driver.findElement(By.id("device-filter-serialNo")).sendKeys(serialNo);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-apply-button")));
         driver.findElement(By.id("device-filter-apply-button")).click();
     }
-
     public void filterByStatusInactive() {
         driver.findElement(By.id("filter_device_button")).click();
         driver.findElement(By.id("device-filter-status-autocomplete")).click();
@@ -67,7 +60,6 @@ public class DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-apply-button")));
         driver.findElement(By.id("device-filter-apply-button")).click();
     }
-
     public String getDeviceName() {
         String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
         String[] attributes = firstRowText.split("\n");
@@ -83,7 +75,6 @@ public class DriverFactory {
         String[] attributes = firstRowText.split("\n");
         return attributes[0];
     }
-
     public void filterByRole(String role) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter-button")));
         driver.findElement(By.id("filter-button")).click();
@@ -101,7 +92,7 @@ public class DriverFactory {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-filter-filter-apply-button")));
         driver.findElement(By.id("user-filter-filter-apply-button")).click();
     }
-    public void filterByEmail(String email){
+    public void filterByEmail(String email) {
         driver.findElement(By.id("filter-button")).click();
         driver.findElement(By.id("user-filter-filter-clearButton")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter-button")));

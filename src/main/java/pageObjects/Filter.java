@@ -35,8 +35,6 @@ public class Filter extends DriverFactory {
     WebElement filterInvoiceDate;
     @FindBy(id = "device-filter-apply-button")
      WebElement applyButton;
-    @FindBy(id = "")
-    WebElement option0;
     @FindBy(id = "device-filter-subcategory-autocomplete-option-0")
      WebElement laptopOption;
     @FindBy(id = "device-filter-asignee-autocomplete-option-0")
@@ -47,7 +45,7 @@ public class Filter extends DriverFactory {
      WebElement filterTagsOption;
     @FindBy(id = "device-filter-clearButton")
      WebElement clearAllButton;
-    String name = "0";
+
 
     public  void filterBySubcategory() {
         signInAsSuperAdmin();
@@ -162,7 +160,7 @@ public class Filter extends DriverFactory {
         filterButton.click();
         wait.until(ExpectedConditions.visibilityOf(filterName));
         filterName.click();
-        filterName.sendKeys(name);
+        filterName.sendKeys(Constants.NAME);
         wait.until(ExpectedConditions.visibilityOf(applyButton));
         applyButton.click();
         wait.until(ExpectedConditions.visibilityOf(filterButton));

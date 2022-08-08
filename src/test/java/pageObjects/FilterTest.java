@@ -59,6 +59,6 @@ public class FilterTest extends BaseTest {
     public void clearAllFilterFieldsButton() {
         filter.clearAllFilterFieldsButton();
         String verifyFields = driver.findElement(By.id("device-filter-name")).getText();
-        Assert.assertFalse(verifyFields.contains(filter.name));
+        Assert.assertFalse(verifyFields.contains(Constants.NAME));
     }
 }
