@@ -3,6 +3,7 @@ package pageObjects;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.Constants;
 
 
 import static utils.RandomGenerator.randomName;
@@ -55,5 +56,13 @@ public class TagsPageTests extends BaseTest {
         String nameTagAfterEdit = randomName();
         tagsPage.checkDeviceWithEditedTag(nameTagAfterEdit);
         Assert.assertNotNull(driver.findElement(By.id("device-table-row-0")));
+    }
+
+    @Test
+    public void checkDeviceWithDeletedTag() {
+        tagsPage.checkDeviceWithDeletedTag();
+        String deletedTag = driver.findElement(By.id("device-table-row-0")).getText();
+        Assert.assertFalse(deletedTag.contains(Constants.EDITABLE_TAG_NAME));
+
     }
 }

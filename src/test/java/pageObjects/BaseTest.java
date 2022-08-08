@@ -15,7 +15,7 @@ public class BaseTest {
     public static EmployeePage employeePage;
     public static Audit audit;
     public static TagsPage tagsPage;
-    public  Filter filter;
+    public static Filter filter;
 
     @BeforeMethod
     public void openApplication() {

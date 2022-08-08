@@ -37,10 +37,10 @@ public class TagsPage extends DriverFactory {
     @FindBy(id = "error_toaster")
     private WebElement errorToaster;
 
-    @FindBy( id = "tags-list-tag-" + Constants.EDITABLE_TAG_NAME + "-item-editInput")
+    @FindBy(id = "tags-list-tag-" + Constants.EDITABLE_TAG_NAME + "-item-editInput")
     private WebElement editField;
 
-    @FindBy(id = "tags-list-tag-" + Constants.EDITABLE_TAG_NAME +"-item-edit")
+    @FindBy(id = "tags-list-tag-" + Constants.EDITABLE_TAG_NAME + "-item-edit")
     private WebElement editButton;
 
     @FindBy(id = "tags-list-tag-" + Constants.EDITABLE_TAG_NAME + "-item-save")
@@ -68,7 +68,7 @@ public class TagsPage extends DriverFactory {
     private WebElement tagsField;
 
     @FindBy(id = "tags-option-0")
-    private WebElement firsTagElement;
+    private WebElement firstTagElement;
 
     @FindBy(id = "device-saveBtn")
     private WebElement deviceSaveButton;
@@ -85,7 +85,7 @@ public class TagsPage extends DriverFactory {
     @FindBy(id = "device-filter-apply-button")
     private WebElement filterApplyButton;
 
-    public void successfullyCreateTag(String name){
+    public void successfullyCreateTag(String name) {
         signInAsAdmin();
         tagsButtonPage.click();
         wait.until(ExpectedConditions.visibilityOf(addTagField));
@@ -94,35 +94,35 @@ public class TagsPage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOf(successToaster));
     }
 
-    public void createTagWithWhitespaces(){
+    public void createTagWithWhitespaces() {
         signInAsAdmin();
         tagsButtonPage.click();
         wait.until(ExpectedConditions.visibilityOf(addTagField));
-        addTagField.sendKeys(Constants.TAG_NAME_WS);
+        addTagField.sendKeys(Constants.DEVICE_NAME_WS);
         addTagButton.click();
         wait.until(ExpectedConditions.visibilityOf(errorToaster));
     }
 
-    public void createTagWithEmptyField(){
+    public void createTagWithEmptyField() {
         signInAsAdmin();
         tagsButtonPage.click();
         wait.until(ExpectedConditions.visibilityOf(addTagField));
         addTagButton.click();
     }
 
-    public void successfullyDeleteTag(String name){
+    public void successfullyDeleteTag(String name) {
         signInAsAdmin();
         tagsButtonPage.click();
         wait.until(ExpectedConditions.visibilityOf(addTagField));
         addTagField.sendKeys(name);
         addTagButton.click();
         wait.until(ExpectedConditions.visibilityOf(successToaster));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("tags-list-tag-"+ name + "-item-delete")));
-        driver.findElement(By.id("tags-list-tag-"+ name + "-item-delete")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("tags-list-tag-" + name + "-item-delete")));
+        driver.findElement(By.id("tags-list-tag-" + name + "-item-delete")).click();
         wait.until(ExpectedConditions.visibilityOf(successToaster));
     }
 
-    public void successfullyEditTag(String nameAfterEdit){
+    public void successfullyEditTag(String nameAfterEdit) {
         signInAsAdmin();
         tagsButtonPage.click();
         wait.until(ExpectedConditions.visibilityOf(addTagField));
@@ -130,7 +130,6 @@ public class TagsPage extends DriverFactory {
         addTagButton.click();
         wait.until(ExpectedConditions.visibilityOf(successToaster));
         editButton.click();
-        editField.click();
         editField.sendKeys(Keys.CONTROL + "a");
         editField.sendKeys(Keys.DELETE);
         editField.sendKeys(nameAfterEdit);
@@ -138,7 +137,7 @@ public class TagsPage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOf(successToaster));
     }
 
-    public void checkDeviceWithEditedTag(String nameTagAfterEdit){
+    public void checkDeviceWithEditedTag(String nameTagAfterEdit) {
         signInAsAdmin();
         tagsButtonPage.click();
         wait.until(ExpectedConditions.visibilityOf(addTagField));
@@ -149,17 +148,16 @@ public class TagsPage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOf(addDeviceButton));
         addDeviceButton.click();
         deviceNameField.sendKeys(randomName());
-        deviceSerialNoField.sendKeys(randomNumber()+"");
-        deviceInventoryNoField.sendKeys(randomNumber()+"");
-        deviceInvoiceNoField.sendKeys(randomNumber()+"");
+        deviceSerialNoField.sendKeys(randomNumber() + "");
+        deviceInventoryNoField.sendKeys(randomNumber() + "");
+        deviceInvoiceNoField.sendKeys(randomNumber() + "");
         tagsField.sendKeys(Constants.EDITABLE_TAG_NAME);
-        firsTagElement.click();
+        firstTagElement.click();
         deviceSaveButton.click();
         wait.until(ExpectedConditions.visibilityOf(successToaster));
         tagsButtonPage.click();
         wait.until(ExpectedConditions.visibilityOf(editButton));
         editButton.click();
-        editField.click();
         editField.sendKeys(Keys.CONTROL + "a");
         editField.sendKeys(Keys.DELETE);
         editField.sendKeys(nameTagAfterEdit);
@@ -170,6 +168,37 @@ public class TagsPage extends DriverFactory {
         filterButton.click();
         tagsFilterField.sendKeys(nameTagAfterEdit);
         editedTagsOption.click();
+        wait.until(ExpectedConditions.visibilityOf(filterApplyButton));
+        filterApplyButton.click();
+    }
+
+    public void checkDeviceWithDeletedTag() {
+        signInAsAdmin();
+        String serialNo = randomNumber() + "";
+        tagsButtonPage.click();
+        wait.until(ExpectedConditions.visibilityOf(addTagField));
+        addTagField.sendKeys(Constants.EDITABLE_TAG_NAME);
+        addTagButton.click();
+        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        devicePageButton.click();
+        wait.until(ExpectedConditions.visibilityOf(addDeviceButton));
+        addDeviceButton.click();
+        deviceNameField.sendKeys(randomName());
+        deviceSerialNoField.sendKeys(serialNo + "");
+        deviceInventoryNoField.sendKeys(randomNumber() + "");
+        deviceInvoiceNoField.sendKeys(randomNumber() + "");
+        tagsField.sendKeys(Constants.EDITABLE_TAG_NAME);
+        firstTagElement.click();
+        deviceSaveButton.click();
+        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        tagsButtonPage.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("tags-list-tag-" + Constants.EDITABLE_TAG_NAME + "-item-delete")));
+        driver.findElement(By.id("tags-list-tag-" + Constants.EDITABLE_TAG_NAME + "-item-delete")).click();
+        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        devicePageButton.click();
+        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        filterButton.click();
+        tagsFilterField.sendKeys(serialNo + "");
         wait.until(ExpectedConditions.visibilityOf(filterApplyButton));
         filterApplyButton.click();
     }
