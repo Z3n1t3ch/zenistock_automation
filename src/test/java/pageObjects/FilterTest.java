@@ -38,7 +38,7 @@ public class FilterTest extends BaseTest {
     }
     @Test
     public void filterByStatus() {
-        filter.filterBySubcategory();
+        filter.filterByStatus();
         String table = driver.findElement(By.id("device-table")).getText();
         Assert.assertTrue(table.contains("Assigned"));
     }
@@ -53,7 +53,7 @@ public class FilterTest extends BaseTest {
         filter.filterBySubcategoryAndName();
         String table = driver.findElement(By.id("device-table")).getText();
         Assert.assertTrue(table.contains("LAPTOP"));
-        Assert.assertTrue(table.contains("Name"));
+        Assert.assertTrue(table.contains("0"));
     }
     @Test
     public void clearAllFilterFieldsButton() {
