@@ -14,6 +14,7 @@ public class BaseTest {
     public  EmployeePage employeePage;
     public  Filter filter;
     public  Audit audit;
+    public  Licenses licenses;
 
     @BeforeMethod
     public void openApplication() {
@@ -24,6 +25,7 @@ public class BaseTest {
         permissionForAllRoles = new Permissions(driver);
         devicePage = new DevicePage(driver);
         employeePage = new EmployeePage(driver);
+        licenses=new Licenses(driver);
         filter=new Filter(driver);
         audit = new Audit(driver);
     }

@@ -11,7 +11,6 @@ import pageObjects.Credentials;
 public class DriverFactory {
     public WebDriver driver;
     public WebDriverWait wait;
-
     public DriverFactory(WebDriver driver) {
         this.driver = driver;
         driver.manage().window().maximize();
@@ -32,7 +31,6 @@ public class DriverFactory {
     private WebElement filterDeviceButton;
     @FindBy (id = "device-filter-apply-button")
     private WebElement deviceFilterApplyButton;
-
     public void signInAsSuperAdmin() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameSuperAdminRole);
@@ -114,6 +112,5 @@ public class DriverFactory {
         driver.findElement(By.id("device-table-row-0-button-audit")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("MuiCollapse-wrapper")));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("MuiTableRow-root")));
-
     }
 }
