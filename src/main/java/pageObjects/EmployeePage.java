@@ -35,22 +35,28 @@ public class EmployeePage extends DriverFactory {
     @FindBy(id = "user-saveBtn")
     WebElement saveButton;
 
+    @FindBy (id="undefined-table")
+    WebElement table;
+
+    @FindBy(id = "success_toaster")
+    WebElement successToaster;
+
     public void successfulSuperAdminToUserRoleChange() {
         signInAsSuperAdmin();
         employeesButton.click();
         filterByRole("super_admin");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-table")));
+        wait.until(ExpectedConditions.visibilityOf(employeesButton));
         String userName = getEmployeeName();
         String email = getEmail();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user_edit_" + userName)));
         driver.findElement(By.id("user_edit_" + userName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-role-selectList")));
+        wait.until(ExpectedConditions.visibilityOf(userRoleSelectList));
         userRoleSelectList.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-role-selectList-user")));
+        wait.until(ExpectedConditions.visibilityOf(userRoleButton));
         userRoleButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-saveBtn")));
+        wait.until(ExpectedConditions.visibilityOf(saveButton));
         saveButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.visibilityOf(successToaster));
         filterByEmail(email);
     }
 
@@ -58,19 +64,19 @@ public class EmployeePage extends DriverFactory {
         signInAsSuperAdmin();
         employeesButton.click();
         filterByRole("admin");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-table")));
+        wait.until(ExpectedConditions.visibilityOf(table));
         String userName = getEmployeeName();
         String email = getEmail();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-table")));
+        wait.until(ExpectedConditions.visibilityOf(table));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user_edit_" + userName)));
         driver.findElement(By.id("user_edit_" + userName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-role-selectList")));
+        wait.until(ExpectedConditions.visibilityOf(userRoleSelectList));
         userRoleSelectList.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-role-selectList-super_admin")));
+        wait.until(ExpectedConditions.visibilityOf(superAdminRoleButton));
         superAdminRoleButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-saveBtn")));
+        wait.until(ExpectedConditions.visibilityOf(saveButton));
         saveButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.visibilityOf(successToaster));
         filterByEmail(email);
     }
 
@@ -78,19 +84,19 @@ public class EmployeePage extends DriverFactory {
         signInAsSuperAdmin();
         employeesButton.click();
         filterByRole("user");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-table")));
+        wait.until(ExpectedConditions.visibilityOf(table));
         String userName = getEmployeeName();
         String email = getEmail();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-table")));
+        wait.until(ExpectedConditions.visibilityOf(table));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user_edit_" + userName)));
         driver.findElement(By.id("user_edit_" + userName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-role-selectList")));
+        wait.until(ExpectedConditions.visibilityOf(userRoleSelectList));
         userRoleSelectList.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-role-selectList-admin")));
+        wait.until(ExpectedConditions.visibilityOf(adminRoleButton));
         adminRoleButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-saveBtn")));
+        wait.until(ExpectedConditions.visibilityOf(saveButton));
         saveButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        wait.until(ExpectedConditions.visibilityOf(successToaster));
         filterByEmail(email);
     }
 }
