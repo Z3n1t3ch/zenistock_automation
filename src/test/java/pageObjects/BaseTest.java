@@ -11,10 +11,10 @@ public class BaseTest {
     public static LoginPage loginPage;
     public static DevicePage devicePage;
     public static Permissions permissionForAllRoles;
-
     public static EmployeePage employeePage;
     public static Filter filter;
 
+    public static Audit audit;
 
     @BeforeMethod
     public void openApplication() {
@@ -26,6 +26,7 @@ public class BaseTest {
         devicePage = new DevicePage(driver);
         employeePage = new EmployeePage(driver);
         filter=new Filter(driver);
+        audit = new Audit(driver);
     }
 
     @AfterMethod
