@@ -99,7 +99,7 @@ public class DriverFactory {
         applyFilterButtonEmployee.click();
     }
     public void filterByEmail(String email) {
-        filterButtonEmployee.click();
+        driver.findElement(By.id("filter-button")).click();
         driver.findElement(By.id("user-filter-filter-clearButton")).click();
         wait.until(ExpectedConditions.visibilityOf(filterButtonEmployee));
         filterButtonEmployee.click();

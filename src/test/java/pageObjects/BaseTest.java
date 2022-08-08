@@ -15,6 +15,7 @@ public class BaseTest {
     public static EmployeePage employeePage;
     public static Audit audit;
     public static TagsPage tagsPage;
+    public  Filter filter;
 
     @BeforeMethod
     public void openApplication() {
@@ -26,12 +27,12 @@ public class BaseTest {
         devicePage = new DevicePage(driver);
         employeePage = new EmployeePage(driver);
         licenses=new Licenses(driver);
+        filter=new Filter(driver);
         audit = new Audit(driver);
         tagsPage = new TagsPage(driver);
     }
     @AfterMethod
     public void closeBrowser() {
-
         driver.quit();
     }
 }
