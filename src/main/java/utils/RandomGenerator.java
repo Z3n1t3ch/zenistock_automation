@@ -17,7 +17,7 @@ public class RandomGenerator {
 
     public static String randomName() {
         String name = UUID.randomUUID().toString();
-        return name.replaceAll("-", "");
+        return name.replaceAll("-", "").substring(5);
     }
 
     public static String randomDateBefore() throws ParseException {
