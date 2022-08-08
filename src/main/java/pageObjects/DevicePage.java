@@ -137,7 +137,6 @@ public class DevicePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOf(filterButton));
         filterBySerialNo(serialNo + "");
     }
-
     public void successfullyEditADeviceName() {
         successfullyCreateDevice();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
@@ -159,7 +158,6 @@ public class DevicePage extends DriverFactory {
         filterBySerialNo(serialNo + "");
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
-
     public void successfullyEditADeviceSerialNo() {
         successfullyCreateDevice();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
@@ -181,7 +179,6 @@ public class DevicePage extends DriverFactory {
         filterBySerialNo(serialNo + "");
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
-
     public void successfullyEditADeviceInventoryNo() {
         successfullyCreateDevice();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
