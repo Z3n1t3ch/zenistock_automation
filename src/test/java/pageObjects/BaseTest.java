@@ -12,10 +12,8 @@ public class BaseTest {
     public static LoginPage loginPage;
     public static DevicePage devicePage;
     public static Permissions permissionForAllRoles;
-
     public static Licenses licenses;
     public static EmployeePage employeePage;
-    public static DriverFactory driverFactory;
     public static Audit audit;
 
     @BeforeMethod
@@ -30,7 +28,6 @@ public class BaseTest {
         licenses=new Licenses(driver);
         audit = new Audit(driver);
     }
-
     @AfterMethod
     public void closeBrowser() {
 
