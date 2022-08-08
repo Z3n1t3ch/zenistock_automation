@@ -7,11 +7,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
-    public static WebDriver driver;
-    public static LoginPage loginPage;
-    public static DevicePage devicePage;
-    public static Permissions permissionForAllRoles;
-    public static EmployeePage employeePage;
+    public  WebDriver driver;
+    public  LoginPage loginPage;
+    public  DevicePage devicePage;
+    public  Permissions permissionForAllRoles;
+    public  EmployeePage employeePage;
+    public  Filter filter;
+    public  Audit audit;
+    public  Licenses licenses;
 
     @BeforeMethod
     public void openApplication() {
@@ -23,11 +26,12 @@ public class BaseTest {
         permissionForAllRoles = new Permissions(driver);
         employeePage = new EmployeePage(driver);
 
+        licenses=new Licenses(driver);
+        filter=new Filter(driver);
+        audit = new Audit(driver);
     }
-
     @AfterMethod
     public void closeBrowser() {
-
         driver.quit();
     }
 }
