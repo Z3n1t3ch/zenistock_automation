@@ -41,7 +41,7 @@ public class PermissionsTest extends BaseTest {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUserCanPerformActionOnDevicePage();
         boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(true);
+        Assert.assertTrue(filterButton);
     }
     @Test
     public void checkIfAdminCanAddDevice() {
