@@ -60,7 +60,7 @@ public class LoginPage extends DriverFactory {
 
     public void logInWithInvalidUsername() {
         driver.get(Credentials.login);
-        usernameField.sendKeys("asdasdadads");
+        usernameField.sendKeys(Credentials.invalidUsername);
         passwordField.sendKeys(Credentials.passwordUserRole);
         signInButton.click();
     }
@@ -68,7 +68,7 @@ public class LoginPage extends DriverFactory {
     public void logInWithInvalidPassword() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameUserRole);
-        passwordField.sendKeys("asdasdadads");
+        passwordField.sendKeys(Credentials.invalidUsername);
         signInButton.click();
     }
 
