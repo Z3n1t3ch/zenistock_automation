@@ -25,7 +25,6 @@ public class BaseTest {
         devicePage = new DevicePage(driver);
         permissionForAllRoles = new Permissions(driver);
         employeePage = new EmployeePage(driver);
-
         licenses=new Licenses(driver);
         filter=new Filter(driver);
         audit = new Audit(driver);

@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pageObjects.Credentials;
+import utils.Credentials;
 
 public class DriverFactory {
     public WebDriver driver;
@@ -18,19 +18,23 @@ public class DriverFactory {
     }
 
     @FindBy(id = "username")
-    private WebElement usernameField;
+    WebElement usernameField;
     @FindBy(id = "password")
-    private WebElement passwordField;
+    WebElement passwordField;
     @FindBy(id = "log-in-button")
-    private WebElement signInButton;
+    WebElement signInButton;
     @FindBy (id = "filter-button")
-    private WebElement filterButtonEmployee;
+    WebElement filterButtonEmployee;
     @FindBy (id = "user-filter-filter-apply-button")
-    private WebElement applyFilterButtonEmployee;
+    WebElement applyFilterButtonEmployee;
     @FindBy (id = "filter_device_button")
-    private WebElement filterDeviceButton;
+    WebElement filterDeviceButton;
     @FindBy (id = "device-filter-apply-button")
-    private WebElement deviceFilterApplyButton;
+    WebElement deviceFilterApplyButton;
+    @FindBy(id = "device-filter-serialNo")
+    WebElement filterSerialNo;
+    @FindBy(id = "device-filter-status-autocomplete")
+    WebElement filterStatus;
     public void signInAsSuperAdmin() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameSuperAdminRole);
@@ -54,13 +58,13 @@ public class DriverFactory {
     }
     public void filterBySerialNo(String serialNo) {
         filterDeviceButton.click();
-        driver.findElement(By.id("device-filter-serialNo")).sendKeys(serialNo);
+        filterSerialNo.sendKeys(serialNo);
         wait.until(ExpectedConditions.visibilityOf(deviceFilterApplyButton));
         deviceFilterApplyButton.click();
     }
     public void filterByStatusInactive() {
         filterDeviceButton.click();
-        driver.findElement(By.id("device-filter-status-autocomplete")).click();
+        filterStatus.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-status-autocomplete-option-2")));
         driver.findElement(By.id("device-filter-status-autocomplete-option-2")).click();
         wait.until(ExpectedConditions.visibilityOf(deviceFilterApplyButton));
@@ -102,7 +106,7 @@ public class DriverFactory {
         applyFilterButtonEmployee.click();
     }
     public void filterByEmail(String email) {
-        driver.findElement(By.id("filter-button")).click();
+        filterButtonEmployee.click();
         driver.findElement(By.id("user-filter-filter-clearButton")).click();
         wait.until(ExpectedConditions.visibilityOf(filterButtonEmployee));
         filterButtonEmployee.click();

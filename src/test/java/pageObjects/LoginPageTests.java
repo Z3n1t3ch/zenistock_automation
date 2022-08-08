@@ -1,10 +1,9 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.Credentials;
 
 public class LoginPageTests extends BaseTest {
     @Test
@@ -44,7 +43,7 @@ public class LoginPageTests extends BaseTest {
         String URL = driver.getCurrentUrl();
         String invalidCredentials = driver.findElement(By.id("password-helper-text")).getText();
         Assert.assertEquals(URL, Credentials.login);
-        Assert.assertEquals(invalidCredentials, Errors.invalidCredentials);
+        Assert.assertEquals(invalidCredentials, Credentials.errorInvalidCredentials);
     }
 
     @Test
@@ -60,7 +59,7 @@ public class LoginPageTests extends BaseTest {
         String URL = driver.getCurrentUrl();
         String invalidCredentials = driver.findElement(By.id("password-helper-text")).getText();
         Assert.assertEquals(URL, Credentials.login);
-        Assert.assertEquals(invalidCredentials, Errors.invalidCredentials);
+        Assert.assertEquals(invalidCredentials, Credentials.errorInvalidCredentials);
     }
 
     @Test
@@ -69,7 +68,7 @@ public class LoginPageTests extends BaseTest {
         String URL = driver.getCurrentUrl();
         String invalidCredentials = driver.findElement(By.id("password-helper-text")).getText();
         Assert.assertEquals(URL, Credentials.login);
-        Assert.assertEquals(invalidCredentials, Errors.invalidCredentials);
+        Assert.assertEquals(invalidCredentials, Credentials.errorInvalidCredentials);
     }
 
     @Test

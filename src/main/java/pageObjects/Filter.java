@@ -127,10 +127,10 @@ public class Filter extends DriverFactory {
         deviceButton.click();
         wait.until(ExpectedConditions.visibilityOf(filterButton));
         filterButton.click();
-        WebElement scroll = driver.findElement(By.id("device-filter-status-autocomplete"));
+        WebElement scroll = filterStatus;
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
         wait.until(ExpectedConditions.visibilityOf(filterTags));
-       filterTags.click();
+        filterTags.click();
         wait.until(ExpectedConditions.visibilityOf(filterTagsOption));
         filterTagsOption.click();
         wait.until(ExpectedConditions.visibilityOf(applyButton));
