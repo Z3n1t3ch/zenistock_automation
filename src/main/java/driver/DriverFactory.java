@@ -80,7 +80,6 @@ public class DriverFactory {
         signInButton.click();
         pageToLoad(Constants.dashboard);
     }
-
     public void signInAsAdmin() {
         driver.get(Constants.login);
         usernameField.sendKeys(Credentials.usernameAdminRole);
