@@ -11,6 +11,7 @@ import pageObjects.Credentials;
 public class DriverFactory {
     public WebDriver driver;
     public WebDriverWait wait;
+
     public DriverFactory(WebDriver driver) {
         this.driver = driver;
         driver.manage().window().maximize();
@@ -23,14 +24,25 @@ public class DriverFactory {
     private WebElement passwordField;
     @FindBy(id = "log-in-button")
     private WebElement signInButton;
-    @FindBy (id = "filter-button")
+    @FindBy(id = "filter-button")
     private WebElement filterButtonEmployee;
-    @FindBy (id = "user-filter-filter-apply-button")
+    @FindBy(id = "user-filter-filter-apply-button")
     private WebElement applyFilterButtonEmployee;
-    @FindBy (id = "filter_device_button")
+    @FindBy(id = "filter_device_button")
     private WebElement filterDeviceButton;
-    @FindBy (id = "device-filter-apply-button")
-    private WebElement deviceFilterApplyButton;
+    @FindBy(id = "device-filter-apply-button")
+    WebElement deviceFilterApplyButton;
+
+    public void pageToLoad (String pageUrl){
+        wait.until(ExpectedConditions.urlToBe(pageUrl));
+    }
+
+    public void elementToLoad(WebElement element){
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+    public void elementToDisappear(WebElement element) {
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
     public void signInAsSuperAdmin() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameSuperAdminRole);
@@ -38,6 +50,7 @@ public class DriverFactory {
         signInButton.click();
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
     }
+
     public void signInAsAdmin() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameAdminRole);
@@ -45,6 +58,7 @@ public class DriverFactory {
         signInButton.click();
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
     }
+
     public void signInAsUser() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameUserRole);
@@ -52,12 +66,14 @@ public class DriverFactory {
         signInButton.click();
         wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
     }
+
     public void filterBySerialNo(String serialNo) {
         filterDeviceButton.click();
         driver.findElement(By.id("device-filter-serialNo")).sendKeys(serialNo);
         wait.until(ExpectedConditions.visibilityOf(deviceFilterApplyButton));
         deviceFilterApplyButton.click();
     }
+
     public void filterByStatusInactive() {
         filterDeviceButton.click();
         driver.findElement(By.id("device-filter-status-autocomplete")).click();
@@ -66,21 +82,25 @@ public class DriverFactory {
         wait.until(ExpectedConditions.visibilityOf(deviceFilterApplyButton));
         deviceFilterApplyButton.click();
     }
+
     public String getDeviceName() {
         String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
         String[] attributes = firstRowText.split("\n");
         return attributes[0];
     }
+
     public String getEmployeeName() {
         String firstRowText = driver.findElement(By.id("undefined-table-row-0")).getText();
         String[] attributes = firstRowText.split("\n");
         return attributes[1];
     }
+
     public String getEmail() {
         String firstRowText = driver.findElement(By.id("undefined-table-row-0")).getText();
         String[] attributes = firstRowText.split("\n");
         return attributes[0];
     }
+
     public void filterByRole(String role) {
         wait.until(ExpectedConditions.visibilityOf(filterButtonEmployee));
         filterButtonEmployee.click();
@@ -98,6 +118,7 @@ public class DriverFactory {
         wait.until(ExpectedConditions.visibilityOf(applyFilterButtonEmployee));
         applyFilterButtonEmployee.click();
     }
+
     public void filterByEmail(String email) {
         driver.findElement(By.id("filter-button")).click();
         driver.findElement(By.id("user-filter-filter-clearButton")).click();
@@ -107,6 +128,7 @@ public class DriverFactory {
         wait.until(ExpectedConditions.visibilityOf(applyFilterButtonEmployee));
         applyFilterButtonEmployee.click();
     }
+
     public void waitForAuditDisplay() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-table-row-0-button-audit")));
         driver.findElement(By.id("device-table-row-0-button-audit")).click();
