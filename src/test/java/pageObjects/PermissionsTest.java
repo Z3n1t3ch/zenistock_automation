@@ -8,235 +8,265 @@ public class PermissionsTest extends BaseTest {
     @Test
     public void checkIfUserCanAddDevice() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         boolean addDeviceButton = driver.getPageSource().contains("Add device");
         Assert.assertFalse(addDeviceButton);
     }
+
     @Test
     public void checkIfUserCanExport() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         boolean exportButton = driver.getPageSource().contains("Export");
         Assert.assertFalse(exportButton);
     }
+
     @Test
     public void checkIfUserCanImport() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         boolean importButton = driver.getPageSource().contains("Import");
         Assert.assertFalse(importButton);
     }
+
     @Test
     public void checkIfUserCanPerformActionsOnDevice() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         if (driver.findElements(By.xpath("//button[starts-with(@id,'device_dropdown_')]")).size() != 0) {
             Assert.fail();
         } else {
             Assert.assertTrue(true);
         }
     }
+
     @Test
     public void checkIfUserCanFilter() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         boolean filterButton = driver.getPageSource().contains("Filter");
         Assert.assertTrue(filterButton);
     }
+
     @Test
     public void checkIfAdminCanAddDevice() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         boolean AddDeviceButton = driver.getPageSource().contains("Add device");
         Assert.assertTrue(AddDeviceButton);
     }
+
     @Test
     public void checkIfAdminCanExport() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         boolean ExportButton = driver.getPageSource().contains("Export");
         Assert.assertTrue(ExportButton);
     }
+
     @Test
     public void checkIfAdminCanImport() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         boolean ImportButton = driver.getPageSource().contains("Import");
         Assert.assertTrue(ImportButton);
     }
+
     @Test
     public void checkIfAdminCanPerformActionsOnDevice() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         if (driver.findElements(By.xpath("//button[starts-with(@id,'device_dropdown_')]")).size() != 0) {
             Assert.assertTrue(true);
         } else {
             Assert.fail();
         }
     }
+
     @Test
     public void checkIfAdminCanFilter() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         boolean filterButton = driver.getPageSource().contains("Filter");
         Assert.assertTrue(filterButton);
     }
+
     @Test
     public void checkIfSuperAdminCanAddDevice() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         boolean AddDeviceButton = driver.getPageSource().contains("Add device");
         Assert.assertTrue(AddDeviceButton);
     }
+
     @Test
     public void checkIfSuperAdminCanExport() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         boolean ExportButton = driver.getPageSource().contains("Export");
         Assert.assertTrue(ExportButton);
     }
+
     @Test
     public void checkIfSuperAdminCanImport() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         boolean ImportButton = driver.getPageSource().contains("Import");
         Assert.assertTrue(ImportButton);
     }
+
     @Test
     public void checkIfSuperAdminCanPerformActionsOnDevice() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         if (driver.findElements(By.xpath("//button[starts-with(@id,'device_dropdown_')]")).size() != 0) {
             Assert.assertTrue(true);
         } else {
             Assert.fail();
         }
     }
+
     @Test
     public void checkIfSuperAdminCanFilter() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
         boolean filterButton = driver.getPageSource().contains("Filter");
         Assert.assertTrue(filterButton);
     }
+
     @Test
     public void checkIfUserCanAddAsset() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnAssetsPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         boolean addAssetButton = driver.getPageSource().contains("Add asset");
         Assert.assertFalse(addAssetButton);
     }
+
     @Test
     public void checkIfUserCanExportOnAssetsPage() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnAssetsPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         boolean exportButton = driver.getPageSource().contains("Export");
         Assert.assertFalse(exportButton);
     }
+
     @Test
     public void checkIfUserCanImportOnAssetsPage() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnAssetsPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         boolean importButton = driver.getPageSource().contains("Import");
         Assert.assertFalse(importButton);
     }
+
     @Test
     public void checkIfUserCanPerformActionsOnAssets() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnAssetsPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         if (driver.findElements(By.xpath("//button[starts-with(@id,'asset_dropdown_')]")).size() != 0) {
             Assert.fail();
         } else {
             Assert.assertTrue(true);
         }
     }
+
     @Test
     public void checkIfUserCanFilterOnAssetsPage() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnAssetsPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         boolean filterButton = driver.getPageSource().contains("Filter");
         Assert.assertTrue(filterButton);
     }
+
     @Test
     public void checkIfAdminCanAddAsset() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         boolean AddAssetsButton = driver.getPageSource().contains("Add device");
         Assert.assertTrue(AddAssetsButton);
     }
+
     @Test
     public void checkIfAdminCanExportOnAssetsPage() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         boolean ExportButton = driver.getPageSource().contains("Export");
         Assert.assertTrue(ExportButton);
     }
+
     @Test
     public void checkIfAdminCanImportOnAssetsPage() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         boolean ImportButton = driver.getPageSource().contains("Import");
         Assert.assertTrue(ImportButton);
     }
+
     @Test
     public void checkIfAdminCanPerformActionsOnAssets() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnAssetsPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         if (driver.findElements(By.xpath("//button[starts-with(@id,'asset_dropdown_')]")).size() != 0) {
             Assert.assertTrue(true);
         } else {
             Assert.fail();
         }
     }
+
     @Test
     public void checkIfAdminCanFilterOnAssetsPage() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnAssetsPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         boolean filterButton = driver.getPageSource().contains("Filter");
         Assert.assertTrue(filterButton);
     }
+
     @Test
     public void checkIfSuperAdminCanAddAsset() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         boolean AddAssetsButton = driver.getPageSource().contains("Add device");
         Assert.assertTrue(AddAssetsButton);
     }
+
     @Test
     public void checkIfSuperAdminCanExportOnAssetsPage() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         boolean ExportButton = driver.getPageSource().contains("Export");
         Assert.assertTrue(ExportButton);
     }
+
     @Test
     public void checkIfSuperAdminCanImportOnAssetsPage() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnDevicePage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         boolean ImportButton = driver.getPageSource().contains("Import");
         Assert.assertTrue(ImportButton);
     }
+
     @Test
     public void checkIfSuperAdminCanPerformActionsOnAssets() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnAssetsPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         if (driver.findElements(By.xpath("//button[starts-with(@id,'asset_dropdown_')]")).size() != 0) {
             Assert.assertTrue(true);
         } else {
             Assert.fail();
         }
     }
+
     @Test
     public void checkIfSuperAdminCanFilterOnAssetsPage() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnAssetsPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
         boolean filterButton = driver.getPageSource().contains("Filter");
         Assert.assertTrue(filterButton);
     }
+
     @Test
     public void checkIfUserCanFilterOnEmployeesPage() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnEmployeesPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnEmployeesPage();
         boolean filterButton = driver.getPageSource().contains("Filter");
         Assert.assertTrue(filterButton);
     }
@@ -244,17 +274,18 @@ public class PermissionsTest extends BaseTest {
     @Test
     public void checkIfUserCanPerformActionsOnEmployeesPage() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnEmployeesPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnEmployeesPage();
         if (driver.findElements(By.xpath("//button[starts-with(@id,'user_edit_')]")).size() != 0) {
             Assert.fail();
         } else {
             Assert.assertTrue(true);
         }
     }
+
     @Test
     public void checkIfAdminCanFilterOnEmployeesPage() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnEmployeesPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnEmployeesPage();
         boolean filterButton = driver.getPageSource().contains("Filter");
         Assert.assertTrue(filterButton);
     }
@@ -262,17 +293,18 @@ public class PermissionsTest extends BaseTest {
     @Test
     public void checkIfAdminCanPerformActionsOnEmployeesPage() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnEmployeesPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnEmployeesPage();
         if (driver.findElements(By.xpath("//*[contains(@id,'user_edit_')]")).size() != 0) {
             Assert.fail();
         } else {
             Assert.assertTrue(true);
         }
     }
+
     @Test
     public void checkIfSuperAdminCanFilterOnEmployeesPage() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnEmployeesPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnEmployeesPage();
         boolean filterButton = driver.getPageSource().contains("Filter");
         Assert.assertTrue(filterButton);
     }
@@ -280,41 +312,45 @@ public class PermissionsTest extends BaseTest {
     @Test
     public void checkIfSuperAdminCanPerformActionsOnEmployeesPage() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnEmployeesPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnEmployeesPage();
         if (driver.findElements(By.xpath("//*[contains(@id,'user_edit_')]")).size() != 0) {
             Assert.assertTrue(true);
         } else {
             Assert.fail();
         }
     }
+
     @Test
     public void checkIfUserCanFilterOnLicensesPage() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnLicensesPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
         boolean filterButton = driver.getPageSource().contains("Filter");
         Assert.assertTrue(filterButton);
     }
+
     @Test
     public void checkIfUserCanPerformActionsOnLicensesPage() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnLicensesPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
         if (driver.findElements(By.xpath("//button[starts-with(@id,'license_dropdown_')]")).size() != 0) {
             Assert.fail();
         } else {
             Assert.assertTrue(true);
         }
     }
+
     @Test
     public void checkIfAdminCanFilterOnLicensesPage() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnEmployeesPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
         boolean filterButton = driver.getPageSource().contains("Filter");
         Assert.assertTrue(filterButton);
     }
+
     @Test
     public void checkIfAdminCanPerformActionsOnLicensesPage() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnLicensesPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
         boolean addLicenseButton = driver.getPageSource().contains("Add license");
         Assert.assertTrue(addLicenseButton);
         if (driver.findElements(By.xpath("//button[starts-with(@id,'license_dropdown_')]")).size() != 0) {
@@ -323,17 +359,19 @@ public class PermissionsTest extends BaseTest {
             Assert.fail();
         }
     }
+
     @Test
     public void checkIfSuperAdminCanFilterOnLicensesPage() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnLicensesPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
         boolean filterButton = driver.getPageSource().contains("Filter");
         Assert.assertTrue(filterButton);
     }
+
     @Test
     public void checkIfSuperAdminCanPerformActionsOnLicensesPage() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnLicensesPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
         boolean addLicenseButton = driver.getPageSource().contains("Add license");
         Assert.assertTrue(addLicenseButton);
         if (driver.findElements(By.xpath("//button[starts-with(@id,'license_dropdown_')]")).size() != 0) {
@@ -342,30 +380,33 @@ public class PermissionsTest extends BaseTest {
             Assert.fail();
         }
     }
+
     @Test
     public void checkIfUserCanDoActionsOnTagsPage() {
         loginPage.successfulSignInAsUser();
-        permissionForAllRoles.checkIfUserCanPerformActionOnTagsPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnTagsPage();
         if (driver.findElements(By.id("tags_edit_laptop")).size() != 0 || driver.findElements(By.id("tags_delete_laptop")).size() != 0) {
             Assert.fail();
         } else {
             Assert.assertTrue(true);
         }
     }
+
     @Test
     public void checkIfAdminCanDoActionsOnTagsPage() {
         loginPage.successfulSignInAsAdmin();
-        permissionForAllRoles.checkIfAdminCanPerformActionOnTagsPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnTagsPage();
         if (driver.findElements(By.xpath("//*[contains(@id,'item-edit')]")).size() != 0 || driver.findElements(By.xpath("//*[contains(@id,'item-delete')]")).size() != 0) {
             Assert.assertTrue(true);
         } else {
             Assert.fail();
         }
     }
+
     @Test
     public void checkIfSuperAdminCanDoActionsOnTagsPage() {
         loginPage.successfulSignInAsSuperAdmin();
-        permissionForAllRoles.checkIfSuperAdminCanPerformActionOnTagsPage();
+        permissionForAllRoles.checkIfUsersCanPerformActionOnTagsPage();
         if (driver.findElements(By.xpath("//*[contains(@id,'item-edit')]")).size() != 0 || driver.findElements(By.xpath("//*[contains(@id,'item-delete')]")).size() != 0) {
             Assert.assertTrue(true);
         } else {

@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
 
 public class Permissions extends DriverFactory {
-
     public Permissions(WebDriver driver) {
         super(driver);
 
@@ -27,78 +26,27 @@ public class Permissions extends DriverFactory {
     @FindBy(id = "undefined-tags-mButton")
     private WebElement tagsButtonSidebarMenu;
 
-    public void checkIfUserCanPerformActionOnDevicePage() {
-        devicesButtonSidebarMenu.click();
-        pageToLoad(Constants.DEVICES_URL);
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
-    }
-
-    public void checkIfAdminCanPerformActionOnDevicePage() {
+    public void checkIfUsersCanPerformActionOnDevicePage() {
         devicesButtonSidebarMenu.click();
         pageToLoad(Constants.DEVICES_URL);
     }
 
-    public void checkIfSuperAdminCanPerformActionOnDevicePage() {
-        devicesButtonSidebarMenu.click();
-        pageToLoad(Constants.DEVICES_URL);
-    }
-
-    public void checkIfUserCanPerformActionOnAssetsPage() {
+    public void checkIfUsersCanPerformActionOnAssetsPage() {
         assetsButtonSidebarMenu.click();
         pageToLoad(Constants.ASSETS_URL);
     }
 
-    public void checkIfAdminCanPerformActionOnAssetsPage() {
-        assetsButtonSidebarMenu.click();
-        pageToLoad(Constants.ASSETS_URL);
-    }
-
-    public void checkIfSuperAdminCanPerformActionOnAssetsPage() {
-        assetsButtonSidebarMenu.click();
-        pageToLoad(Constants.ASSETS_URL);
-    }
-
-    public void checkIfUserCanPerformActionOnEmployeesPage() {
+    public void checkIfUsersCanPerformActionOnEmployeesPage() {
         employeesButtonSidebarMenu.click();
         pageToLoad(Constants.EMPLOYEES_URL);
     }
 
-    public void checkIfAdminCanPerformActionOnEmployeesPage() {
-        employeesButtonSidebarMenu.click();
-        pageToLoad(Constants.EMPLOYEES_URL);
-    }
-
-    public void checkIfSuperAdminCanPerformActionOnEmployeesPage() {
-        employeesButtonSidebarMenu.click();
-        pageToLoad(Constants.EMPLOYEES_URL);
-    }
-
-    public void checkIfUserCanPerformActionOnLicensesPage() {
+    public void checkIfUsersCanPerformActionOnLicensesPage() {
         licensesButtonSidebarMenu.click();
         pageToLoad(Constants.LICENSES_URL);
     }
 
-    public void checkIfAdminCanPerformActionOnLicensesPage() {
-        licensesButtonSidebarMenu.click();
-        pageToLoad(Constants.LICENSES_URL);
-    }
-
-    public void checkIfSuperAdminCanPerformActionOnLicensesPage() {
-        licensesButtonSidebarMenu.click();
-        pageToLoad(Constants.LICENSES_URL);
-    }
-
-    public void checkIfUserCanPerformActionOnTagsPage() {
-        tagsButtonSidebarMenu.click();
-        pageToLoad(Constants.TAGS_URL);
-    }
-
-    public void checkIfAdminCanPerformActionOnTagsPage() {
-        tagsButtonSidebarMenu.click();
-        pageToLoad(Constants.TAGS_URL);
-    }
-
-    public void checkIfSuperAdminCanPerformActionOnTagsPage() {
+    public void checkIfUsersCanPerformActionOnTagsPage() {
         tagsButtonSidebarMenu.click();
         pageToLoad(Constants.TAGS_URL);
     }
