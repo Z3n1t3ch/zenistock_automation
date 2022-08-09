@@ -1,137 +1,171 @@
 package driver;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.Constants;
-import utils.Credentials;
-
-import java.util.ConcurrentModificationException;
+import pageObjects.Credentials;
 
 public class DriverFactory {
     public WebDriver driver;
     public WebDriverWait wait;
+
     public DriverFactory(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, 20);
         driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, 20);
     }
-    @FindBy(id = "username")
-    WebElement usernameField;
-    @FindBy(id = "password")
-    WebElement passwordField;
-    @FindBy(id = "log-in-button")
-    WebElement signInButton;
-    @FindBy (id = "filter-button")
-    WebElement filterButtonEmployee;
-    @FindBy (id = "user-filter-filter-apply-button")
-    WebElement applyFilterButtonEmployee;
-    @FindBy (id = "filter_device_button")
-    WebElement filterDeviceButton;
-    @FindBy (id = "device-filter-apply-button")
-    WebElement deviceFilterApplyButton;
-    @FindBy(id = "device-filter-serialNo")
-    WebElement filterSerialNo;
-    @FindBy(id = "device-filter-status-autocomplete")
-    WebElement filterStatus;
 
-    public void pageToLoad (String pageUrl){
+    @FindBy(id = "username")
+    private WebElement usernameField;
+    @FindBy(id = "password")
+    private WebElement passwordField;
+    @FindBy(id = "log-in-button")
+    private WebElement signInButton;
+    @FindBy(id = "filter-button")
+    private WebElement filterButtonEmployee;
+    @FindBy(id = "user-filter-filter-apply-button")
+    private WebElement applyFilterButtonEmployee;
+    @FindBy(id = "filter_device_button")
+    private WebElement filterDeviceButton;
+    @FindBy(id = "device-filter-apply-button")
+    private WebElement deviceFilterApplyButton;
+    @FindBy(id = "device-filter-serialNo")
+    private WebElement deviceFilterSerialNo;
+    @FindBy(id = "device-filter-status-autocomplete")
+    private WebElement deviceFilterStatusAutocomplete;
+    @FindBy(id = "device-filter-status-autocomplete-option-2")
+    private WebElement deviceFilterStatusAutocompleteOption2;
+    @FindBy(id = "device-table-row-0")
+    private WebElement deviceTableRow0;
+    @FindBy(id = "undefined-table-row-0")
+    private WebElement undefinedTableRow0;
+    @FindBy(id = "user-filter-filter-role-selectList")
+    private WebElement userFilterFilterRoleSelectList;
+    @FindBy(id = "user-filter-filter-role-selectList-user")
+    private WebElement userFilterFilterRoleSelectListUser;
+    @FindBy(id = "user-filter-filter-role-selectList-admin")
+    private WebElement userFilterFilterRoleSelectListAdmin;
+    @FindBy(id = "user-filter-filter-role-selectList-super_admin")
+    private WebElement userFilterFilterRoleSelectListSuperAdmin;
+    @FindBy(id = "user-filter-filter-clearButton")
+    private WebElement userFilterFilterClearButton;
+    @FindBy(id = "user-filter-filter-email")
+    private WebElement userFilterFilterEmail;
+    @FindBy(id = "device-table-row-0-button-audit")
+    private WebElement deviceTableRow0ButtonAudit;
+    @FindBy(className = "MuiCollapse-wrapper")
+    private WebElement muiCollapseWrapper;
+    @FindBy(className = "MuiTableRow-root")
+    private WebElement muiTableRowRoot;
+
+    public void pageToLoad(String pageUrl) {
         wait.until(ExpectedConditions.urlToBe(pageUrl));
     }
 
-    public void elementToLoad(WebElement element){
+    public void elementToLoad(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-    public void elementToDisappear(WebElement element){
-        wait.until(ExpectedConditions.invisibilityOf(element));}
+
+    public void elementToDisappear(WebElement element) {
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
 
     public void signInAsSuperAdmin() {
-        driver.get(Constants.login);
+        driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameSuperAdminRole);
         passwordField.sendKeys(Credentials.passwordSuperAdminRole);
         signInButton.click();
-        pageToLoad(Constants.dashboard);
+        pageToLoad(Credentials.dashboard);
     }
+
     public void signInAsAdmin() {
-        driver.get(Constants.login);
+        driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameAdminRole);
         passwordField.sendKeys(Credentials.passwordAdminRole);
         signInButton.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.dashboard));
+        pageToLoad(Credentials.dashboard);
     }
+
     public void signInAsUser() {
-        driver.get(Constants.login);
+        driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameUserRole);
         passwordField.sendKeys(Credentials.passwordUserRole);
         signInButton.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.dashboard));
+        pageToLoad(Credentials.dashboard);
     }
+
     public void filterBySerialNo(String serialNo) {
         filterDeviceButton.click();
-        filterSerialNo.sendKeys(serialNo);
-        wait.until(ExpectedConditions.visibilityOf(deviceFilterApplyButton));
+        deviceFilterSerialNo.sendKeys(serialNo);
+        elementToLoad(deviceFilterApplyButton);
         deviceFilterApplyButton.click();
     }
+
     public void filterByStatusInactive() {
         filterDeviceButton.click();
-        filterStatus.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-filter-status-autocomplete-option-2")));
-        driver.findElement(By.id("device-filter-status-autocomplete-option-2")).click();
-        wait.until(ExpectedConditions.visibilityOf(deviceFilterApplyButton));
+        deviceFilterStatusAutocomplete.click();
+        elementToLoad(deviceFilterStatusAutocompleteOption2);
+        deviceFilterStatusAutocompleteOption2.click();
+        elementToLoad(deviceFilterApplyButton);
         deviceFilterApplyButton.click();
     }
+
     public String getDeviceName() {
-        String firstRowText = driver.findElement(By.id("device-table-row-0")).getText();
+        String firstRowText = deviceTableRow0.getText();
         String[] attributes = firstRowText.split("\n");
         return attributes[0];
     }
 
     public String getEmployeeName() {
-        String firstRowText = driver.findElement(By.id("undefined-table-row-0")).getText();
+        String firstRowText = undefinedTableRow0.getText();
         String[] attributes = firstRowText.split("\n");
         return attributes[1];
     }
 
-
     public String getEmail() {
-        String firstRowText = driver.findElement(By.id("undefined-table-row-0")).getText();
+        String firstRowText = undefinedTableRow0.getText();
         String[] attributes = firstRowText.split("\n");
         return attributes[0];
     }
+
     public void filterByRole(String role) {
-        wait.until(ExpectedConditions.visibilityOf(filterButtonEmployee));
+        elementToLoad(filterButtonEmployee);
         filterButtonEmployee.click();
-        driver.findElement(By.id("user-filter-filter-role-selectList")).click();
-        if (role.equals("user")) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-filter-filter-role-selectList-user")));
-            driver.findElement(By.id("user-filter-filter-role-selectList-user")).click();
-        } else if (role.equals("admin")) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-filter-filter-role-selectList-admin")));
-            driver.findElement(By.id("user-filter-filter-role-selectList-admin")).click();
-        } else if (role.equals("super_admin")) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-filter-filter-role-selectList-super_admin")));
-            driver.findElement(By.id("user-filter-filter-role-selectList-super_admin")).click();
+        userFilterFilterRoleSelectList.click();
+        switch (role) {
+            case "user":
+                elementToLoad(userFilterFilterRoleSelectListUser);
+                userFilterFilterRoleSelectListUser.click();
+                break;
+            case "admin":
+                elementToLoad(userFilterFilterRoleSelectListAdmin);
+                userFilterFilterRoleSelectListAdmin.click();
+                break;
+            case "super_admin":
+                elementToLoad(userFilterFilterRoleSelectListSuperAdmin);
+                userFilterFilterRoleSelectListSuperAdmin.click();
+                break;
         }
-        wait.until(ExpectedConditions.visibilityOf(applyFilterButtonEmployee));
+        elementToLoad(applyFilterButtonEmployee);
         applyFilterButtonEmployee.click();
-    }
-    public void filterByEmail(String email) {
-        filterButtonEmployee.click();
-        driver.findElement(By.id("user-filter-filter-clearButton")).click();
-        wait.until(ExpectedConditions.visibilityOf(filterButtonEmployee));
-        filterButtonEmployee.click();
-        driver.findElement(By.id("user-filter-filter-email")).sendKeys(email);
-        wait.until(ExpectedConditions.visibilityOf(applyFilterButtonEmployee));
-        applyFilterButtonEmployee.click();
-    }
-    public void waitForAuditDisplay() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device-table-row-0-button-audit")));
-        driver.findElement(By.id("device-table-row-0-button-audit")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("MuiCollapse-wrapper")));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("MuiTableRow-root")));
     }
 
+    public void filterByEmail(String email) {
+        filterButtonEmployee.click();
+        userFilterFilterClearButton.click();
+        elementToLoad(filterButtonEmployee);
+        filterButtonEmployee.click();
+        userFilterFilterEmail.sendKeys(email);
+        elementToLoad(applyFilterButtonEmployee);
+        applyFilterButtonEmployee.click();
+    }
+
+    public void waitForAuditDisplay() {
+        elementToLoad(deviceTableRow0ButtonAudit);
+        deviceTableRow0ButtonAudit.click();
+        elementToLoad(muiCollapseWrapper);
+        elementToLoad(muiTableRowRoot);
+    }
 }
