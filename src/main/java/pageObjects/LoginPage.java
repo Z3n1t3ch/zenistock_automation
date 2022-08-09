@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.Constants;
+import utils.Credentials;
 
 
 public class LoginPage extends DriverFactory {
@@ -42,58 +44,58 @@ public class LoginPage extends DriverFactory {
     }
 
     public void logInWithEmptyUsername() {
-        driver.get(Credentials.login);
+        driver.get(Constants.login);
         passwordField.sendKeys(Credentials.passwordSuperAdminRole);
         signInButton.click();
     }
 
     public void logInWithEmptyPassword() {
-        driver.get(Credentials.login);
+        driver.get(Constants.login);
         usernameField.sendKeys(Credentials.usernameSuperAdminRole);
         signInButton.click();
     }
 
     public void logInWithEmptyCredentials() {
-        driver.get(Credentials.login);
+        driver.get(Constants.login);
         signInButton.click();
     }
 
     public void logInWithInvalidUsername() {
-        driver.get(Credentials.login);
+        driver.get(Constants.login);
         usernameField.sendKeys(Credentials.invalidUsername);
         passwordField.sendKeys(Credentials.passwordUserRole);
         signInButton.click();
     }
 
     public void logInWithInvalidPassword() {
-        driver.get(Credentials.login);
+        driver.get(Constants.login);
         usernameField.sendKeys(Credentials.usernameUserRole);
         passwordField.sendKeys(Credentials.invalidUsername);
         signInButton.click();
     }
 
     public void successfulLogOutAsSuperAdmin() {
-        driver.get(Credentials.login);
+        driver.get(Constants.login);
         usernameField.sendKeys(Credentials.usernameSuperAdminRole);
         passwordField.sendKeys(Credentials.passwordSuperAdminRole);
         signInButton.click();
-        wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
+        pageToLoad(Constants.dashboard);
         logOutButton.click();
     }
     public void successfulLogOutAsAdmin() {
-        driver.get(Credentials.login);
+        driver.get(Constants.login);
         usernameField.sendKeys(Credentials.usernameAdminRole);
         passwordField.sendKeys(Credentials.passwordAdminRole);
         signInButton.click();
-        wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
+        pageToLoad(Constants.dashboard);
         logOutButton.click();
     }
     public void successfulLogOutAsUser() {
-        driver.get(Credentials.login);
+        driver.get(Constants.login);
         usernameField.sendKeys(Credentials.usernameUserRole);
         passwordField.sendKeys(Credentials.passwordUserRole);
         signInButton.click();
-        wait.until(ExpectedConditions.urlToBe(Credentials.dashboard));
+        pageToLoad(Constants.dashboard);
         logOutButton.click();
     }
 }
