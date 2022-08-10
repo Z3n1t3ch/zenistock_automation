@@ -9,21 +9,21 @@ public class PermissionsTest extends BaseTest {
     public void checkIfUserCanAddDevice() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        Assert.assertFalse(exists("Add device"));
+        Assert.assertFalse(elementExists("Add device"));
     }
 
     @Test
     public void checkIfUserCanExport() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        Assert.assertFalse(exists("Export"));
+        Assert.assertFalse(elementExists("Export"));
     }
 
     @Test
     public void checkIfUserCanImport() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        Assert.assertFalse(exists("Import"));
+        Assert.assertFalse(elementExists("Import"));
     }
 
     @Test
@@ -41,28 +41,28 @@ public class PermissionsTest extends BaseTest {
     public void checkIfUserCanFilter() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        Assert.assertTrue(exists("Filter"));
+        Assert.assertTrue(elementExists("Filter"));
     }
 
     @Test
     public void checkIfAdminCanAddDevice() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        Assert.assertTrue(exists("Add device"));
+        Assert.assertTrue(elementExists("Add device"));
     }
 
     @Test
     public void checkIfAdminCanExport() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        Assert.assertTrue(exists("Export"));
+        Assert.assertTrue(elementExists("Export"));
     }
 
     @Test
     public void checkIfAdminCanImport() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        Assert.assertTrue(exists("Import"));
+        Assert.assertTrue(elementExists("Import"));
     }
 
     @Test
@@ -80,28 +80,28 @@ public class PermissionsTest extends BaseTest {
     public void checkIfAdminCanFilter() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        Assert.assertTrue(exists("Filter"));
+        Assert.assertTrue(elementExists("Filter"));
     }
 
     @Test
     public void checkIfSuperAdminCanAddDevice() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        Assert.assertTrue(exists("Add device"));
+        Assert.assertTrue(elementExists("Add device"));
     }
 
     @Test
     public void checkIfSuperAdminCanExport() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        Assert.assertTrue(exists("Export"));
+        Assert.assertTrue(elementExists("Export"));
     }
 
     @Test
     public void checkIfSuperAdminCanImport() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        Assert.assertTrue(exists("Import"));
+        Assert.assertTrue(elementExists("Import"));
     }
 
     @Test
@@ -119,28 +119,28 @@ public class PermissionsTest extends BaseTest {
     public void checkIfSuperAdminCanFilter() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        Assert.assertTrue(exists("Filter"));
+        Assert.assertTrue(elementExists("Filter"));
     }
 
     @Test
     public void checkIfUserCanAddAsset() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        Assert.assertFalse(exists("Add asset"));
+        Assert.assertFalse(elementExists("Add asset"));
     }
 
     @Test
     public void checkIfUserCanExportOnAssetsPage() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        Assert.assertFalse(exists("Export"));
+        Assert.assertFalse(elementExists("Export"));
     }
 
     @Test
     public void checkIfUserCanImportOnAssetsPage() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        Assert.assertFalse(exists("Import"));
+        Assert.assertFalse(elementExists("Import"));
     }
 
     @Test
@@ -158,28 +158,28 @@ public class PermissionsTest extends BaseTest {
     public void checkIfUserCanFilterOnAssetsPage() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        Assert.assertTrue(exists("Filter"));
+        Assert.assertTrue(elementExists("Filter"));
     }
 
     @Test
     public void checkIfAdminCanAddAsset() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        Assert.assertTrue(exists("Add asset"));
+        Assert.assertTrue(elementExists("Add asset"));
     }
 
     @Test
     public void checkIfAdminCanExportOnAssetsPage() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        Assert.assertTrue(exists("Export"));
+        Assert.assertTrue(elementExists("Export"));
     }
 
     @Test
     public void checkIfAdminCanImportOnAssetsPage() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        Assert.assertTrue(exists("Import"));
+        Assert.assertTrue(elementExists("Import"));
     }
 
     @Test
@@ -197,28 +197,28 @@ public class PermissionsTest extends BaseTest {
     public void checkIfAdminCanFilterOnAssetsPage() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        Assert.assertTrue(exists("Filter"));
+        Assert.assertTrue(elementExists("Filter"));
     }
 
     @Test
     public void checkIfSuperAdminCanAddAsset() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        Assert.assertTrue(exists("Add asset"));
+        Assert.assertTrue(elementExists("Add asset"));
     }
 
     @Test
     public void checkIfSuperAdminCanExportOnAssetsPage() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        Assert.assertTrue(exists("Export"));
+        Assert.assertTrue(elementExists("Export"));
     }
 
     @Test
     public void checkIfSuperAdminCanImportOnAssetsPage() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        Assert.assertTrue(exists("Import"));
+        Assert.assertTrue(elementExists("Import"));
     }
 
     @Test
@@ -236,14 +236,14 @@ public class PermissionsTest extends BaseTest {
     public void checkIfSuperAdminCanFilterOnAssetsPage() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        Assert.assertTrue(exists("Filter"));
+        Assert.assertTrue(elementExists("Filter"));
     }
 
     @Test
     public void checkIfUserCanFilterOnEmployeesPage() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnEmployeesPage();
-        Assert.assertTrue(exists("Filter"));
+        Assert.assertTrue(elementExists("Filter"));
     }
 
     @Test
@@ -261,7 +261,7 @@ public class PermissionsTest extends BaseTest {
     public void checkIfAdminCanFilterOnEmployeesPage() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnEmployeesPage();
-        Assert.assertTrue(exists("Filter"));
+        Assert.assertTrue(elementExists("Filter"));
     }
 
     @Test
@@ -279,7 +279,7 @@ public class PermissionsTest extends BaseTest {
     public void checkIfSuperAdminCanFilterOnEmployeesPage() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnEmployeesPage();
-        Assert.assertTrue(exists("Filter"));
+        Assert.assertTrue(elementExists("Filter"));
     }
 
     @Test
@@ -297,7 +297,7 @@ public class PermissionsTest extends BaseTest {
     public void checkIfUserCanFilterOnLicensesPage() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
-        Assert.assertTrue(exists("Filter"));
+        Assert.assertTrue(elementExists("Filter"));
     }
 
     @Test
@@ -315,14 +315,14 @@ public class PermissionsTest extends BaseTest {
     public void checkIfAdminCanFilterOnLicensesPage() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
-        Assert.assertTrue(exists("Filter"));
+        Assert.assertTrue(elementExists("Filter"));
     }
 
     @Test
     public void checkIfAdminCanPerformActionsOnLicensesPage() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
-        Assert.assertTrue(exists("Add license"));
+        Assert.assertTrue(elementExists("Add license"));
         if (driver.findElements(By.xpath("//button[starts-with(@id,'license_dropdown_')]")).size() != 0) {
             Assert.assertTrue(true);
         } else {
@@ -334,14 +334,14 @@ public class PermissionsTest extends BaseTest {
     public void checkIfSuperAdminCanFilterOnLicensesPage() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
-        Assert.assertTrue(exists("Filter"));
+        Assert.assertTrue(elementExists("Filter"));
     }
 
     @Test
     public void checkIfSuperAdminCanPerformActionsOnLicensesPage() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
-        Assert.assertTrue(exists("Add license"));
+        Assert.assertTrue(elementExists("Add license"));
         if (driver.findElements(By.xpath("//button[starts-with(@id,'license_dropdown_')]")).size() != 0) {
             Assert.assertTrue(true);
         } else {
