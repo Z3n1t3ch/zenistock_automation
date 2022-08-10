@@ -14,11 +14,11 @@ public class Filter extends DriverFactory {
     }
 
     @FindBy(id = "undefined-devices-mButton")
-     WebElement deviceButton;
+    WebElement deviceButton;
     @FindBy(id = "filter_device_button")
-     WebElement filterButton;
+    WebElement filterButton;
     @FindBy(id = "device-filter-subcategory-autocomplete")
-     WebElement subcategoryList;
+    WebElement subcategoryList;
     @FindBy(id = "device-filter-name")
     WebElement filterName;
     @FindBy(id = "device-filter-serialNo")
@@ -34,20 +34,20 @@ public class Filter extends DriverFactory {
     @FindBy(id = "device-filter-invoiceDate")
     WebElement filterInvoiceDate;
     @FindBy(id = "device-filter-apply-button")
-     WebElement applyButton;
+    WebElement applyButton;
     @FindBy(id = "device-filter-subcategory-autocomplete-option-0")
-     WebElement laptopOption;
+    WebElement laptopOption;
     @FindBy(id = "device-filter-asignee-autocomplete-option-0")
-     WebElement assignedToOption;
+    WebElement assignedToOption;
     @FindBy(id = "device-filter-status-autocomplete-option-0")
-     WebElement filterStatusOption;
+    WebElement filterStatusOption;
     @FindBy(id = "device-filter-tags-autocomplete-option-0")
-     WebElement filterTagsOption;
+    WebElement filterTagsOption;
     @FindBy(id = "device-filter-clearButton")
-     WebElement clearAllButton;
+    WebElement clearAllButton;
 
 
-    public  void filterBySubcategory() {
+    public void filterBySubcategory() {
         signInAsSuperAdmin();
         deviceButton.click();
         wait.until(ExpectedConditions.visibilityOf(filterButton));
@@ -60,6 +60,7 @@ public class Filter extends DriverFactory {
         applyButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
+
     public void filterByName() {
         signInAsSuperAdmin();
         deviceButton.click();
@@ -72,6 +73,7 @@ public class Filter extends DriverFactory {
         applyButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
+
     public void filterBySerialNo() {
         signInAsSuperAdmin();
         deviceButton.click();
@@ -84,6 +86,7 @@ public class Filter extends DriverFactory {
         applyButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
+
     public void filterByInventoryNo() {
         signInAsSuperAdmin();
         deviceButton.click();
@@ -96,6 +99,7 @@ public class Filter extends DriverFactory {
         applyButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
+
     public void filterByAssignTo() {
         signInAsSuperAdmin();
         deviceButton.click();
@@ -109,6 +113,7 @@ public class Filter extends DriverFactory {
         applyButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
+
     public void filterByStatus() {
         signInAsSuperAdmin();
         deviceButton.click();
@@ -122,6 +127,7 @@ public class Filter extends DriverFactory {
         applyButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
+
     public void filterByTags() {
         signInAsSuperAdmin();
         deviceButton.click();
@@ -130,14 +136,15 @@ public class Filter extends DriverFactory {
         WebElement scroll = driver.findElement(By.id("device-filter-status-autocomplete"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
         wait.until(ExpectedConditions.visibilityOf(filterTags));
-       filterTags.click();
+        filterTags.click();
         wait.until(ExpectedConditions.visibilityOf(filterTagsOption));
         filterTagsOption.click();
         wait.until(ExpectedConditions.visibilityOf(applyButton));
         applyButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
-    public  void filterBySubcategoryAndName() {
+
+    public void filterBySubcategoryAndName() {
         signInAsSuperAdmin();
         deviceButton.click();
         wait.until(ExpectedConditions.visibilityOf(filterButton));
@@ -153,7 +160,8 @@ public class Filter extends DriverFactory {
         applyButton.click();
         wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
     }
-    public  void clearAllFilterFieldsButton() {
+
+    public void clearAllFilterFieldsButton() {
         signInAsSuperAdmin();
         deviceButton.click();
         wait.until(ExpectedConditions.visibilityOf(filterButton));

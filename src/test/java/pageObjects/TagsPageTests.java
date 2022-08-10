@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import utils.Constants;
 
 
+import static pageObjects.TagsPage.elementText;
 import static utils.RandomGenerator.randomName;
 
 public class TagsPageTests extends BaseTest {
@@ -14,31 +15,27 @@ public class TagsPageTests extends BaseTest {
     public void successfullyCreateTag() {
         String name = randomName();
         tagsPage.successfullyCreateTag(name);
-        String toaster = driver.findElement(By.id("success_toaster")).getText();
-        Assert.assertTrue(toaster.contains("Tag created successfully!"));
+        Assert.assertTrue(elementText.contains("Tag created successfully!"));
         Assert.assertTrue(driver.getPageSource().contains(name));
     }
 
     @Test
     public void createTagWithWhitespaces() {
         tagsPage.createTagWithWhitespaces();
-        String toaster = driver.findElement(By.id("error_toaster")).getText();
-        Assert.assertTrue(toaster.contains("The field \"name\" contains only whitespaces."));
+        Assert.assertTrue(elementText.contains("The field \"name\" contains only whitespaces."));
     }
 
     @Test
     public void createTagWithEmptyNameField() {
         tagsPage.createTagWithEmptyField();
-        boolean requiredNameField = Boolean.parseBoolean(driver.findElement(By.id("tags-addTag-field")).getAttribute("required"));
-        Assert.assertTrue(requiredNameField);
+        Assert.assertTrue(driver.getPageSource().contains("required"));
     }
 
     @Test
     public void successfullyDeleteTag() {
         String name = randomName();
         tagsPage.successfullyDeleteTag(name);
-        String toaster = driver.findElement(By.id("success_toaster")).getText();
-        Assert.assertTrue(toaster.contains("Tag deleted successfully!"));
+        Assert.assertTrue(elementText.contains("Tag deleted successfully!"));
         Assert.assertFalse(driver.getPageSource().contains(name));
     }
 
@@ -46,8 +43,7 @@ public class TagsPageTests extends BaseTest {
     public void successfullyEditTag() {
         String nameAfterEdit = randomName();
         tagsPage.successfullyEditTag(nameAfterEdit);
-        String toaster = driver.findElement(By.id("success_toaster")).getText();
-        Assert.assertTrue(toaster.contains("Tag updated successfully!"));
+        Assert.assertTrue(elementText.contains("Tag updated successfully!"));
         Assert.assertTrue(driver.getPageSource().contains(nameAfterEdit));
     }
 
@@ -61,8 +57,6 @@ public class TagsPageTests extends BaseTest {
     @Test
     public void checkDeviceWithDeletedTag() {
         tagsPage.checkDeviceWithDeletedTag();
-        String deletedTag = driver.findElement(By.id("device-table-row-0")).getText();
-        Assert.assertFalse(deletedTag.contains(Constants.EDITABLE_TAG_NAME));
-
+        Assert.assertFalse(elementText.contains(Constants.EDITABLE_TAG_NAME));
     }
 }
