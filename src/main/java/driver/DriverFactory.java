@@ -1,12 +1,17 @@
 package driver;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pageObjects.Credentials;
+import utils.Constants;
+
+import static utils.RandomGenerator.randomName;
+import static utils.RandomGenerator.randomNumber;
 
 public class DriverFactory {
     public WebDriver driver;
@@ -31,7 +36,7 @@ public class DriverFactory {
     @FindBy(id = "filter_device_button")
     private WebElement filterDeviceButton;
     @FindBy(id = "device-filter-apply-button")
-    WebElement deviceFilterApplyButton;
+    private WebElement deviceFilterApplyButton;
     @FindBy(id = "device-filter-serialNo")
     private WebElement deviceFilterSerialNo;
     @FindBy(id = "device-filter-status-autocomplete")
@@ -61,16 +66,45 @@ public class DriverFactory {
     @FindBy(className = "MuiTableRow-root")
     private WebElement muiTableRowRoot;
 
-    public void pageToLoad (String pageUrl){
+    @FindBy(id = "undefined-devices-mButton")
+    private WebElement devicePageButton;
+
+    @FindBy(id = "add_device_button")
+    private WebElement addDeviceButton;
+
+    @FindBy(id = "device-information-name")
+    private WebElement deviceNameField;
+
+    @FindBy(id = "device-information-serialNo")
+    private WebElement deviceSerialNoField;
+
+    @FindBy(id = "device-information-inventoryNo")
+    private WebElement deviceInventoryNoField;
+
+    @FindBy(id = "device-information-invoiceNo")
+    private WebElement deviceInvoiceNoField;
+
+    @FindBy(id = "tags")
+    private WebElement tagsField;
+
+    @FindBy(id = "tags-option-0")
+    private WebElement firstTagElement;
+
+    @FindBy(id = "device-saveBtn")
+    private WebElement deviceSaveButton;
+
+    public void pageToLoad(String pageUrl) {
         wait.until(ExpectedConditions.urlToBe(pageUrl));
     }
 
-    public void elementToLoad(WebElement element){
+    public void elementToLoad(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+
     public void elementToDisappear(WebElement element) {
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
+
     public void signInAsSuperAdmin() {
         driver.get(Credentials.login);
         usernameField.sendKeys(Credentials.usernameSuperAdminRole);
@@ -166,5 +200,32 @@ public class DriverFactory {
         deviceTableRow0ButtonAudit.click();
         elementToLoad(muiCollapseWrapper);
         elementToLoad(muiTableRowRoot);
+    }
+
+    public void clearField(WebElement webElement) {
+        webElement.sendKeys(Keys.CONTROL + "a");
+        webElement.sendKeys(Keys.DELETE);
+    }
+
+    public void deleteTag(String webElementId) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(webElementId)));
+        driver.findElement(By.id(webElementId)).click();
+    }
+
+    public void createDeviceForTagPage() {
+        devicePageButton.click();
+        elementToLoad(addDeviceButton);
+        addDeviceButton.click();
+        deviceNameField.sendKeys(randomName());
+        deviceSerialNoField.sendKeys(randomNumber() + "");
+        deviceInventoryNoField.sendKeys(randomNumber() + "");
+        deviceInvoiceNoField.sendKeys(randomNumber() + "");
+        tagsField.sendKeys(Constants.EDITABLE_TAG_NAME);
+        firstTagElement.click();
+        deviceSaveButton.click();
+    }
+
+    public String getTextFromElement(WebElement element) {
+        return element.getText();
     }
 }
