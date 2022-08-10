@@ -9,24 +9,21 @@ public class PermissionsTest extends BaseTest {
     public void checkIfUserCanAddDevice() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        boolean addDeviceButton = driver.getPageSource().contains("Add device");
-        Assert.assertFalse(addDeviceButton);
+        Assert.assertFalse(exists("Add device"));
     }
 
     @Test
     public void checkIfUserCanExport() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        boolean exportButton = driver.getPageSource().contains("Export");
-        Assert.assertFalse(exportButton);
+        Assert.assertFalse(exists("Export"));
     }
 
     @Test
     public void checkIfUserCanImport() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        boolean importButton = driver.getPageSource().contains("Import");
-        Assert.assertFalse(importButton);
+        Assert.assertFalse(exists("Import"));
     }
 
     @Test
@@ -44,32 +41,28 @@ public class PermissionsTest extends BaseTest {
     public void checkIfUserCanFilter() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(filterButton);
+        Assert.assertTrue(exists("Filter"));
     }
 
     @Test
     public void checkIfAdminCanAddDevice() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        boolean AddDeviceButton = driver.getPageSource().contains("Add device");
-        Assert.assertTrue(AddDeviceButton);
+        Assert.assertTrue(exists("Add device"));
     }
 
     @Test
     public void checkIfAdminCanExport() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        boolean ExportButton = driver.getPageSource().contains("Export");
-        Assert.assertTrue(ExportButton);
+        Assert.assertTrue(exists("Export"));
     }
 
     @Test
     public void checkIfAdminCanImport() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        boolean ImportButton = driver.getPageSource().contains("Import");
-        Assert.assertTrue(ImportButton);
+        Assert.assertTrue(exists("Import"));
     }
 
     @Test
@@ -87,32 +80,28 @@ public class PermissionsTest extends BaseTest {
     public void checkIfAdminCanFilter() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(filterButton);
+        Assert.assertTrue(exists("Filter"));
     }
 
     @Test
     public void checkIfSuperAdminCanAddDevice() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        boolean AddDeviceButton = driver.getPageSource().contains("Add device");
-        Assert.assertTrue(AddDeviceButton);
+        Assert.assertTrue(exists("Add device"));
     }
 
     @Test
     public void checkIfSuperAdminCanExport() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        boolean ExportButton = driver.getPageSource().contains("Export");
-        Assert.assertTrue(ExportButton);
+        Assert.assertTrue(exists("Export"));
     }
 
     @Test
     public void checkIfSuperAdminCanImport() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        boolean ImportButton = driver.getPageSource().contains("Import");
-        Assert.assertTrue(ImportButton);
+        Assert.assertTrue(exists("Import"));
     }
 
     @Test
@@ -130,32 +119,28 @@ public class PermissionsTest extends BaseTest {
     public void checkIfSuperAdminCanFilter() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnDevicePage();
-        boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(filterButton);
+        Assert.assertTrue(exists("Filter"));
     }
 
     @Test
     public void checkIfUserCanAddAsset() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        boolean addAssetButton = driver.getPageSource().contains("Add asset");
-        Assert.assertFalse(addAssetButton);
+        Assert.assertFalse(exists("Add asset"));
     }
 
     @Test
     public void checkIfUserCanExportOnAssetsPage() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        boolean exportButton = driver.getPageSource().contains("Export");
-        Assert.assertFalse(exportButton);
+        Assert.assertFalse(exists("Export"));
     }
 
     @Test
     public void checkIfUserCanImportOnAssetsPage() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        boolean importButton = driver.getPageSource().contains("Import");
-        Assert.assertFalse(importButton);
+        Assert.assertFalse(exists("Import"));
     }
 
     @Test
@@ -173,32 +158,28 @@ public class PermissionsTest extends BaseTest {
     public void checkIfUserCanFilterOnAssetsPage() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(filterButton);
+        Assert.assertTrue(exists("Filter"));
     }
 
     @Test
     public void checkIfAdminCanAddAsset() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        boolean AddAssetsButton = driver.getPageSource().contains("Add device");
-        Assert.assertTrue(AddAssetsButton);
+        Assert.assertTrue(exists("Add asset"));
     }
 
     @Test
     public void checkIfAdminCanExportOnAssetsPage() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        boolean ExportButton = driver.getPageSource().contains("Export");
-        Assert.assertTrue(ExportButton);
+        Assert.assertTrue(exists("Export"));
     }
 
     @Test
     public void checkIfAdminCanImportOnAssetsPage() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        boolean ImportButton = driver.getPageSource().contains("Import");
-        Assert.assertTrue(ImportButton);
+        Assert.assertTrue(exists("Import"));
     }
 
     @Test
@@ -216,32 +197,28 @@ public class PermissionsTest extends BaseTest {
     public void checkIfAdminCanFilterOnAssetsPage() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(filterButton);
+        Assert.assertTrue(exists("Filter"));
     }
 
     @Test
     public void checkIfSuperAdminCanAddAsset() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        boolean AddAssetsButton = driver.getPageSource().contains("Add device");
-        Assert.assertTrue(AddAssetsButton);
+        Assert.assertTrue(exists("Add asset"));
     }
 
     @Test
     public void checkIfSuperAdminCanExportOnAssetsPage() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        boolean ExportButton = driver.getPageSource().contains("Export");
-        Assert.assertTrue(ExportButton);
+        Assert.assertTrue(exists("Export"));
     }
 
     @Test
     public void checkIfSuperAdminCanImportOnAssetsPage() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        boolean ImportButton = driver.getPageSource().contains("Import");
-        Assert.assertTrue(ImportButton);
+        Assert.assertTrue(exists("Import"));
     }
 
     @Test
@@ -259,16 +236,14 @@ public class PermissionsTest extends BaseTest {
     public void checkIfSuperAdminCanFilterOnAssetsPage() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnAssetsPage();
-        boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(filterButton);
+        Assert.assertTrue(exists("Filter"));
     }
 
     @Test
     public void checkIfUserCanFilterOnEmployeesPage() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnEmployeesPage();
-        boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(filterButton);
+        Assert.assertTrue(exists("Filter"));
     }
 
     @Test
@@ -286,8 +261,7 @@ public class PermissionsTest extends BaseTest {
     public void checkIfAdminCanFilterOnEmployeesPage() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnEmployeesPage();
-        boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(filterButton);
+        Assert.assertTrue(exists("Filter"));
     }
 
     @Test
@@ -305,8 +279,7 @@ public class PermissionsTest extends BaseTest {
     public void checkIfSuperAdminCanFilterOnEmployeesPage() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnEmployeesPage();
-        boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(filterButton);
+        Assert.assertTrue(exists("Filter"));
     }
 
     @Test
@@ -324,8 +297,7 @@ public class PermissionsTest extends BaseTest {
     public void checkIfUserCanFilterOnLicensesPage() {
         loginPage.successfulSignInAsUser();
         permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
-        boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(filterButton);
+        Assert.assertTrue(exists("Filter"));
     }
 
     @Test
@@ -343,16 +315,14 @@ public class PermissionsTest extends BaseTest {
     public void checkIfAdminCanFilterOnLicensesPage() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
-        boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(filterButton);
+        Assert.assertTrue(exists("Filter"));
     }
 
     @Test
     public void checkIfAdminCanPerformActionsOnLicensesPage() {
         loginPage.successfulSignInAsAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
-        boolean addLicenseButton = driver.getPageSource().contains("Add license");
-        Assert.assertTrue(addLicenseButton);
+        Assert.assertTrue(exists("Add license"));
         if (driver.findElements(By.xpath("//button[starts-with(@id,'license_dropdown_')]")).size() != 0) {
             Assert.assertTrue(true);
         } else {
@@ -364,16 +334,14 @@ public class PermissionsTest extends BaseTest {
     public void checkIfSuperAdminCanFilterOnLicensesPage() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
-        boolean filterButton = driver.getPageSource().contains("Filter");
-        Assert.assertTrue(filterButton);
+        Assert.assertTrue(exists("Filter"));
     }
 
     @Test
     public void checkIfSuperAdminCanPerformActionsOnLicensesPage() {
         loginPage.successfulSignInAsSuperAdmin();
         permissionForAllRoles.checkIfUsersCanPerformActionOnLicensesPage();
-        boolean addLicenseButton = driver.getPageSource().contains("Add license");
-        Assert.assertTrue(addLicenseButton);
+        Assert.assertTrue(exists("Add license"));
         if (driver.findElements(By.xpath("//button[starts-with(@id,'license_dropdown_')]")).size() != 0) {
             Assert.assertTrue(true);
         } else {

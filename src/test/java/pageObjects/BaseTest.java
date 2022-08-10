@@ -35,4 +35,7 @@ public class BaseTest {
     public void closeBrowser() {
         driver.quit();
     }
+    public boolean exists(String actions) {
+        return driver.getPageSource().contains(actions);
+    }
 }
