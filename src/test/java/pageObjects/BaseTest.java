@@ -3,6 +3,7 @@ package pageObjects;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -35,7 +36,8 @@ public class BaseTest {
     public void closeBrowser() {
         driver.quit();
     }
-    public boolean exists(String actions) {
+    public boolean elementExists(String actions) {
         return driver.getPageSource().contains(actions);
     }
+
 }
