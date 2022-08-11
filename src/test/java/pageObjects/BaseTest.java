@@ -1,8 +1,10 @@
 package pageObjects;
 
+import driver.DriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -17,6 +19,8 @@ public class BaseTest {
     public static TagsPage tagsPage;
     public static Filter filter;
 
+    public static DriverFactory driverFactory;
+
     @BeforeMethod
     public void openApplication() {
 
@@ -30,9 +34,14 @@ public class BaseTest {
         filter=new Filter(driver);
         audit = new Audit(driver);
         tagsPage = new TagsPage(driver);
+        driverFactory = new DriverFactory(driver);
     }
     @AfterMethod
     public void closeBrowser() {
         driver.quit();
     }
+    public boolean elementExists(String actions) {
+        return driver.getPageSource().contains(actions);
+    }
+
 }

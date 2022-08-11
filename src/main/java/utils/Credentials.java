@@ -9,6 +9,6 @@ public final class Credentials {
     public static final String passwordSuperAdminRole = "qwer3#qazxsw09*";
     public static final String invalidUsername = "asdasdadads";
 
-    public static final String errorInvalidCredentials = "Invalid credentials";
+
 
 }

@@ -2,11 +2,11 @@ package pageObjects;
 
 
 import driver.DriverFactory;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
 import utils.Credentials;
 
@@ -31,6 +31,18 @@ public class LoginPage extends DriverFactory {
     @FindBy(id = "log-out")
     private WebElement logOutButton;
 
+    public String getURL(){
+        return driver.getCurrentUrl();
+    }
+
+    public boolean hasRequired(){
+        String hasRequired = driver.findElement(By.id("username")).getAttribute("required");
+        return driver.getPageSource().contains(hasRequired);
+    }
+
+    public String invalidCredentials(){
+        return driver.findElement(By.id("password-helper-text")).getText();
+    }
     public void successfulSignInAsSuperAdmin() {
         signInAsSuperAdmin();
     }
