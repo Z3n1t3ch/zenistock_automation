@@ -7,12 +7,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pageObjects.Credentials;
 import utils.Constants;
-
 import static utils.RandomGenerator.randomName;
 import static utils.RandomGenerator.randomNumber;
-import utils.Constants;
 import utils.Credentials;
 
 public class DriverFactory {
