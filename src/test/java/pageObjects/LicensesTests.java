@@ -1,82 +1,91 @@
 package pageObjects;
 
-
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.Constants;
-
-import static pageObjects.Licenses.elementText;
 
 public class LicensesTests extends BaseTest {
     @Test
     public void successfulCreateLicense() {
         licenses.successfulCreateLicense();
-        Assert.assertEquals(driver.getCurrentUrl(), Constants.LICENSES_URL);
-        Assert.assertTrue(elementText.contains("License created successfully!"));
+        String URL = driver.getCurrentUrl();
+        Assert.assertEquals(URL, Constants.LICENSES_URL);
+        String success = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(success, "License created successfully!");
     }
-
     @Test
     public void createDeviceWithTooLongName() {
         licenses.addLicenseTooLongName();
-        Assert.assertTrue(elementText.contains("The field \"name\" is too long."));
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(), "The field \"name\" is too long.");
     }
-
     @Test
     public void saveLicenseWhiteSpaceNameField() {
         licenses.createLicenseWithWhiteSpacesNameField();
-        Assert.assertTrue(elementText.contains("The field \"name\" contains only whitespaces."));
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(), "The field \"name\" contains only whitespaces.");
     }
-
     @Test
     public void createLicenseWithIndividualType() {
         licenses.createLicenseWithIndividualType();
-        Assert.assertEquals(driver.getCurrentUrl(), Constants.LICENSES_URL);
-        Assert.assertTrue(elementText.contains("License created successfully!"));
+        String URL = driver.getCurrentUrl();
+        String success = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(URL, Constants.LICENSES_URL);
+        Assert.assertEquals(success, "License created successfully!");
     }
-
     @Test
     public void createLicenseWithPackType() {
         licenses.createLicenseWithPackType();
-        Assert.assertEquals(driver.getCurrentUrl(), Constants.LICENSES_URL);
-        Assert.assertTrue(elementText.contains("License created successfully!"));
+        String URL = driver.getCurrentUrl();
+        String success = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(URL, Constants.LICENSES_URL);
+        Assert.assertEquals(success, "License created successfully!");
     }
-
     @Test
     public void createLicenseWithLocation() {
         licenses.createLicenseWithLocation();
-        Assert.assertEquals(driver.getCurrentUrl(), Constants.LICENSES_URL);
-        Assert.assertTrue(elementText.contains("License created successfully!"));
+        String URL = driver.getCurrentUrl();
+        String success = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(URL, Constants.LICENSES_URL);
+        Assert.assertEquals(success, "License created successfully!");
     }
-
     @Test
     public void createLicenseWithEmptyNameField() {
         licenses.createLicenseWithEmptyNameField();
-        Assert.assertEquals(elementText, "true");
-        Assert.assertEquals(driver.getCurrentUrl(), Constants.LICENSE_DETAILS_URL);
+        String URL = driver.getCurrentUrl();
+        String errorToaster = driver.findElement(By.id("license_name")).getAttribute("required");
+        boolean errorMessage = driver.getPageSource().contains(errorToaster);
+        Assert.assertEquals(URL, Constants.LICENSE_DETAILS_URL);
+        Assert.assertTrue(errorMessage);
     }
-
     @Test
     public void createLicenseWithExpirationDateEarlierThanPurchaseDate() {
         licenses.createLicenseWithExpirationDateEarlierThanPurchaseDate();
-        Assert.assertTrue(elementText.contains("The field \"expirationDate\" is inconsistent."));
+        WebElement errorToaster = driver.findElement(By.id("error_toaster"));
+        Assert.assertEquals(errorToaster.getText(), "The field \"expirationDate\" is inconsistent.");
     }
-
     @Test
     public void createLicenseWithEmptyExpirationDate() {
         licenses.createLicenseWithEmptyExpirationDate();
-        Assert.assertEquals(elementText, "true");
+        String errorToaster = driver.findElement(By.id("license_expiration_date_picker")).getAttribute("required");
+        boolean errorMessage = driver.getPageSource().contains(errorToaster);
+        Assert.assertTrue(errorMessage);
     }
-
     @Test
     public void createLicenseWithEmptyPurchaseDate() {
         licenses.createLicenseWithEmptyPurchaseDate();
-        Assert.assertEquals(elementText, "true");
+        String errorToaster = driver.findElement(By.id("license_purchase_date_picker")).getAttribute("required");
+        boolean errorMessage = driver.getPageSource().contains(errorToaster);
+        Assert.assertTrue(errorMessage);
     }
-
     @Test
     public void successfulEditLicenseName() {
         licenses.successfulEditLicenseName();
-        Assert.assertEquals(driver.getCurrentUrl(), Constants.LICENSES_URL);
-        Assert.assertTrue(elementText.contains("License updated successfully!"));
+        String URL = driver.getCurrentUrl();
+        String success = driver.findElement(By.id("success_toaster")).getText();
+        Assert.assertEquals(URL, Constants.LICENSES_URL);
+        Assert.assertEquals(success, "License updated successfully!");
     }
 }
