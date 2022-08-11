@@ -65,6 +65,10 @@ public class DriverFactory {
     private WebElement muiCollapseWrapper;
     @FindBy(className = "MuiTableRow-root")
     private WebElement muiTableRowRoot;
+    @FindBy(id = "undefined-licenses-mButton")
+    private WebElement licenseButton;
+    @FindBy(id = "add-license")
+    private WebElement addLicenseButton;
 
     @FindBy(id = "undefined-devices-mButton")
     private WebElement devicePageButton;
@@ -226,6 +230,15 @@ public class DriverFactory {
     }
 
     public String getTextFromElement(WebElement element) {
+
         return element.getText();
+    }
+
+    public void openAddLicensesPage() {
+        signInAsAdmin();
+        licenseButton.click();
+        elementToLoad(addLicenseButton);
+        addLicenseButton.click();
+        pageToLoad(Constants.LICENSE_DETAILS_URL);
     }
 }
