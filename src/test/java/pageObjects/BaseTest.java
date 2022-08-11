@@ -19,7 +19,6 @@ public class BaseTest {
     public static TagsPage tagsPage;
     public static Filter filter;
 
-    public static DriverFactory driverFactory;
 
     @BeforeMethod
     public void openApplication() {
@@ -34,7 +33,6 @@ public class BaseTest {
         filter=new Filter(driver);
         audit = new Audit(driver);
         tagsPage = new TagsPage(driver);
-        driverFactory = new DriverFactory(driver);
     }
     @AfterMethod
     public void closeBrowser() {
