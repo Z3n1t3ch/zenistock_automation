@@ -44,9 +44,13 @@ public class Filter extends DriverFactory {
     WebElement filterTagsOption;
     @FindBy(id = "device-filter-clearButton")
     WebElement clearAllButton;
+    @FindBy(id = "device-table")
+    WebElement deviceTable;
+    @FindBy(id = "device-table-row-0")
+    WebElement firstTableRow;
 
+    public static String elementText;
 
-    public void filterBySubcategory() {
     public void filterBySubcategory() {
         signInAsSuperAdmin();
         deviceButton.click();
@@ -59,6 +63,7 @@ public class Filter extends DriverFactory {
         elementToLoad(applyButton);
         applyButton.click();
         pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void filterByName() {
@@ -71,6 +76,7 @@ public class Filter extends DriverFactory {
         elementToLoad(applyButton);
         applyButton.click();
         pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(firstTableRow);
     }
 
     public void filterBySerialNo() {
@@ -83,7 +89,7 @@ public class Filter extends DriverFactory {
         elementToLoad(applyButton);
         applyButton.click();
         pageToLoad(Constants.DEVICES_URL);
-
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void filterByInventoryNo() {
@@ -96,6 +102,7 @@ public class Filter extends DriverFactory {
         elementToLoad(applyButton);
         applyButton.click();
         pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void filterByAssignTo() {
@@ -110,6 +117,7 @@ public class Filter extends DriverFactory {
         elementToLoad(applyButton);
         applyButton.click();
         pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void filterByStatus() {
@@ -124,6 +132,7 @@ public class Filter extends DriverFactory {
         elementToLoad(applyButton);
         applyButton.click();
         pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void filterByTags() {
@@ -133,9 +142,6 @@ public class Filter extends DriverFactory {
         filterButton.click();
         WebElement scroll = filterStatus;
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
-        wait.until(ExpectedConditions.visibilityOf(filterTags));
-        filterTags.click();
-        wait.until(ExpectedConditions.visibilityOf(filterTagsOption));
         elementToLoad(filterTags);
         filterTags.click();
         elementToLoad(filterTagsOption);
@@ -143,6 +149,7 @@ public class Filter extends DriverFactory {
         elementToLoad(applyButton);
         applyButton.click();
         pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void filterBySubcategoryAndName() {
@@ -159,6 +166,7 @@ public class Filter extends DriverFactory {
         elementToLoad(applyButton);
         applyButton.click();
         pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void clearAllFilterFieldsButton() {
@@ -176,5 +184,6 @@ public class Filter extends DriverFactory {
         clearAllButton.click();
         elementToLoad(filterButton);
         filterButton.click();
+        elementText = getTextFromElement(filterName);
     }
 }
