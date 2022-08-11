@@ -5,14 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
 
 public class Permissions extends DriverFactory {
-
     public Permissions(WebDriver driver) {
         super(driver);
-
         PageFactory.initElements(driver, this);
     }
 
@@ -26,77 +23,29 @@ public class Permissions extends DriverFactory {
     private WebElement licensesButtonSidebarMenu;
     @FindBy(id = "undefined-tags-mButton")
     private WebElement tagsButtonSidebarMenu;
-    public void checkIfUserCanPerformActionOnDevicePage() {
+
+    public void checkIfUsersCanPerformActionOnDevicePage() {
         devicesButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        pageToLoad(Constants.DEVICES_URL);
     }
 
-    public void checkIfAdminCanPerformActionOnDevicePage() {
-        devicesButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
-    }
-
-    public void checkIfSuperAdminCanPerformActionOnDevicePage() {
-        devicesButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
-    }
-
-    public void checkIfUserCanPerformActionOnAssetsPage() {
+    public void checkIfUsersCanPerformActionOnAssetsPage() {
         assetsButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.ASSETS_URL));
+        pageToLoad(Constants.ASSETS_URL);
     }
 
-    public void checkIfAdminCanPerformActionOnAssetsPage() {
-        assetsButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.ASSETS_URL));
-    }
-
-    public void checkIfSuperAdminCanPerformActionOnAssetsPage() {
-        assetsButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.ASSETS_URL));
-    }
-
-    public void checkIfUserCanPerformActionOnEmployeesPage() {
+    public void checkIfUsersCanPerformActionOnEmployeesPage() {
         employeesButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.EMPLOYEES_URL));
+        pageToLoad(Constants.EMPLOYEES_URL);
     }
 
-    public void checkIfAdminCanPerformActionOnEmployeesPage() {
-        employeesButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.EMPLOYEES_URL));
-    }
-
-    public void checkIfSuperAdminCanPerformActionOnEmployeesPage() {
-        employeesButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.EMPLOYEES_URL));
-    }
-
-    public void checkIfUserCanPerformActionOnLicensesPage() {
+    public void checkIfUsersCanPerformActionOnLicensesPage() {
         licensesButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
+        pageToLoad(Constants.LICENSES_URL);
     }
 
-    public void checkIfAdminCanPerformActionOnLicensesPage() {
-        licensesButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
-    }
-
-    public void checkIfSuperAdminCanPerformActionOnLicensesPage() {
-        licensesButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.LICENSES_URL));
-    }
-    public void checkIfUserCanPerformActionOnTagsPage() {
+    public void checkIfUsersCanPerformActionOnTagsPage() {
         tagsButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.TAGS_URL));
-    }
-
-    public void checkIfAdminCanPerformActionOnTagsPage() {
-        tagsButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.TAGS_URL));
-    }
-
-    public void checkIfSuperAdminCanPerformActionOnTagsPage() {
-        tagsButtonSidebarMenu.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.TAGS_URL));
+        pageToLoad(Constants.TAGS_URL);
     }
 }

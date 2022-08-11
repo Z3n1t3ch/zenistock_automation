@@ -45,6 +45,8 @@ public class Filter extends DriverFactory {
     @FindBy(id = "device-filter-clearButton")
     WebElement clearAllButton;
 
+
+    public void filterBySubcategory() {
     public void filterBySubcategory() {
         signInAsSuperAdmin();
         deviceButton.click();
@@ -131,6 +133,9 @@ public class Filter extends DriverFactory {
         filterButton.click();
         WebElement scroll = filterStatus;
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
+        wait.until(ExpectedConditions.visibilityOf(filterTags));
+        filterTags.click();
+        wait.until(ExpectedConditions.visibilityOf(filterTagsOption));
         elementToLoad(filterTags);
         filterTags.click();
         elementToLoad(filterTagsOption);
