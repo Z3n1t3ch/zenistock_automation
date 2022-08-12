@@ -266,7 +266,6 @@ public class DriverFactory {
     }
 
     public void changeEmployeeRole(String initialRole, String roleAfterEdit) {
-        signInAsSuperAdmin();
         employeesButton.click();
         filterByRole(initialRole);
         elementToLoad(employeesButton);

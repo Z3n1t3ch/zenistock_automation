@@ -21,16 +21,19 @@ public class EmployeePage extends DriverFactory {
     public static String elementText;
 
     public void successfulSuperAdminToUserRoleChange() {
+        signInAsSuperAdmin();
         changeEmployeeRole("super_admin", "user");
         elementText = getTextFromElement(firstTableRow);
     }
 
     public void successfulAdminToSuperAdminRoleChange() {
+        signInAsSuperAdmin();
         changeEmployeeRole("admin", "super_admin");
         elementText = getTextFromElement(firstTableRow);
     }
 
     public void successfulUserToAdminRoleChange() {
+        signInAsSuperAdmin();
         changeEmployeeRole("user", "admin");
         elementText = getTextFromElement(firstTableRow);
     }
