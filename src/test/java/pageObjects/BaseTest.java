@@ -1,5 +1,6 @@
 package pageObjects;
 
+import driver.DriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,6 +18,7 @@ public class BaseTest {
     public static Audit audit;
     public static TagsPage tagsPage;
     public static Filter filter;
+
 
     @BeforeMethod
     public void openApplication() {

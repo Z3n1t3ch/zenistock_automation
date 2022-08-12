@@ -7,11 +7,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pageObjects.Credentials;
 import utils.Constants;
-
 import static utils.RandomGenerator.randomName;
 import static utils.RandomGenerator.randomNumber;
+import utils.Credentials;
 
 public class DriverFactory {
     public WebDriver driver;
@@ -110,27 +109,26 @@ public class DriverFactory {
     }
 
     public void signInAsSuperAdmin() {
-        driver.get(Credentials.login);
+        driver.get(Constants.login);
         usernameField.sendKeys(Credentials.usernameSuperAdminRole);
         passwordField.sendKeys(Credentials.passwordSuperAdminRole);
         signInButton.click();
-        pageToLoad(Credentials.dashboard);
+        pageToLoad(Constants.dashboard);
     }
-
     public void signInAsAdmin() {
-        driver.get(Credentials.login);
+        driver.get(Constants.login);
         usernameField.sendKeys(Credentials.usernameAdminRole);
         passwordField.sendKeys(Credentials.passwordAdminRole);
         signInButton.click();
-        pageToLoad(Credentials.dashboard);
+        pageToLoad(Constants.dashboard);
     }
 
     public void signInAsUser() {
-        driver.get(Credentials.login);
+        driver.get(Constants.login);
         usernameField.sendKeys(Credentials.usernameUserRole);
         passwordField.sendKeys(Credentials.passwordUserRole);
         signInButton.click();
-        pageToLoad(Credentials.dashboard);
+        pageToLoad(Constants.dashboard);
     }
 
     public void filterBySerialNo(String serialNo) {
