@@ -35,68 +35,29 @@ public class EmployeePage extends DriverFactory {
     @FindBy(id = "user-saveBtn")
     WebElement saveButton;
 
-    @FindBy (id="undefined-table")
+    @FindBy(id = "undefined-table")
     WebElement table;
 
     @FindBy(id = "success_toaster")
     WebElement successToaster;
 
+    @FindBy(id = "undefined-table-row-0")
+    WebElement firstTableRow;
+
+    public static String elementText;
+
     public void successfulSuperAdminToUserRoleChange() {
-        signInAsSuperAdmin();
-        employeesButton.click();
-        filterByRole("super_admin");
-        wait.until(ExpectedConditions.visibilityOf(employeesButton));
-        String userName = getEmployeeName();
-        String email = getEmail();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user_edit_" + userName)));
-        driver.findElement(By.id("user_edit_" + userName)).click();
-        wait.until(ExpectedConditions.visibilityOf(userRoleSelectList));
-        userRoleSelectList.click();
-        wait.until(ExpectedConditions.visibilityOf(userRoleButton));
-        userRoleButton.click();
-        wait.until(ExpectedConditions.visibilityOf(saveButton));
-        saveButton.click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
-        filterByEmail(email);
+        changeEmployeeRole("super_admin", "user");
+        elementText=getTextFromElement(firstTableRow);
     }
 
     public void successfulAdminToSuperAdminRoleChange() {
-        signInAsSuperAdmin();
-        employeesButton.click();
-        filterByRole("admin");
-        wait.until(ExpectedConditions.visibilityOf(table));
-        String userName = getEmployeeName();
-        String email = getEmail();
-        wait.until(ExpectedConditions.visibilityOf(table));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user_edit_" + userName)));
-        driver.findElement(By.id("user_edit_" + userName)).click();
-        wait.until(ExpectedConditions.visibilityOf(userRoleSelectList));
-        userRoleSelectList.click();
-        wait.until(ExpectedConditions.visibilityOf(superAdminRoleButton));
-        superAdminRoleButton.click();
-        wait.until(ExpectedConditions.visibilityOf(saveButton));
-        saveButton.click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
-        filterByEmail(email);
+        changeEmployeeRole("admin", "super_admin");
+        elementText=getTextFromElement(firstTableRow);
     }
 
     public void successfulUserToAdminRoleChange() {
-        signInAsSuperAdmin();
-        employeesButton.click();
-        filterByRole("user");
-        wait.until(ExpectedConditions.visibilityOf(table));
-        String userName = getEmployeeName();
-        String email = getEmail();
-        wait.until(ExpectedConditions.visibilityOf(table));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user_edit_" + userName)));
-        driver.findElement(By.id("user_edit_" + userName)).click();
-        wait.until(ExpectedConditions.visibilityOf(userRoleSelectList));
-        userRoleSelectList.click();
-        wait.until(ExpectedConditions.visibilityOf(adminRoleButton));
-        adminRoleButton.click();
-        wait.until(ExpectedConditions.visibilityOf(saveButton));
-        saveButton.click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
-        filterByEmail(email);
+        changeEmployeeRole("user", "admin");
+        elementText=getTextFromElement(firstTableRow);
     }
 }
