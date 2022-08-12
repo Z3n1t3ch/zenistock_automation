@@ -120,9 +120,6 @@ public class DriverFactory {
     @FindBy(id = "success_toaster")
     WebElement successToaster;
 
-    private String username;
-    private String email;
-
     public void pageToLoad(String pageUrl) {
         wait.until(ExpectedConditions.urlToBe(pageUrl));
     }
@@ -273,21 +270,30 @@ public class DriverFactory {
         employeesButton.click();
         filterByRole(initialRole);
         elementToLoad(employeesButton);
-        username = getEmployeeName();
-        email = getEmail();
+        String username = getEmployeeName();
+        String email = getEmail();
         elementToLoad(driver.findElement(By.id("user_edit_" + username)));
         driver.findElement(By.id("user_edit_" + username)).click();
         elementToLoad(userRoleSelectList);
         userRoleSelectList.click();
-        if (roleAfterEdit.equals("user")) {
-            elementToLoad(userRoleButton);
-            userRoleButton.click();
-        } else if (roleAfterEdit.equals("super_admin")) {
-            elementToLoad(superAdminRoleButton);
-            superAdminRoleButton.click();
-        } else if (roleAfterEdit.equals("admin")) {
-            elementToLoad(adminRoleButton);
-            adminRoleButton.click();
+        switch (roleAfterEdit) {
+            case "user": {
+                elementToLoad(userRoleButton);
+                userRoleButton.click();
+                break;
+            }
+            case "super_admin": {
+                elementToLoad(superAdminRoleButton);
+                superAdminRoleButton.click();
+                break;
+            }
+            case "admin": {
+                elementToLoad(adminRoleButton);
+                adminRoleButton.click();
+                break;
+            }
+            default:
+                break;
         }
         elementToLoad(saveButton);
         saveButton.click();

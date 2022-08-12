@@ -1,28 +1,27 @@
 package pageObjects;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static pageObjects.EmployeePage.elementText;
 
-public class EmployeePageTests extends BaseTest{
+public class EmployeePageTests extends BaseTest {
 
     @Test
-    public void successfulSuperAdminToUserRoleChange(){
+    public void successfulSuperAdminToUserRoleChange() {
         employeePage.successfulSuperAdminToUserRoleChange();
         Assert.assertTrue(elementText.contains("USER"));
 
     }
 
     @Test
-    public void successfulAdminToSuperAdminRoleChange(){
+    public void successfulAdminToSuperAdminRoleChange() {
         employeePage.successfulAdminToSuperAdminRoleChange();
         Assert.assertTrue(elementText.contains("SUPER_ADMIN"));
     }
 
     @Test
-    public void successfulUserToAdminRoleChange(){
+    public void successfulUserToAdminRoleChange() {
         employeePage.successfulUserToAdminRoleChange();
         Assert.assertTrue(elementText.contains("ADMIN"));
     }
