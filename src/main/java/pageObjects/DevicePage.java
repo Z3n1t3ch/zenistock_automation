@@ -10,7 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
-
 import java.text.ParseException;
 import static utils.Constants.DEVICE_DESCRIPTION;
 import static utils.RandomGenerator.randomDateBefore;
@@ -107,18 +106,21 @@ public class DevicePage extends DriverFactory {
     @FindBy(id = "device-table")
     WebElement deviceTable;
 
-
     @FindBy(id = "device-information-endWarranty")
     private WebElement endWarrantyField;
 
-    public void successfullyCreateDevice() {
-        signInAsAdmin();
+    public String fieldInTabel(){
+        return driver.findElement(By.id("device-table")).getText();
+    }
+
+    public boolean hasRequired(WebElement element){
+        return  Boolean.parseBoolean(element.getAttribute("required"));
+    }
+    public void fillAllFieldsDevice(){
         deviceName = randomName();
         serialNo = randomNumber();
         inventoryNo = randomNumber();
         invoiceNo = randomNumber();
-        devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOf(addDeviceButton));
         addDeviceButton.click();
         nameField.sendKeys(deviceName);
         serialNoField.sendKeys(serialNo + "");
@@ -132,128 +134,136 @@ public class DevicePage extends DriverFactory {
         locationsList.click();
         locationsRomaniaListElement.click();
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
-        wait.until(ExpectedConditions.invisibilityOf(successToaster));
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+    }
+
+    public void openColumns(WebElement element) {
+        columnsButton.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        elementToLoad(element);
+        element.click();
+        WebElement element2 = driver.switchTo().activeElement();
+        element2.sendKeys(Keys.ESCAPE);
+    }
+
+    public void openEdit(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
+        driver.findElement(By.id("device_edit_" + deviceName)).click();
+    }
+
+    public void openAssign(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
+        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_" + deviceName)));
+        driver.findElement(By.id("device_assign_" + deviceName)).click();
+    }
+    public void openInactiveDevice(){
+        filterByStatusInactive();
+        String inactiveDeviceName = getDeviceName();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + inactiveDeviceName)));
+        driver.findElement(By.id("device_dropdown_" + inactiveDeviceName)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_" + inactiveDeviceName)));
+        driver.findElement(By.id("device_assign_" + inactiveDeviceName)).click();
+    }
+
+    public void successfullyCreateDevice() {
+        signInAsAdmin();
+        devicesButton.click();
+        elementToLoad(addDeviceButton);
+        fillAllFieldsDevice();
+        elementToLoad(successToaster);
+        elementToDisappear(successToaster);
+        elementToLoad(filterButton);
         filterBySerialNo(serialNo + "");
     }
     public void successfullyEditADeviceName() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         nameField.clear();
         nameField.sendKeys(Constants.name);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        elementToLoad(successToaster);
         successEdit = successToaster.getText();
-        wait.until(ExpectedConditions.invisibilityOf(successToaster));
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToDisappear(successToaster);
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButtonClearAll));
+        elementToLoad(filterButtonClearAll);
         filterButtonClearAll.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterBySerialNo(serialNo + "");
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        pageToLoad(Constants.DEVICES_URL);
     }
     public void successfullyEditADeviceSerialNo() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         serialNoField.clear();
         serialNoField.sendKeys(Constants.number);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        elementToLoad(successToaster);
         successEdit = successToaster.getText();
-        wait.until(ExpectedConditions.invisibilityOf(successToaster));
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToDisappear(successToaster);
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButtonClearAll));
+        elementToLoad(filterButtonClearAll);
         filterButtonClearAll.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterBySerialNo(serialNo + "");
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        pageToLoad(Constants.DEVICES_URL);
     }
     public void successfullyEditADeviceInventoryNo() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         inventoryNoField.clear();
         inventoryNoField.sendKeys(Constants.number);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        elementToLoad(successToaster);
         successEdit = successToaster.getText();
-        wait.until(ExpectedConditions.invisibilityOf(successToaster));
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToDisappear(successToaster);
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButtonClearAll));
+        elementToLoad(filterButtonClearAll);
         filterButtonClearAll.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterBySerialNo(serialNo + "");
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
-        columnsButton.click();
-        wait.until(ExpectedConditions.visibilityOf(inventoryNoInColumns));
-        inventoryNoInColumns.click();
-        WebElement element = driver.switchTo().activeElement();
-        element.sendKeys(Keys.ESCAPE);
+        pageToLoad(Constants.DEVICES_URL);
+        openColumns(inventoryNoInColumns);
     }
 
     public void successfullyEditADeviceInvoiceNo() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         invoiceNoField.sendKeys(Keys.CONTROL + "a");
         invoiceNoField.sendKeys(Keys.DELETE);
         invoiceNoField.sendKeys(Constants.number);
-        System.out.println(serialNo);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        elementToLoad(successToaster);
         successEdit = successToaster.getText();
-        wait.until(ExpectedConditions.invisibilityOf(successToaster));
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToDisappear(successToaster);
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButtonClearAll));
+        elementToLoad(filterButtonClearAll);
         filterButtonClearAll.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterBySerialNo(serialNo + "");
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
-        columnsButton.click();
-        WebElement scroll = invoiceNoInColumns;
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
-        invoiceNoInColumns.click();
-        WebElement element = driver.switchTo().activeElement();
-        element.sendKeys(Keys.ESCAPE);
-        wait.until(ExpectedConditions.visibilityOf(deviceTable));
+        pageToLoad(Constants.DEVICES_URL);
+        openColumns(invoiceNoInColumns);
+        elementToLoad(deviceTable);
     }
 
     public void successfullyEditDescription() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         descriptionField.clear();
         descriptionField.sendKeys(randomName());
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        elementToLoad(successToaster);
     }
 
     public void createDeviceWithoutName() {
         signInAsAdmin();
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
@@ -263,21 +273,17 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceWithoutName() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         nameField.clear();
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void createDeviceWithoutSerialNo() {
         signInAsAdmin();
-        wait.until(ExpectedConditions.visibilityOf(devicesButton));
+        elementToLoad(devicesButton);
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         inventoryNoField.sendKeys(inventoryNo + "");
@@ -287,20 +293,17 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceWithoutSerialNo() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
+        openEdit();
         serialNoField.clear();
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void createDeviceWithoutInventoryNo() {
         signInAsAdmin();
-        wait.until(ExpectedConditions.visibilityOf(devicesButton));
+        elementToLoad(devicesButton);
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
@@ -310,20 +313,16 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceWithoutInventoryNo() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         inventoryNoField.clear();
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void createDeviceWithoutInvoiceNo() {
         signInAsAdmin();
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
@@ -333,124 +332,104 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceWithoutInvoiceNo() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         invoiceNoField.clear();
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void createDeviceWithWhiteSpacesNameField() {
         signInAsAdmin();
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(Constants.DEVICE_NAME_WS);
         serialNoField.sendKeys(deviceName + "");
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void editDeviceWithWhiteSpacesNameField() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         nameField.clear();
         nameField.sendKeys(Constants.DEVICE_NAME_WS);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void createDeviceWithWhiteSpaceSerialNoField() {
         signInAsAdmin();
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(Constants.DEVICE_SERIAL_NO_WS);
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void editDeviceWithWhiteSpaceSerialNoField() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         serialNoField.clear();
         serialNoField.sendKeys(Constants.DEVICE_SERIAL_NO_WS);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void createDeviceWithWhiteSpaceInventoryNoField() {
         signInAsAdmin();
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOf(addDeviceButton));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(Constants.DEVICE_INVENTORY_NO_WS);
         invoiceNoField.sendKeys(invoiceNo + "");
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void editDeviceWithWhiteSpaceInventoryNo() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         inventoryNoField.clear();
         inventoryNoField.sendKeys(Constants.DEVICE_INVENTORY_NO_WS);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void createDeviceWithWhiteSpaceInvoiceNoField() {
         signInAsAdmin();
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOf(addDeviceButton));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(Constants.DEVICE_INVOICE_NO_WS);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void editDeviceWithWhiteSpaceInvoiceNo() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         invoiceNoField.clear();
         invoiceNoField.sendKeys(Constants.DEVICE_INVOICE_NO_WS);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void createDeviceWithWhiteSpaceDescriptionField() {
         signInAsAdmin();
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
@@ -458,165 +437,132 @@ public class DevicePage extends DriverFactory {
         invoiceNoField.sendKeys(invoiceNo + "");
         descriptionField.sendKeys(Constants.DEVICE_DESCRIPTION_WS);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void editDeviceWithWhiteSpaceDescriptionField() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         descriptionField.clear();
         descriptionField.sendKeys(Constants.DEVICE_DESCRIPTION_WS);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void createDeviceTooLongName() {
         signInAsAdmin();
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(Constants.DEVICE_NAME_TOO_LONG);
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void editDeviceTooLongName() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         nameField.clear();
         nameField.sendKeys(Constants.DEVICE_NAME_TOO_LONG);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void createDeviceTooLongSerialNo() {
         signInAsAdmin();
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOf(addDeviceButton));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(Constants.DEVICE_NUMBER_OVER_30_CHAR);
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(invoiceNo + "");
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void editDeviceTooLongSerialNo() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         serialNoField.clear();
         serialNoField.sendKeys((Constants.DEVICE_NUMBER_OVER_30_CHAR));
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+       elementToLoad(errorToaster);
     }
 
     public void createDeviceTooLongInventoryNo() {
         signInAsAdmin();
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(Constants.DEVICE_NUMBER_OVER_30_CHAR);
         invoiceNoField.sendKeys(invoiceNo + "");
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void editDeviceTooLongInventoryNo() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         inventoryNoField.clear();
         inventoryNoField.sendKeys((Constants.DEVICE_NUMBER_OVER_30_CHAR));
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void createDeviceTooLongInvoiceNo() {
         signInAsAdmin();
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOf(addDeviceButton));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(deviceName + "");
         serialNoField.sendKeys(serialNo + "");
         inventoryNoField.sendKeys(inventoryNo + "");
         invoiceNoField.sendKeys(Constants.DEVICE_NUMBER_OVER_30_CHAR);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void editDeviceTooLongInvoiceNo() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         invoiceNoField.clear();
         invoiceNoField.sendKeys((Constants.DEVICE_NUMBER_OVER_30_CHAR));
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     // The Invoice Date Field has a bug, this method will work after repair
     public void successfullyEditInvoiceDate() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         invoiceDateField.sendKeys(Keys.CONTROL + "a");
         invoiceNoField.sendKeys(Keys.DELETE);
         invoiceDateField.sendKeys(Constants.INVOICE_DATE);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        elementToLoad(successToaster);
         successEdit = successToaster.getText();
-        wait.until(ExpectedConditions.invisibilityOf(successToaster));
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToDisappear(successToaster);
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButtonClearAll));
+        elementToLoad(filterButtonClearAll);
         filterButtonClearAll.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterBySerialNo(serialNo + "");
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
-        columnsButton.click();
-        WebElement scroll = invoiceDateInColumns;
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
-        invoiceDateInColumns.click();
-        WebElement element = driver.switchTo().activeElement();
-        element.sendKeys(Keys.ESCAPE);
-        wait.until(ExpectedConditions.visibilityOf(deviceTable));
+        pageToLoad(Constants.DEVICES_URL);
+        openColumns(invoiceDateInColumns);
+        elementToLoad(deviceTable);
     }
 
     // The Warranty Dates Fields have a bug, this method will work after repair
     public void successfullyEditStartDateAndEndDate() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         startDateWarrantyField.click();
         startDateWarrantyField.sendKeys(Keys.CONTROL + "a");
         startDateWarrantyField.sendKeys(Keys.DELETE);
@@ -626,101 +572,73 @@ public class DevicePage extends DriverFactory {
         endDateWarrantyField.sendKeys(Keys.DELETE);
         endDateWarrantyField.sendKeys(Constants.WARRANTY_END_DATE);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        elementToLoad(successToaster);
         successEdit = successToaster.getText();
-        wait.until(ExpectedConditions.invisibilityOf(successToaster));
-        columnsButton.click();
-        WebElement scroll = warrantyStartDateInColumns;
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
-        wait.until(ExpectedConditions.visibilityOf(warrantyStartDateInColumns));
-        warrantyStartDateInColumns.click();
-        wait.until(ExpectedConditions.visibilityOf(warrantyEndDateInColumns));
-        warrantyEndDateInColumns.click();
-        WebElement element = driver.switchTo().activeElement();
-        element.sendKeys(Keys.ESCAPE);
-        wait.until(ExpectedConditions.visibilityOf(deviceTable));
+        elementToDisappear(successToaster);
+        openColumns(warrantyStartDateInColumns);
+        openColumns(warrantyEndDateInColumns);
+        elementToLoad(deviceTable);
     }
 
     public void editEndDateToBeEarlierThenStartDate() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICE_DETAILS));
+        openEdit();
         endDateWarrantyField.click();
         endDateWarrantyField.sendKeys(Keys.CONTROL + "a");
         endDateWarrantyField.sendKeys(Keys.DELETE);
         endDateWarrantyField.sendKeys(Constants.WARRANTY_END_DATE_ERROR);
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(errorToaster));
+        elementToLoad(errorToaster);
     }
 
     public void successfullyAssignDevice() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_" + deviceName)));
-        driver.findElement(By.id("device_assign_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_user")));
+        openAssign();
+        elementToLoad(assignUserButton);
         assignUserButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_user-option-0")));
+        elementToLoad(firstUserInList);
         firstUserInList.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_update")));
+        elementToLoad(assignUpdateButton);
         assignUpdateButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+        elementToLoad(successToaster);
+        elementToDisappear(successToaster);
 
     }
 
     public void succesfullyUnAssignDevice() {
         successfullyAssignDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_" + deviceName)));
-        driver.findElement(By.id("device_assign_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOf(assignUpdateButton));
+        openAssign();
+        elementToLoad(assignUpdateButton);
         assignUpdateButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+        elementToLoad(successToaster);
+        elementToDisappear(successToaster);
     }
 
     public void assignDeviceWithoutUser() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_" + deviceName)));
-        driver.findElement(By.id("device_assign_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOf(assignUpdateButton));
+        openAssign();
+        elementToLoad(assignUpdateButton);
         assignUpdateButton.click();
     }
 
     public void assignDeviceInactiveStatus() {
         signInAsAdmin();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-devices-mButton")));
+        elementToLoad(devicesButton);
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
-        filterByStatusInactive();
-        String inactiveDeviceName = getDeviceName();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + inactiveDeviceName)));
-        driver.findElement(By.id("device_dropdown_" + inactiveDeviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_" + inactiveDeviceName)));
-        driver.findElement(By.id("device_assign_" + inactiveDeviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_user")));
+        elementToLoad(filterButton);
+        openInactiveDevice();
+        elementToLoad(assignUserButton);
         assignUserButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_user-option-0")));
+        elementToLoad(firstUserInList);
         firstUserInList.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign_update")));
+        elementToLoad(assignUpdateButton);
         assignUpdateButton.click();
     }
 
     public void deleteDevice() {
         successfullyCreateDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + deviceName)));
-        driver.findElement(By.id("device_delete_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOf(successToaster));
+        openAssign();
+        elementToLoad(successToaster);
     }
 
     public void successfullyDeleteAssignedDevice() {
@@ -729,22 +647,17 @@ public class DevicePage extends DriverFactory {
         driver.findElement(By.id("device_dropdown_" + deviceName)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + deviceName)));
         driver.findElement(By.id("device_delete_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("success_toaster")));
+        elementToLoad(successToaster);
+        elementToDisappear(successToaster);
     }
 
     public void deleteInactiveDevice() {
         signInAsAdmin();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-devices-mButton")));
+        elementToLoad(devicesButton);
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("filter_device_button")));
-        filterByStatusInactive();
-        String inactiveDeviceName = getDeviceName();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + inactiveDeviceName)));
-        driver.findElement(By.id("device_dropdown_" + inactiveDeviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + inactiveDeviceName)));
-        driver.findElement(By.id("device_delete_" + inactiveDeviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("success_toaster")));
+        elementToLoad(filterButton);
+        openInactiveDevice();
+        elementToLoad(successToaster);
     }
 
     public void createDeviceInvalidWarrantyEndDate() {
@@ -753,9 +666,9 @@ public class DevicePage extends DriverFactory {
         serialNo = randomNumber();
         inventoryNo = randomNumber();
         invoiceNo = randomNumber();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("undefined-devices-mButton")));
+        elementToLoad(devicesButton);
         devicesButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_device_button")));
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(deviceName);
         serialNoField.sendKeys(serialNo + "");
@@ -777,7 +690,7 @@ public class DevicePage extends DriverFactory {
         locationsList.click();
         locationsRomaniaListElement.click();
         saveDeviceButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("error_toaster")));
+        elementToLoad(errorToaster);
     }
 
 }
