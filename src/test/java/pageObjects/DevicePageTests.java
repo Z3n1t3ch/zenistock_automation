@@ -17,29 +17,25 @@ public class DevicePageTests extends BaseTest {
     public void successfullyEditADeviceName() {
         devicePage.successfullyEditADeviceName();
         Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
-        String field = driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(field.contains(Constants.name));
+        Assert.assertTrue(devicePage.fieldInTabel().contains(Constants.name));
     }
     @Test
     public void successfullyEditADeviceSerialNo() {
         devicePage.successfullyEditADeviceSerialNo();
         Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
-        String field = driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(field.contains(Constants.number));
+        Assert.assertTrue(devicePage.fieldInTabel().contains(Constants.number));
     }
     @Test
     public void successfullyEditADeviceInventoryNo() {
         devicePage.successfullyEditADeviceInventoryNo();
         Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
-        String field = driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(field.contains(Constants.number));
+        Assert.assertTrue(devicePage.fieldInTabel().contains(Constants.number));
     }
     @Test
     public void successfullyEditADeviceInvoiceNo() {
         devicePage.successfullyEditADeviceInvoiceNo();
         Assert.assertEquals(devicePage.successEdit, "Item updated successfully!");
-        String field = driver.findElement(By.id("device-table")).getText();
-        Assert.assertTrue(field.contains(Constants.number));
+        Assert.assertTrue(devicePage.fieldInTabel().contains(Constants.number));
     }
     @Test
     public void successfullyEditDescription() {
@@ -50,50 +46,42 @@ public class DevicePageTests extends BaseTest {
     @Test
     public void createDeviceEmptyName() {
         devicePage.createDeviceWithoutName();
-        boolean requiredNameField = Boolean.parseBoolean(driver.findElement(By.id("device-information-name")).getAttribute("required"));
-        Assert.assertTrue(requiredNameField);
+        Assert.assertTrue(devicePage.hasRequired(devicePage.nameField));
     }
     @Test
     public void editDeviceWithoutName() {
         devicePage.editDeviceWithoutName();
-        boolean requiredNameField = Boolean.parseBoolean(driver.findElement(By.id("device-information-name")).getAttribute("required"));
-        Assert.assertTrue(requiredNameField);
+        Assert.assertTrue(devicePage.hasRequired(devicePage.nameField));
     }
     @Test
     public void createDeviceEmptySerialNo() {
         devicePage.createDeviceWithoutSerialNo();
-        boolean requireSerialNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-serialNo")).getAttribute("required"));
-        Assert.assertTrue(requireSerialNoField);
+        Assert.assertTrue(devicePage.hasRequired(devicePage.serialNoField));
     }
     @Test
     public void editDeviceWithoutSerialNo() {
         devicePage.editDeviceWithoutSerialNo();
-        boolean requireSerialNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-serialNo")).getAttribute("required"));
-        Assert.assertTrue(requireSerialNoField);
+        Assert.assertTrue(devicePage.hasRequired(devicePage.serialNoField));
     }
     @Test
     public void createDeviceEmptyInventoryNo() {
         devicePage.createDeviceWithoutInventoryNo();
-        boolean requireInventoryNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-inventoryNo")).getAttribute("required"));
-        Assert.assertTrue(requireInventoryNoField);
+        Assert.assertTrue(devicePage.hasRequired(devicePage.inventoryNoField));
     }
     @Test
     public void editDeviceWithoutInventoryNo() {
         devicePage.editDeviceWithoutInventoryNo();
-        boolean requireInventoryNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-inventoryNo")).getAttribute("required"));
-        Assert.assertTrue(requireInventoryNoField);
+        Assert.assertTrue(devicePage.hasRequired(devicePage.inventoryNoField));
     }
     @Test
     public void createDeviceEmptyInvoiceNo() {
         devicePage.createDeviceWithoutInvoiceNo();
-        boolean requireInvoiceNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-invoiceNo")).getAttribute("required"));
-        Assert.assertTrue(requireInvoiceNoField);
+        Assert.assertTrue(devicePage.hasRequired(devicePage.invoiceNoField));
     }
     @Test
     public void editDeviceWithoutInvoiceNo() {
         devicePage.editDeviceWithoutInvoiceNo();
-        boolean requireInvoiceNoField = Boolean.parseBoolean(driver.findElement(By.id("device-information-invoiceNo")).getAttribute("required"));
-        Assert.assertTrue(requireInvoiceNoField);
+        Assert.assertTrue(devicePage.hasRequired(devicePage.invoiceNoField));
     }
     @Test
     public void createDeviceWhiteSpaceNameField() {
