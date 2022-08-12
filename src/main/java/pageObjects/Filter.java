@@ -1,10 +1,11 @@
 package pageObjects;
 
 import driver.DriverFactory;
-import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
 
 public class Filter extends DriverFactory {
@@ -45,137 +46,146 @@ public class Filter extends DriverFactory {
     WebElement filterTagsOption;
     @FindBy(id = "device-filter-clearButton")
     WebElement clearAllButton;
+    @FindBy(id = "device-table")
+    WebElement deviceTable;
+    @FindBy(id = "device-table-row-0")
+    WebElement firstTableRow;
 
+    public static String elementText;
 
     public void filterBySubcategory() {
         signInAsSuperAdmin();
         deviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(subcategoryList));
+        elementToLoad(subcategoryList);
         subcategoryList.click();
-        wait.until(ExpectedConditions.visibilityOf(laptopOption));
+        elementToLoad(laptopOption);
         laptopOption.click();
-        wait.until(ExpectedConditions.visibilityOf(applyButton));
+        elementToLoad(applyButton);
         applyButton.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void filterByName() {
         signInAsSuperAdmin();
         deviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterName));
-        filterName.click();
+        elementToLoad(filterName);
         filterName.sendKeys("0");
-        wait.until(ExpectedConditions.visibilityOf(applyButton));
+        elementToLoad(applyButton);
         applyButton.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(firstTableRow);
     }
 
     public void filterBySerialNo() {
         signInAsSuperAdmin();
         deviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterSerialNo));
-        filterSerialNo.click();
+        elementToLoad(filterSerialNo);
         filterSerialNo.sendKeys("356");
-        wait.until(ExpectedConditions.visibilityOf(applyButton));
+        elementToLoad(applyButton);
         applyButton.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void filterByInventoryNo() {
         signInAsSuperAdmin();
         deviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(deviceButton));
+        elementToLoad(deviceButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterInventoryNo));
-        filterInventoryNo.click();
+        elementToLoad(filterInventoryNo);
         filterInventoryNo.sendKeys("11");
-        wait.until(ExpectedConditions.visibilityOf(applyButton));
+        elementToLoad(applyButton);
         applyButton.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void filterByAssignTo() {
         signInAsSuperAdmin();
         deviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterAssignee));
+        elementToLoad(filterAssignee);
         filterAssignee.click();
-        wait.until(ExpectedConditions.visibilityOf(assignedToOption));
+        elementToLoad(assignedToOption);
         assignedToOption.click();
-        wait.until(ExpectedConditions.visibilityOf(applyButton));
+        elementToLoad(applyButton);
         applyButton.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void filterByStatus() {
         signInAsSuperAdmin();
         deviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterStatus));
+        elementToLoad(filterStatus);
         filterStatus.click();
-        wait.until(ExpectedConditions.visibilityOf(filterStatusOption));
+        elementToLoad(filterStatusOption);
         filterStatusOption.click();
-        wait.until(ExpectedConditions.visibilityOf(applyButton));
+        elementToLoad(applyButton);
         applyButton.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void filterByTags() {
         signInAsSuperAdmin();
         deviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterButton.click();
-        WebElement scroll = driver.findElement(By.id("device-filter-status-autocomplete"));
+        WebElement scroll = filterStatus;
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
-        wait.until(ExpectedConditions.visibilityOf(filterTags));
+        elementToLoad(filterTags);
         filterTags.click();
-        wait.until(ExpectedConditions.visibilityOf(filterTagsOption));
+        elementToLoad(filterTagsOption);
         filterTagsOption.click();
-        wait.until(ExpectedConditions.visibilityOf(applyButton));
+        elementToLoad(applyButton);
         applyButton.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void filterBySubcategoryAndName() {
         signInAsSuperAdmin();
         deviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(subcategoryList));
+        elementToLoad(subcategoryList);
         subcategoryList.click();
-        wait.until(ExpectedConditions.visibilityOf(laptopOption));
+        elementToLoad(laptopOption);
         laptopOption.click();
-        wait.until(ExpectedConditions.visibilityOf(filterName));
-        filterName.click();
+        elementToLoad(filterName);
         filterName.sendKeys("0");
-        wait.until(ExpectedConditions.visibilityOf(applyButton));
+        elementToLoad(applyButton);
         applyButton.click();
-        wait.until(ExpectedConditions.urlToBe(Constants.DEVICES_URL));
+        pageToLoad(Constants.DEVICES_URL);
+        elementText = getTextFromElement(deviceTable);
     }
 
     public void clearAllFilterFieldsButton() {
         signInAsSuperAdmin();
         deviceButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterName));
-        filterName.click();
+        elementToLoad(filterName);
         filterName.sendKeys(Constants.NAME);
-        wait.until(ExpectedConditions.visibilityOf(applyButton));
+        elementToLoad(applyButton);
         applyButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterButton.click();
-        wait.until(ExpectedConditions.visibilityOf(clearAllButton));
+        elementToLoad(clearAllButton);
         clearAllButton.click();
-        wait.until(ExpectedConditions.visibilityOf(filterButton));
+        elementToLoad(filterButton);
         filterButton.click();
+        elementText = getTextFromElement(filterName);
     }
 }
