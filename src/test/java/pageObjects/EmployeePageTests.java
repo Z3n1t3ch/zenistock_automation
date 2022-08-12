@@ -1,30 +1,28 @@
 package pageObjects;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EmployeePageTests extends BaseTest{
+import static pageObjects.EmployeePage.elementText;
+
+public class EmployeePageTests extends BaseTest {
 
     @Test
-    public void successfulSuperAdminToUserRoleChange(){
+    public void successfulSuperAdminToUserRoleChange() {
         employeePage.successfulSuperAdminToUserRoleChange();
-        String employeeRowText = driver.findElement(By.id("undefined-table-row-0")).getText();
-        Assert.assertTrue(employeeRowText.contains("USER"));
+        Assert.assertTrue(elementText.contains("USER"));
 
     }
 
     @Test
-    public void successfulAdminToSuperAdminRoleChange(){
+    public void successfulAdminToSuperAdminRoleChange() {
         employeePage.successfulAdminToSuperAdminRoleChange();
-        String employeeRowText = driver.findElement(By.id("undefined-table-row-0")).getText();
-        Assert.assertTrue(employeeRowText.contains("SUPER_ADMIN"));
+        Assert.assertTrue(elementText.contains("SUPER_ADMIN"));
     }
 
     @Test
-    public void successfulUserToAdminRoleChange(){
+    public void successfulUserToAdminRoleChange() {
         employeePage.successfulUserToAdminRoleChange();
-        String employeeRowText = driver.findElement(By.id("undefined-table-row-0")).getText();
-        Assert.assertTrue(employeeRowText.contains("ADMIN"));
+        Assert.assertTrue(elementText.contains("ADMIN"));
     }
 }

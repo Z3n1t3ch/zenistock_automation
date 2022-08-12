@@ -8,8 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
+
 import static utils.RandomGenerator.randomName;
 import static utils.RandomGenerator.randomNumber;
+
 import utils.Credentials;
 
 public class DriverFactory {
@@ -96,6 +98,28 @@ public class DriverFactory {
     @FindBy(id = "device-saveBtn")
     private WebElement deviceSaveButton;
 
+    @FindBy(id = "undefined-employees-mButton")
+    WebElement employeesButton;
+
+    @FindBy(id = "user-role-selectList")
+    WebElement userRoleSelectList;
+
+    @FindBy(id = "user-role-selectList-user")
+    WebElement userRoleButton;
+
+    @FindBy(id = "user-role-selectList-admin")
+    WebElement adminRoleButton;
+
+    @FindBy(id = "user-role-selectList-super_admin")
+    WebElement superAdminRoleButton;
+
+    @FindBy(id = "user-saveBtn")
+    WebElement saveButton;
+
+
+    @FindBy(id = "success_toaster")
+    WebElement successToaster;
+
     public void pageToLoad(String pageUrl) {
         wait.until(ExpectedConditions.urlToBe(pageUrl));
     }
@@ -115,6 +139,7 @@ public class DriverFactory {
         signInButton.click();
         pageToLoad(Constants.dashboard);
     }
+
     public void signInAsAdmin() {
         driver.get(Constants.login);
         usernameField.sendKeys(Credentials.usernameAdminRole);
@@ -238,5 +263,40 @@ public class DriverFactory {
         elementToLoad(addLicenseButton);
         addLicenseButton.click();
         pageToLoad(Constants.LICENSE_DETAILS_URL);
+    }
+
+    public void changeEmployeeRole(String initialRole, String roleAfterEdit) {
+        employeesButton.click();
+        filterByRole(initialRole);
+        elementToLoad(employeesButton);
+        String username = getEmployeeName();
+        String email = getEmail();
+        elementToLoad(driver.findElement(By.id("user_edit_" + username)));
+        driver.findElement(By.id("user_edit_" + username)).click();
+        elementToLoad(userRoleSelectList);
+        userRoleSelectList.click();
+        switch (roleAfterEdit) {
+            case "user": {
+                elementToLoad(userRoleButton);
+                userRoleButton.click();
+                break;
+            }
+            case "super_admin": {
+                elementToLoad(superAdminRoleButton);
+                superAdminRoleButton.click();
+                break;
+            }
+            case "admin": {
+                elementToLoad(adminRoleButton);
+                adminRoleButton.click();
+                break;
+            }
+            default:
+                break;
+        }
+        elementToLoad(saveButton);
+        saveButton.click();
+        elementToLoad(successToaster);
+        filterByEmail(email);
     }
 }
