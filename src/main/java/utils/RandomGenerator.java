@@ -12,7 +12,7 @@ public class RandomGenerator {
     private static Random random = new Random();
 
     public static int randomNumber() {
-        return random.nextInt(10000);
+        return random.nextInt(1000000);
     }
 
     public static String randomName() {

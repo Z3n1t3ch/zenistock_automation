@@ -1,10 +1,7 @@
 package driver;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Constants;
@@ -23,78 +20,119 @@ public class DriverFactory {
     }
 
     @FindBy(id = "username")
-    private WebElement usernameField;
+    WebElement usernameField;
     @FindBy(id = "password")
-    private WebElement passwordField;
+    WebElement passwordField;
     @FindBy(id = "log-in-button")
-    private WebElement signInButton;
+    WebElement signInButton;
     @FindBy(id = "filter-button")
-    private WebElement filterButtonEmployee;
+    WebElement filterButtonEmployee;
     @FindBy(id = "user-filter-filter-apply-button")
-    private WebElement applyFilterButtonEmployee;
+    WebElement applyFilterButtonEmployee;
     @FindBy(id = "filter_device_button")
-    private WebElement filterDeviceButton;
+    WebElement filterDeviceButton;
     @FindBy(id = "device-filter-apply-button")
-    private WebElement deviceFilterApplyButton;
+    WebElement deviceFilterApplyButton;
     @FindBy(id = "device-filter-serialNo")
-    private WebElement deviceFilterSerialNo;
+    WebElement deviceFilterSerialNo;
     @FindBy(id = "device-filter-status-autocomplete")
-    private WebElement deviceFilterStatusAutocomplete;
+    WebElement deviceFilterStatusAutocomplete;
     @FindBy(id = "device-filter-status-autocomplete-option-2")
-    private WebElement deviceFilterStatusAutocompleteOption2;
+    WebElement deviceFilterStatusAutocompleteOption2;
     @FindBy(id = "device-table-row-0")
-    private WebElement deviceTableRow0;
+    WebElement deviceTableRow0;
     @FindBy(id = "undefined-table-row-0")
-    private WebElement undefinedTableRow0;
+    WebElement undefinedTableRow0;
     @FindBy(id = "user-filter-filter-role-selectList")
-    private WebElement userFilterFilterRoleSelectList;
+    WebElement userFilterFilterRoleSelectList;
     @FindBy(id = "user-filter-filter-role-selectList-user")
-    private WebElement userFilterFilterRoleSelectListUser;
+    WebElement userFilterFilterRoleSelectListUser;
     @FindBy(id = "user-filter-filter-role-selectList-admin")
-    private WebElement userFilterFilterRoleSelectListAdmin;
+    WebElement userFilterFilterRoleSelectListAdmin;
     @FindBy(id = "user-filter-filter-role-selectList-super_admin")
-    private WebElement userFilterFilterRoleSelectListSuperAdmin;
+    WebElement userFilterFilterRoleSelectListSuperAdmin;
     @FindBy(id = "user-filter-filter-clearButton")
-    private WebElement userFilterFilterClearButton;
+    WebElement userFilterFilterClearButton;
     @FindBy(id = "user-filter-filter-email")
-    private WebElement userFilterFilterEmail;
+    WebElement userFilterFilterEmail;
     @FindBy(id = "device-table-row-0-button-audit")
-    private WebElement deviceTableRow0ButtonAudit;
+    WebElement deviceTableRow0ButtonAudit;
     @FindBy(className = "MuiCollapse-wrapper")
-    private WebElement muiCollapseWrapper;
+    WebElement muiCollapseWrapper;
     @FindBy(className = "MuiTableRow-root")
-    private WebElement muiTableRowRoot;
+    WebElement muiTableRowRoot;
     @FindBy(id = "undefined-licenses-mButton")
-    private WebElement licenseButton;
+    WebElement licenseButton;
     @FindBy(id = "add-license")
-    private WebElement addLicenseButton;
+    WebElement addLicenseButton;
 
     @FindBy(id = "undefined-devices-mButton")
-    private WebElement devicePageButton;
+    WebElement devicePageButton;
 
     @FindBy(id = "add_device_button")
-    private WebElement addDeviceButton;
+    WebElement addDeviceButton;
 
     @FindBy(id = "device-information-name")
-    private WebElement deviceNameField;
+    WebElement deviceNameField;
 
     @FindBy(id = "device-information-serialNo")
-    private WebElement deviceSerialNoField;
+    WebElement deviceSerialNoField;
 
     @FindBy(id = "device-information-inventoryNo")
-    private WebElement deviceInventoryNoField;
+    WebElement deviceInventoryNoField;
 
     @FindBy(id = "device-information-invoiceNo")
-    private WebElement deviceInvoiceNoField;
+    WebElement deviceInvoiceNoField;
 
     @FindBy(id = "tags")
-    private WebElement tagsField;
+    WebElement tagsField;
 
     @FindBy(id = "tags-option-0")
-    private WebElement firstTagElement;
+    WebElement firstTagElement;
 
     @FindBy(id = "device-saveBtn")
-    private WebElement deviceSaveButton;
+    WebElement deviceSaveButton;
+    @FindBy(xpath = "//*[text()='Columns']")
+    WebElement columnsButton;
+    @FindBy(id = "device-information-name")
+    WebElement nameField;
+    @FindBy(id = "device-information-serialNo")
+    WebElement serialNoField;
+    @FindBy(id = "device-information-inventoryNo")
+    WebElement inventoryNoField;
+    @FindBy(id = "device-information-invoiceNo")
+    WebElement invoiceNoField;
+    @FindBy(id = "device-information-description")
+    WebElement descriptionField;
+    @FindBy(id = "device-tags-subcategory-selectList")
+    WebElement subcategoryList;
+    @FindBy(id = "tags")
+    WebElement tagsList;
+    @FindBy(id = "device-locations-selectList")
+    WebElement locationsList;
+    @FindBy(id = "device-saveBtn")
+    WebElement saveDeviceButton;
+    @FindBy(id = "device-tags-subcategory-selectList-laptop")
+    WebElement subcategoryLaptopListElement;
+    @FindBy(id = "tags-option-0")
+    WebElement tagsListElement;
+    @FindBy(id = "device-locations-selectList-romania")
+    WebElement locationsRomaniaListElement;
+
+    public String deviceName;
+    public int serialNo;
+    public int inventoryNo;
+    public int invoiceNo;
+    public String deviceDropdown = "device_dropdown_";
+
+    public String editDevice = "device_edit_";
+
+    public String assignDevice = "device_assign_";
+
+    public String deleteDevice = "device_delete_";
+
+    public String message;
+    String inactiveDeviceName = getDeviceName();
 
     public void pageToLoad(String pageUrl) {
         wait.until(ExpectedConditions.urlToBe(pageUrl));
@@ -102,6 +140,10 @@ public class DriverFactory {
 
     public void elementToLoad(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void elementToLoadForComposedElements (String element){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(element)));
     }
 
     public void elementToDisappear(WebElement element) {
@@ -228,7 +270,6 @@ public class DriverFactory {
     }
 
     public String getTextFromElement(WebElement element) {
-
         return element.getText();
     }
 
@@ -238,5 +279,70 @@ public class DriverFactory {
         elementToLoad(addLicenseButton);
         addLicenseButton.click();
         pageToLoad(Constants.LICENSE_DETAILS_URL);
+    }
+    public String getTextFromTable(){
+        return driver.findElement(By.id("device-table")).getText();
+    }
+
+    public boolean hasRequired(WebElement element){
+        return  Boolean.parseBoolean(element.getAttribute("required"));
+    }
+    public void fillAllFieldsDevice(){
+        deviceName = randomName();
+        serialNo = randomNumber();
+        inventoryNo = randomNumber();
+        invoiceNo = randomNumber();
+        addDeviceButton.click();
+        nameField.sendKeys(deviceName);
+        serialNoField.sendKeys(serialNo + "");
+        inventoryNoField.sendKeys(inventoryNo + "");
+        invoiceNoField.sendKeys(invoiceNo + "");
+        descriptionField.sendKeys(Constants.DEVICE_DESCRIPTION);
+        subcategoryList.click();
+        subcategoryLaptopListElement.click();
+        tagsList.click();
+        tagsListElement.click();
+        locationsList.click();
+        locationsRomaniaListElement.click();
+        saveDeviceButton.click();
+    }
+    public void fillAllMandatoryFields(WebElement field){
+        deviceName = randomName();
+        serialNo = randomNumber();
+        inventoryNo = randomNumber();
+        invoiceNo = randomNumber();
+        addDeviceButton.click();
+        nameField.sendKeys(deviceName);
+        serialNoField.sendKeys(serialNo + "");
+        inventoryNoField.sendKeys(inventoryNo + "");
+        invoiceNoField.sendKeys(invoiceNo + "");
+        clearField(field);
+    }
+
+
+    public void openColumns(WebElement element) {
+        columnsButton.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        elementToLoad(element);
+        element.click();
+        WebElement closeColumns = driver.switchTo().activeElement();
+        closeColumns.sendKeys(Keys.ESCAPE);
+    }
+
+    public void openThreeDotsOptions(String dropdown, String option){
+        dropdown = deviceDropdown + deviceName;
+        elementToLoadForComposedElements(dropdown);
+        driver.findElement(By.id(dropdown)).click();
+        option = option + deviceName;
+        elementToLoadForComposedElements(option);
+        driver.findElement(By.id(option)).click();
+    }
+    public void openThreeDotsOptionsForInactive(String dropdown, String inactive){
+        dropdown = deviceDropdown + inactiveDeviceName;
+        elementToLoadForComposedElements(dropdown);
+        driver.findElement(By.id(dropdown)).click();
+        inactive = assignDevice + inactiveDeviceName;
+        elementToLoadForComposedElements(inactive);
+        driver.findElement(By.id(inactive)).click();
     }
 }

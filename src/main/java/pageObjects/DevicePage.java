@@ -2,7 +2,6 @@ package pageObjects;
 
 import driver.DriverFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,12 +17,6 @@ import static utils.RandomGenerator.randomNumber;
 
 
 public class DevicePage extends DriverFactory {
-
-    private String deviceName;
-    private int serialNo;
-    private int inventoryNo;
-    private int invoiceNo;
-    String successEdit;
 
     public DevicePage(WebDriver driver) {
 
@@ -74,9 +67,6 @@ public class DevicePage extends DriverFactory {
     @FindBy(id = "device-information-endWarranty")
     WebElement endDateWarrantyField;
 
-    @FindBy(xpath = "//*[text()='Columns']")
-    WebElement columnsButton;
-
     @FindBy(xpath = "//*[text()='Inventory no']")
     WebElement inventoryNoInColumns;
 
@@ -107,65 +97,7 @@ public class DevicePage extends DriverFactory {
     WebElement deviceTable;
 
     @FindBy(id = "device-information-endWarranty")
-    private WebElement endWarrantyField;
-
-    public String fieldInTabel(){
-        return driver.findElement(By.id("device-table")).getText();
-    }
-
-    public boolean hasRequired(WebElement element){
-        return  Boolean.parseBoolean(element.getAttribute("required"));
-    }
-    public void fillAllFieldsDevice(){
-        deviceName = randomName();
-        serialNo = randomNumber();
-        inventoryNo = randomNumber();
-        invoiceNo = randomNumber();
-        addDeviceButton.click();
-        nameField.sendKeys(deviceName);
-        serialNoField.sendKeys(serialNo + "");
-        inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(invoiceNo + "");
-        descriptionField.sendKeys(Constants.DEVICE_DESCRIPTION);
-        subcategoryList.click();
-        subcategoryLaptopListElement.click();
-        tagsList.click();
-        tagsListElement.click();
-        locationsList.click();
-        locationsRomaniaListElement.click();
-        saveDeviceButton.click();
-    }
-
-    public void openColumns(WebElement element) {
-        columnsButton.click();
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        elementToLoad(element);
-        element.click();
-        WebElement element2 = driver.switchTo().activeElement();
-        element2.sendKeys(Keys.ESCAPE);
-    }
-
-    public void openEdit(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_edit_" + deviceName)));
-        driver.findElement(By.id("device_edit_" + deviceName)).click();
-    }
-
-    public void openAssign(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_" + deviceName)));
-        driver.findElement(By.id("device_assign_" + deviceName)).click();
-    }
-    public void openInactiveDevice(){
-        filterByStatusInactive();
-        String inactiveDeviceName = getDeviceName();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + inactiveDeviceName)));
-        driver.findElement(By.id("device_dropdown_" + inactiveDeviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_assign_" + inactiveDeviceName)));
-        driver.findElement(By.id("device_assign_" + inactiveDeviceName)).click();
-    }
+    WebElement endWarrantyField;
 
     public void successfullyCreateDevice() {
         signInAsAdmin();
@@ -179,12 +111,12 @@ public class DevicePage extends DriverFactory {
     }
     public void successfullyEditADeviceName() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         nameField.clear();
         nameField.sendKeys(Constants.name);
         saveDeviceButton.click();
         elementToLoad(successToaster);
-        successEdit = successToaster.getText();
+        message = getTextFromElement(successToaster);
         elementToDisappear(successToaster);
         elementToLoad(filterButton);
         filterButton.click();
@@ -196,12 +128,12 @@ public class DevicePage extends DriverFactory {
     }
     public void successfullyEditADeviceSerialNo() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         serialNoField.clear();
         serialNoField.sendKeys(Constants.number);
         saveDeviceButton.click();
         elementToLoad(successToaster);
-        successEdit = successToaster.getText();
+        message = successToaster.getText();
         elementToDisappear(successToaster);
         elementToLoad(filterButton);
         filterButton.click();
@@ -213,12 +145,12 @@ public class DevicePage extends DriverFactory {
     }
     public void successfullyEditADeviceInventoryNo() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         inventoryNoField.clear();
         inventoryNoField.sendKeys(Constants.number);
         saveDeviceButton.click();
         elementToLoad(successToaster);
-        successEdit = successToaster.getText();
+        message = getTextFromElement(successToaster);
         elementToDisappear(successToaster);
         elementToLoad(filterButton);
         filterButton.click();
@@ -232,13 +164,12 @@ public class DevicePage extends DriverFactory {
 
     public void successfullyEditADeviceInvoiceNo() {
         successfullyCreateDevice();
-        openEdit();
-        invoiceNoField.sendKeys(Keys.CONTROL + "a");
-        invoiceNoField.sendKeys(Keys.DELETE);
+        openThreeDotsOptions(deviceDropdown,editDevice);
+        clearField(invoiceNoField);
         invoiceNoField.sendKeys(Constants.number);
         saveDeviceButton.click();
         elementToLoad(successToaster);
-        successEdit = successToaster.getText();
+        message = getTextFromElement(successToaster);
         elementToDisappear(successToaster);
         elementToLoad(filterButton);
         filterButton.click();
@@ -253,7 +184,7 @@ public class DevicePage extends DriverFactory {
 
     public void successfullyEditDescription() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         descriptionField.clear();
         descriptionField.sendKeys(randomName());
         saveDeviceButton.click();
@@ -262,18 +193,13 @@ public class DevicePage extends DriverFactory {
 
     public void createDeviceWithoutName() {
         signInAsAdmin();
-        devicesButton.click();
-        elementToLoad(addDeviceButton);
-        addDeviceButton.click();
-        serialNoField.sendKeys(serialNo + "");
-        inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(invoiceNo + "");
+        fillAllMandatoryFields(nameField);
         saveDeviceButton.click();
     }
 
     public void editDeviceWithoutName() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         nameField.clear();
         saveDeviceButton.click();
         elementToLoad(errorToaster);
@@ -281,19 +207,13 @@ public class DevicePage extends DriverFactory {
 
     public void createDeviceWithoutSerialNo() {
         signInAsAdmin();
-        elementToLoad(devicesButton);
-        devicesButton.click();
-        elementToLoad(addDeviceButton);
-        addDeviceButton.click();
-        nameField.sendKeys(deviceName + "");
-        inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(invoiceNo + "");
+        fillAllMandatoryFields(serialNoField);
         saveDeviceButton.click();
     }
 
     public void editDeviceWithoutSerialNo() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         serialNoField.clear();
         saveDeviceButton.click();
         elementToLoad(errorToaster);
@@ -301,19 +221,13 @@ public class DevicePage extends DriverFactory {
 
     public void createDeviceWithoutInventoryNo() {
         signInAsAdmin();
-        elementToLoad(devicesButton);
-        devicesButton.click();
-        elementToLoad(addDeviceButton);
-        addDeviceButton.click();
-        nameField.sendKeys(deviceName + "");
-        serialNoField.sendKeys(serialNo + "");
-        invoiceNoField.sendKeys(invoiceNo + "");
+        fillAllMandatoryFields(inventoryNoField);
         saveDeviceButton.click();
     }
 
     public void editDeviceWithoutInventoryNo() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         inventoryNoField.clear();
         saveDeviceButton.click();
         elementToLoad(errorToaster);
@@ -321,18 +235,13 @@ public class DevicePage extends DriverFactory {
 
     public void createDeviceWithoutInvoiceNo() {
         signInAsAdmin();
-        devicesButton.click();
-        elementToLoad(addDeviceButton);
-        addDeviceButton.click();
-        nameField.sendKeys(deviceName + "");
-        serialNoField.sendKeys(serialNo + "");
-        inventoryNoField.sendKeys(inventoryNo + "");
+        fillAllMandatoryFields(invoiceNoField);
         saveDeviceButton.click();
     }
 
     public void editDeviceWithoutInvoiceNo() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         invoiceNoField.clear();
         saveDeviceButton.click();
         elementToLoad(errorToaster);
@@ -353,7 +262,7 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceWithWhiteSpacesNameField() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         nameField.clear();
         nameField.sendKeys(Constants.DEVICE_NAME_WS);
         saveDeviceButton.click();
@@ -375,7 +284,7 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceWithWhiteSpaceSerialNoField() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         serialNoField.clear();
         serialNoField.sendKeys(Constants.DEVICE_SERIAL_NO_WS);
         saveDeviceButton.click();
@@ -397,7 +306,7 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceWithWhiteSpaceInventoryNo() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         inventoryNoField.clear();
         inventoryNoField.sendKeys(Constants.DEVICE_INVENTORY_NO_WS);
         saveDeviceButton.click();
@@ -419,7 +328,7 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceWithWhiteSpaceInvoiceNo() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         invoiceNoField.clear();
         invoiceNoField.sendKeys(Constants.DEVICE_INVOICE_NO_WS);
         saveDeviceButton.click();
@@ -442,7 +351,7 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceWithWhiteSpaceDescriptionField() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         descriptionField.clear();
         descriptionField.sendKeys(Constants.DEVICE_DESCRIPTION_WS);
         saveDeviceButton.click();
@@ -464,7 +373,7 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceTooLongName() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         nameField.clear();
         nameField.sendKeys(Constants.DEVICE_NAME_TOO_LONG);
         saveDeviceButton.click();
@@ -486,11 +395,11 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceTooLongSerialNo() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         serialNoField.clear();
         serialNoField.sendKeys((Constants.DEVICE_NUMBER_OVER_30_CHAR));
         saveDeviceButton.click();
-       elementToLoad(errorToaster);
+        elementToLoad(errorToaster);
     }
 
     public void createDeviceTooLongInventoryNo() {
@@ -508,7 +417,7 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceTooLongInventoryNo() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         inventoryNoField.clear();
         inventoryNoField.sendKeys((Constants.DEVICE_NUMBER_OVER_30_CHAR));
         saveDeviceButton.click();
@@ -530,7 +439,7 @@ public class DevicePage extends DriverFactory {
 
     public void editDeviceTooLongInvoiceNo() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         invoiceNoField.clear();
         invoiceNoField.sendKeys((Constants.DEVICE_NUMBER_OVER_30_CHAR));
         saveDeviceButton.click();
@@ -540,13 +449,12 @@ public class DevicePage extends DriverFactory {
     // The Invoice Date Field has a bug, this method will work after repair
     public void successfullyEditInvoiceDate() {
         successfullyCreateDevice();
-        openEdit();
-        invoiceDateField.sendKeys(Keys.CONTROL + "a");
-        invoiceNoField.sendKeys(Keys.DELETE);
+        openThreeDotsOptions(deviceDropdown,editDevice);
+        clearField(invoiceDateField);
         invoiceDateField.sendKeys(Constants.INVOICE_DATE);
         saveDeviceButton.click();
         elementToLoad(successToaster);
-        successEdit = successToaster.getText();
+        message = getTextFromElement(successToaster);
         elementToDisappear(successToaster);
         elementToLoad(filterButton);
         filterButton.click();
@@ -562,18 +470,16 @@ public class DevicePage extends DriverFactory {
     // The Warranty Dates Fields have a bug, this method will work after repair
     public void successfullyEditStartDateAndEndDate() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         startDateWarrantyField.click();
-        startDateWarrantyField.sendKeys(Keys.CONTROL + "a");
-        startDateWarrantyField.sendKeys(Keys.DELETE);
+        clearField(startDateWarrantyField);
         startDateWarrantyField.sendKeys(Constants.WARRANTY_START_DATE);
         endDateWarrantyField.click();
-        endDateWarrantyField.sendKeys(Keys.CONTROL + "a");
-        endDateWarrantyField.sendKeys(Keys.DELETE);
+        clearField(endWarrantyField);
         endDateWarrantyField.sendKeys(Constants.WARRANTY_END_DATE);
         saveDeviceButton.click();
         elementToLoad(successToaster);
-        successEdit = successToaster.getText();
+        message = getTextFromElement(successToaster);
         elementToDisappear(successToaster);
         openColumns(warrantyStartDateInColumns);
         openColumns(warrantyEndDateInColumns);
@@ -582,7 +488,7 @@ public class DevicePage extends DriverFactory {
 
     public void editEndDateToBeEarlierThenStartDate() {
         successfullyCreateDevice();
-        openEdit();
+        openThreeDotsOptions(deviceDropdown,editDevice);
         endDateWarrantyField.click();
         endDateWarrantyField.sendKeys(Keys.CONTROL + "a");
         endDateWarrantyField.sendKeys(Keys.DELETE);
@@ -593,7 +499,7 @@ public class DevicePage extends DriverFactory {
 
     public void successfullyAssignDevice() {
         successfullyCreateDevice();
-        openAssign();
+        openThreeDotsOptions(deviceDropdown,assignDevice);
         elementToLoad(assignUserButton);
         assignUserButton.click();
         elementToLoad(firstUserInList);
@@ -602,12 +508,11 @@ public class DevicePage extends DriverFactory {
         assignUpdateButton.click();
         elementToLoad(successToaster);
         elementToDisappear(successToaster);
-
     }
 
     public void succesfullyUnAssignDevice() {
         successfullyAssignDevice();
-        openAssign();
+        openThreeDotsOptions(deviceDropdown,assignDevice);
         elementToLoad(assignUpdateButton);
         assignUpdateButton.click();
         elementToLoad(successToaster);
@@ -616,7 +521,7 @@ public class DevicePage extends DriverFactory {
 
     public void assignDeviceWithoutUser() {
         successfullyCreateDevice();
-        openAssign();
+        openThreeDotsOptions(deviceDropdown,assignDevice);
         elementToLoad(assignUpdateButton);
         assignUpdateButton.click();
     }
@@ -626,7 +531,8 @@ public class DevicePage extends DriverFactory {
         elementToLoad(devicesButton);
         devicesButton.click();
         elementToLoad(filterButton);
-        openInactiveDevice();
+        filterByStatusInactive();
+        openThreeDotsOptionsForInactive(deviceDropdown, assignDevice);
         elementToLoad(assignUserButton);
         assignUserButton.click();
         elementToLoad(firstUserInList);
@@ -637,16 +543,13 @@ public class DevicePage extends DriverFactory {
 
     public void deleteDevice() {
         successfullyCreateDevice();
-        openAssign();
+        openThreeDotsOptions(deviceDropdown,assignDevice);
         elementToLoad(successToaster);
     }
 
     public void successfullyDeleteAssignedDevice() {
         successfullyAssignDevice();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_dropdown_" + deviceName)));
-        driver.findElement(By.id("device_dropdown_" + deviceName)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("device_delete_" + deviceName)));
-        driver.findElement(By.id("device_delete_" + deviceName)).click();
+        openThreeDotsOptions(deviceDropdown,deleteDevice);
         elementToLoad(successToaster);
         elementToDisappear(successToaster);
     }
@@ -656,7 +559,7 @@ public class DevicePage extends DriverFactory {
         elementToLoad(devicesButton);
         devicesButton.click();
         elementToLoad(filterButton);
-        openInactiveDevice();
+        openThreeDotsOptionsForInactive(deviceDropdown, assignDevice);
         elementToLoad(successToaster);
     }
 
@@ -676,8 +579,7 @@ public class DevicePage extends DriverFactory {
         invoiceNoField.sendKeys(invoiceNo + "");
         descriptionField.sendKeys(DEVICE_DESCRIPTION);
         endWarrantyField.click();
-        endWarrantyField.sendKeys(Keys.CONTROL + "a");
-        endWarrantyField.sendKeys(Keys.DELETE);
+        clearField(endWarrantyField);
         try {
             endWarrantyField.sendKeys(randomDateBefore());
         } catch (ParseException parseException){
@@ -692,5 +594,4 @@ public class DevicePage extends DriverFactory {
         saveDeviceButton.click();
         elementToLoad(errorToaster);
     }
-
 }
