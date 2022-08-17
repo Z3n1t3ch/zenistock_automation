@@ -35,6 +35,7 @@ public class Constants {
     public static final String WARRANTY_END_DATE = "23/07/2022";
     public static final String WARRANTY_END_DATE_ERROR = "01/06/2022";
     public static final String INVOICE_DATE = "07/07/2022";
+
     public static final String name = randomName() + "";
     public static final String number = "0000" + randomNumber();
     public static final String EDITABLE_TAG_NAME = "edited_tag";

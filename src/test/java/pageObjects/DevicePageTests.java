@@ -17,7 +17,7 @@ public class DevicePageTests extends BaseTest {
     public void successfullyEditADeviceName() {
         devicePage.successfullyEditADeviceName();
         Assert.assertEquals(devicePage.message, "Item updated successfully!");
-        Assert.assertTrue(devicePage.getTextFromTable().contains(devicePage.serialNoField + ""));
+        Assert.assertTrue(devicePage.table.contains(devicePage.serialNoField + ""));
     }
     @Test
     public void successfullyEditADeviceSerialNo() {

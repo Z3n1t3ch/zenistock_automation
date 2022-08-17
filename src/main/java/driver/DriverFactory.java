@@ -4,10 +4,11 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.Constants;
+import utils.*;
+import utils.Credentials;
+
 import static utils.RandomGenerator.randomName;
 import static utils.RandomGenerator.randomNumber;
-import utils.Credentials;
 
 public class DriverFactory {
     public WebDriver driver;
@@ -65,16 +66,12 @@ public class DriverFactory {
     WebElement licenseButton;
     @FindBy(id = "add-license")
     WebElement addLicenseButton;
-
     @FindBy(id = "undefined-devices-mButton")
     WebElement devicePageButton;
-
     @FindBy(id = "add_device_button")
     WebElement addDeviceButton;
-
     @FindBy(id = "device-information-name")
     WebElement deviceNameField;
-
     @FindBy(id = "device-information-serialNo")
     WebElement deviceSerialNoField;
 
@@ -118,11 +115,8 @@ public class DriverFactory {
     WebElement tagsListElement;
     @FindBy(id = "device-locations-selectList-romania")
     WebElement locationsRomaniaListElement;
-
-    public String deviceName;
-    public int serialNo;
-    public int inventoryNo;
-    public int invoiceNo;
+    @FindBy(id = "undefined-devices-mButton")
+    WebElement devicesButton;
     public String deviceDropdown = "device_dropdown_";
 
     public String editDevice = "device_edit_";
@@ -130,9 +124,10 @@ public class DriverFactory {
     public String assignDevice = "device_assign_";
 
     public String deleteDevice = "device_delete_";
-
     public String message;
-    String inactiveDeviceName = getDeviceName();
+
+    public String table;
+
 
     public void pageToLoad(String pageUrl) {
         wait.until(ExpectedConditions.urlToBe(pageUrl));
@@ -288,15 +283,11 @@ public class DriverFactory {
         return  Boolean.parseBoolean(element.getAttribute("required"));
     }
     public void fillAllFieldsDevice(){
-        deviceName = randomName();
-        serialNo = randomNumber();
-        inventoryNo = randomNumber();
-        invoiceNo = randomNumber();
         addDeviceButton.click();
-        nameField.sendKeys(deviceName);
-        serialNoField.sendKeys(serialNo + "");
-        inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(invoiceNo + "");
+        nameField.sendKeys(RandomGenerator.randomName());
+        serialNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        inventoryNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        invoiceNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         descriptionField.sendKeys(Constants.DEVICE_DESCRIPTION);
         subcategoryList.click();
         subcategoryLaptopListElement.click();
@@ -307,15 +298,13 @@ public class DriverFactory {
         saveDeviceButton.click();
     }
     public void fillAllMandatoryFields(WebElement field){
-        deviceName = randomName();
-        serialNo = randomNumber();
-        inventoryNo = randomNumber();
-        invoiceNo = randomNumber();
+        devicesButton.click();
+        elementToLoad(addDeviceButton);
         addDeviceButton.click();
-        nameField.sendKeys(deviceName);
-        serialNoField.sendKeys(serialNo + "");
-        inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(invoiceNo + "");
+        nameField.sendKeys(RandomGenerator.randomName());
+        serialNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        inventoryNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        invoiceNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         clearField(field);
     }
 
@@ -330,17 +319,18 @@ public class DriverFactory {
     }
 
     public void openThreeDotsOptions(String dropdown, String option){
-        dropdown = deviceDropdown + deviceName;
+        dropdown = deviceDropdown + nameField;
         elementToLoadForComposedElements(dropdown);
         driver.findElement(By.id(dropdown)).click();
-        option = option + deviceName;
+        option = option + nameField;
         elementToLoadForComposedElements(option);
         driver.findElement(By.id(option)).click();
     }
-    public void openThreeDotsOptionsForInactive(String dropdown, String inactive){
-        dropdown = deviceDropdown + inactiveDeviceName;
-        elementToLoadForComposedElements(dropdown);
-        driver.findElement(By.id(dropdown)).click();
+    public void openThreeDotsOptionsForInactive(String dropdownInactive, String inactive){
+        String inactiveDeviceName = getDeviceName();
+        dropdownInactive = deviceDropdown + inactiveDeviceName;
+        elementToLoadForComposedElements(dropdownInactive);
+        driver.findElement(By.id(dropdownInactive)).click();
         inactive = assignDevice + inactiveDeviceName;
         elementToLoadForComposedElements(inactive);
         driver.findElement(By.id(inactive)).click();

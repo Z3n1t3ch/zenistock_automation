@@ -1,14 +1,13 @@
 package pageObjects;
 
 import driver.DriverFactory;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.Constants;
+import utils.*;
+
 import java.text.ParseException;
 import static utils.Constants.DEVICE_DESCRIPTION;
 import static utils.RandomGenerator.randomDateBefore;
@@ -107,13 +106,13 @@ public class DevicePage extends DriverFactory {
         elementToLoad(successToaster);
         elementToDisappear(successToaster);
         elementToLoad(filterButton);
-        filterBySerialNo(serialNo + "");
+        filterBySerialNo(serialNoField + "");
     }
     public void successfullyEditADeviceName() {
         successfullyCreateDevice();
         openThreeDotsOptions(deviceDropdown,editDevice);
         nameField.clear();
-        nameField.sendKeys(Constants.name);
+        nameField.sendKeys(RandomGenerator.randomName());
         saveDeviceButton.click();
         elementToLoad(successToaster);
         message = getTextFromElement(successToaster);
@@ -123,7 +122,8 @@ public class DevicePage extends DriverFactory {
         elementToLoad(filterButtonClearAll);
         filterButtonClearAll.click();
         elementToLoad(filterButton);
-        filterBySerialNo(serialNo + "");
+        filterBySerialNo(serialNoField + "");
+        table = getTextFromTable();
         pageToLoad(Constants.DEVICES_URL);
     }
     public void successfullyEditADeviceSerialNo() {
@@ -140,7 +140,7 @@ public class DevicePage extends DriverFactory {
         elementToLoad(filterButtonClearAll);
         filterButtonClearAll.click();
         elementToLoad(filterButton);
-        filterBySerialNo(serialNo + "");
+        filterBySerialNo(serialNoField + "");
         pageToLoad(Constants.DEVICES_URL);
     }
     public void successfullyEditADeviceInventoryNo() {
@@ -157,7 +157,7 @@ public class DevicePage extends DriverFactory {
         elementToLoad(filterButtonClearAll);
         filterButtonClearAll.click();
         elementToLoad(filterButton);
-        filterBySerialNo(serialNo + "");
+        filterBySerialNo(serialNoField + "");
         pageToLoad(Constants.DEVICES_URL);
         openColumns(inventoryNoInColumns);
     }
@@ -176,7 +176,7 @@ public class DevicePage extends DriverFactory {
         elementToLoad(filterButtonClearAll);
         filterButtonClearAll.click();
         elementToLoad(filterButton);
-        filterBySerialNo(serialNo + "");
+        filterBySerialNo(serialNoField + "");
         pageToLoad(Constants.DEVICES_URL);
         openColumns(invoiceNoInColumns);
         elementToLoad(deviceTable);
@@ -253,9 +253,9 @@ public class DevicePage extends DriverFactory {
         elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(Constants.DEVICE_NAME_WS);
-        serialNoField.sendKeys(deviceName + "");
-        inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(invoiceNo + "");
+        serialNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        inventoryNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        invoiceNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         saveDeviceButton.click();
         elementToLoad(errorToaster);
     }
@@ -274,10 +274,10 @@ public class DevicePage extends DriverFactory {
         devicesButton.click();
         elementToLoad(addDeviceButton);
         addDeviceButton.click();
-        nameField.sendKeys(deviceName + "");
+        nameField.sendKeys(RandomGenerator.randomName());
         serialNoField.sendKeys(Constants.DEVICE_SERIAL_NO_WS);
-        inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(invoiceNo + "");
+        inventoryNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        invoiceNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         saveDeviceButton.click();
         elementToLoad(errorToaster);
     }
@@ -296,10 +296,10 @@ public class DevicePage extends DriverFactory {
         devicesButton.click();
         elementToLoad(addDeviceButton);
         addDeviceButton.click();
-        nameField.sendKeys(deviceName + "");
-        serialNoField.sendKeys(serialNo + "");
+        nameField.sendKeys(RandomGenerator.randomName());
+        serialNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         inventoryNoField.sendKeys(Constants.DEVICE_INVENTORY_NO_WS);
-        invoiceNoField.sendKeys(invoiceNo + "");
+        invoiceNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         saveDeviceButton.click();
         elementToLoad(errorToaster);
     }
@@ -318,9 +318,9 @@ public class DevicePage extends DriverFactory {
         devicesButton.click();
         elementToLoad(addDeviceButton);
         addDeviceButton.click();
-        nameField.sendKeys(deviceName + "");
-        serialNoField.sendKeys(serialNo + "");
-        inventoryNoField.sendKeys(inventoryNo + "");
+        nameField.sendKeys(RandomGenerator.randomName());
+        serialNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        inventoryNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         invoiceNoField.sendKeys(Constants.DEVICE_INVOICE_NO_WS);
         saveDeviceButton.click();
         elementToLoad(errorToaster);
@@ -340,10 +340,10 @@ public class DevicePage extends DriverFactory {
         devicesButton.click();
         elementToLoad(addDeviceButton);
         addDeviceButton.click();
-        nameField.sendKeys(deviceName + "");
-        serialNoField.sendKeys(serialNo + "");
-        inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(invoiceNo + "");
+        nameField.sendKeys(RandomGenerator.randomName());
+        serialNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        inventoryNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        invoiceNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         descriptionField.sendKeys(Constants.DEVICE_DESCRIPTION_WS);
         saveDeviceButton.click();
         elementToLoad(errorToaster);
@@ -364,9 +364,9 @@ public class DevicePage extends DriverFactory {
         elementToLoad(addDeviceButton);
         addDeviceButton.click();
         nameField.sendKeys(Constants.DEVICE_NAME_TOO_LONG);
-        serialNoField.sendKeys(serialNo + "");
-        inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(invoiceNo + "");
+        serialNoField.sendKeys(RandomGenerator.randomName());
+        inventoryNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        invoiceNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         saveDeviceButton.click();
         elementToLoad(errorToaster);
     }
@@ -385,10 +385,10 @@ public class DevicePage extends DriverFactory {
         devicesButton.click();
         elementToLoad(addDeviceButton);
         addDeviceButton.click();
-        nameField.sendKeys(deviceName + "");
+        nameField.sendKeys(RandomGenerator.randomName());
         serialNoField.sendKeys(Constants.DEVICE_NUMBER_OVER_30_CHAR);
-        inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(invoiceNo + "");
+        inventoryNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        invoiceNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         saveDeviceButton.click();
         elementToLoad(errorToaster);
     }
@@ -407,10 +407,10 @@ public class DevicePage extends DriverFactory {
         devicesButton.click();
         elementToLoad(addDeviceButton);
         addDeviceButton.click();
-        nameField.sendKeys(deviceName + "");
-        serialNoField.sendKeys(serialNo + "");
+        nameField.sendKeys(RandomGenerator.randomName());
+        serialNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         inventoryNoField.sendKeys(Constants.DEVICE_NUMBER_OVER_30_CHAR);
-        invoiceNoField.sendKeys(invoiceNo + "");
+        invoiceNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         saveDeviceButton.click();
         elementToLoad(errorToaster);
     }
@@ -429,9 +429,9 @@ public class DevicePage extends DriverFactory {
         devicesButton.click();
         elementToLoad(addDeviceButton);
         addDeviceButton.click();
-        nameField.sendKeys(deviceName + "");
-        serialNoField.sendKeys(serialNo + "");
-        inventoryNoField.sendKeys(inventoryNo + "");
+        nameField.sendKeys(RandomGenerator.randomName());
+        serialNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        inventoryNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         invoiceNoField.sendKeys(Constants.DEVICE_NUMBER_OVER_30_CHAR);
         saveDeviceButton.click();
         elementToLoad(errorToaster);
@@ -461,7 +461,7 @@ public class DevicePage extends DriverFactory {
         elementToLoad(filterButtonClearAll);
         filterButtonClearAll.click();
         elementToLoad(filterButton);
-        filterBySerialNo(serialNo + "");
+        filterBySerialNo(serialNoField + "");
         pageToLoad(Constants.DEVICES_URL);
         openColumns(invoiceDateInColumns);
         elementToLoad(deviceTable);
@@ -565,18 +565,14 @@ public class DevicePage extends DriverFactory {
 
     public void createDeviceInvalidWarrantyEndDate() {
         signInAsAdmin();
-        deviceName = randomName();
-        serialNo = randomNumber();
-        inventoryNo = randomNumber();
-        invoiceNo = randomNumber();
         elementToLoad(devicesButton);
         devicesButton.click();
         elementToLoad(addDeviceButton);
         addDeviceButton.click();
-        nameField.sendKeys(deviceName);
-        serialNoField.sendKeys(serialNo + "");
-        inventoryNoField.sendKeys(inventoryNo + "");
-        invoiceNoField.sendKeys(invoiceNo + "");
+        nameField.sendKeys(RandomGenerator.randomName());
+        serialNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        inventoryNoField.sendKeys(RandomGenerator.randomNumber()+ "");
+        invoiceNoField.sendKeys(RandomGenerator.randomNumber()+ "");
         descriptionField.sendKeys(DEVICE_DESCRIPTION);
         endWarrantyField.click();
         clearField(endWarrantyField);
